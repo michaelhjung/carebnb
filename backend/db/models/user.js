@@ -4,6 +4,7 @@ const { Model, Validator } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
+    /*----------------------- MODEL METHODS FOR AUTH -----------------------*/
     toSafeObject() {
       const { id, username, email } = this; // context will be the User instance
       return { id, username, email };
@@ -41,6 +42,7 @@ module.exports = (sequelize, DataTypes) => {
       });
       return await User.scope('currentUser').findByPk(user.id);
     }
+    /*----------------------------------------------------------------------*/
 
     static associate(models) {
       // define association here
@@ -80,6 +82,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "User",
+      /*------------------------------ SCOPES ------------------------------*/
       defaultScope: {
         attributes: {
           exclude: ["hashedPassword", "email", "createdAt", "updatedAt"]
@@ -93,6 +96,7 @@ module.exports = (sequelize, DataTypes) => {
           attributes: {}
         }
       }
+      /*--------------------------------------------------------------------*/
     }
   );
   return User;
