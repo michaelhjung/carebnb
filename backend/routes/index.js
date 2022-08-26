@@ -8,6 +8,10 @@ router.use('/api', apiRouter);
 /*--------------------------------------------------------------------------*/
 
 /*------------------------------- TEST ROUTES -------------------------------*/
+router.get('/', function(req, res) {
+    res.send({ message: 'The server is live!' });
+});
+
 router.get('/hello/world', function(req, res) {
     res.cookie('XSRF-TOKEN', req.csrfToken());
     res.send('Hello World!');
