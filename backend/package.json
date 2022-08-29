@@ -8,7 +8,11 @@
     "sequelize-cli": "sequelize-cli",
     "start": "per-env",
     "start:development": "nodemon ./bin/www",
-    "start:production": "node ./bin/www"
+    "start:production": "node ./bin/www",
+    "migrate": "dotenv npx sequelize db:migrate",
+    "migrate-undo": "dotenv npx sequelize db:migrate:undo:all",
+    "seed": "dotenv npx sequelize db:seed:all",
+    "seed-undo": "dotenv npx sequelize db:seed:undo:all"
   },
   "keywords": [],
   "author": "",
