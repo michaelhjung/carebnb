@@ -3,7 +3,6 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    allowNull: false,
   class Spot extends Model {
 
     static associate(models) {
@@ -23,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
+
   Spot.init({
     ownerId: {
         type: DataTypes.INTEGER,
