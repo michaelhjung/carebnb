@@ -40,8 +40,16 @@ router.post(
 
         await setTokenCookie(res, user);
 
+        const userData = {};
+        userData.id = user.id;
+        userData.firstName = user.firstName;
+        userData.lastName = user.lastName;
+        userData.email = user.email;
+        userData.username = user.username;
+        userData.token = "";
+
         return res.json({
-            user
+            ...userData
         });
     }
 );
