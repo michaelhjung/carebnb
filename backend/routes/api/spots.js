@@ -9,33 +9,51 @@ const router = express.Router();
 // Get all Spots
 router.get('/', async (req, res, next) => {
 
-    const spots = await Spot.findAll({
-        include: [
-            {
-                model: Review,
-                attributes: [],
-                required: false
-            },
-            {
-                model: SpotImage,
-                // as: 'previewImage',
-                attributes: ['url'],
-                where: {
-                    preview: true
-                },
-                required: false
-            }
-        ],
-        attributes: {
-            include: [
-                [
-                    sequelize.fn("AVG", sequelize.col("Reviews.stars")),
-                    "avgRating"
-                ]
-            ],
-            required: false
-        }
-    });
+    // const spots = await Spot.findAll({
+    //     include: [
+    //         {
+    //             model: Review,
+    //             attributes: [],
+    //             required: false
+    //         },
+    //         {
+    //             model: SpotImage,
+    //             // as: 'previewImage',
+    //             attributes: ['url'],
+    //             where: {
+    //                 preview: true
+    //             },
+    //             required: false
+    //         }
+    //     ],
+    //     attributes: {
+    //         include: [
+    //             [
+    //                 sequelize.fn("AVG", sequelize.col("Reviews.stars")),
+    //                 "avgRating"
+    //             ]
+    //         ],
+    //         required: false
+    //     }
+    // });
+
+    const spots = await Spot.findAll();
+    // spots.forEach(async spot => {
+    //     const reviewSum = await Review.sum({
+    //         where: {
+    //             spotId: spot.id
+    //         }
+    //     });
+
+    //     const reviewCount = await Review.count({
+    //         where: {
+    //             spotId: spot.id
+    //         }
+    //     });
+
+    //     spot.avgRating = reviewSum / reviewCount;
+    // });
+
 
     res.json({
         Spots: spots
@@ -52,22 +70,43 @@ router.get('/current', requireAuth, async (req, res, next) => {
         }
     });
 
-    res.json(mySpots);
+    res.json({
+        Spots: mySpots
+    });
 });
 
 // Get details of a Spot from an id
 router.get('/:spotId', async (req, res, next) => {
-    const spot = await Spot.findOne({
-        where: {
-            id: req.params.spotId
-        },
-        include: [
-            { model: SpotImage },
-            // { model: User, where: { ownerId: this.ownerId } },
-        ]
-    });
+    const spot = await Spot.findByPk(req.params.spotId);
 
-    if (spot) res.json(spot);
+
+    if (spot) {
+        const spotData = spot.toJSON();
+        spotData.numReviews = await Review.count({
+            where: {
+                spotId: spot.id
+            }
+        });
+
+        const reviewSum = await Review.sum('stars', {
+            where: {
+                spotId: spot.id
+            }
+        });
+
+        spotData.avgStarRating = reviewSum / spotData.numReviews;
+
+        spotData.spotImages = await SpotImage.findAll({
+            where: {
+                spotId: spot.id
+            },
+            attributes: ['id', 'url', 'preview']
+        });
+        spotData.Owner = await User.findByPk(spot.ownerId, {attributes: ['id', 'firstName', 'lastName'] });
+
+
+        res.json(spotData);
+    }
     else res.status(404).json({
         message: "Spot couldn't be found",
         statusCode: 404
