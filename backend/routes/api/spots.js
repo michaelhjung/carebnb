@@ -8,28 +8,28 @@ const router = express.Router();
 /*--------------------------------- ROUTES ---------------------------------*/
 // Get all Spots
 router.get('/', async (req, res, next) => {
-    // res.json("this is the GET /api/spots route!");
-    // const spots = await Spot.findAll(
-    //     {
-    //         include: [
-    //             { model: Review, attributes: [] },
-    //             { model: SpotImage, attributes: [] }
-    //         ],
-    //         attributes: {
-    //             include: [
-    //                 [
-    //                     sequelize.fn("AVG", sequelize.col("Reviews.stars")),
-    //                     "avgGrade"
-    //                 ],
-    //                 [
 
-    //                 ]
-    //             ]
-    //         }
-    //     }
-    // );
-
-    const spots = await Spot.findAll();
+    const spots = await Spot.findAll({
+        include: [
+            {
+                model: Review,
+                attributes: []
+            },
+            {
+                model: SpotImage,
+                as: 'previewImage',
+                attributes: ['url']
+            }
+        ],
+        // attributes: {
+        //     include: [
+        //         [
+        //             sequelize.fn("AVG", sequelize.col("Reviews.stars")),
+        //             "avgRating"
+        //         ]
+        //     ]
+        // }
+    });
 
     res.json(spots);
 });

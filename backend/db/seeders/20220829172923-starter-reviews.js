@@ -9,7 +9,13 @@ module.exports = {
             userId: 9,
             review: 'I came here on a honeymoon with my wife! It was the best! 100% recommend!',
             stars: 5
-        }
+        },
+        {
+            spotId: 1,
+            userId: 4,
+            review: 'Eh, it was ok. There weren\'t enough trees, but nice hot-tub!',
+            stars: 3
+        },
     ]);
   },
 

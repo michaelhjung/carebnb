@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       Spot.belongsTo(models.User, { foreignKey: 'id' });
-      Spot.hasMany(models.SpotImage, { foreignKey: 'spotId' });
+      Spot.hasMany(models.SpotImage, { foreignKey: 'spotId', as: 'previewImage' });
       Spot.hasMany(models.Review, { foreignKey: 'spotId' });
       Spot.hasMany(models.Booking, { foreignKey: 'spotId' });
 
