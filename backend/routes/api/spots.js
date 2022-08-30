@@ -185,9 +185,83 @@ router.post('/', requireAuth, validateSpot, async (req, res, next) => {
 
         res.status(201).json(spot);
     } else {
+        let err = {};
+        err.errors = {};
 
+        if (!address) {
+            // err = new Error('Validation Error');
+            err.title = "Validation Error"
+            err.message = "Validation Error";
+            err.status = 400;
+            err.errors.address = "Street address is required";
+            // next(err);
+        }
+        if (!city) {
+            // err = new Error('Validation Error');
+            err.title = "Validation Error"
+            err.message = "Validation Error";
+            err.status = 400;
+            err.errors.city = "City is required";
+            // next(err);
+        }
+        if (!state) {
+            // err = new Error('Validation Error');
+            err.title = "Validation Error"
+            err.message = "Validation Error";
+            err.status = 400;
+            err.errors.state = "State is required";
+            // next(err);
+        }
+        if (!country) {
+            // err = new Error('Validation Error');
+            err.title = "Validation Error"
+            err.message = "Validation Error";
+            err.status = 400;
+            err.errors.country = "Country is required";
+            // next(err);
+        }
+        if (!lat) {
+            // err = new Error('Validation Error');
+            err.title = "Validation Error"
+            err.message = "Validation Error";
+            err.status = 400;
+            err.errors.lat = "Latitude is not valid";
+            // next(err);
+        }
+        if (!lng) {
+            // err = new Error('Validation Error');
+            err.title = "Validation Error"
+            err.message = "Validation Error";
+            err.status = 400;
+            err.errors.lng = "Longitude is not valid";
+            // next(err);
+        }
+        if (!name) {
+            // err = new Error('Validation Error');
+            err.title = "Validation Error"
+            err.message = "Validation Error";
+            err.status = 400;
+            err.errors.name = "Name must be less than 50 characters";
+            // next(err);
+        }
+        if (!description) {
+            // err = new Error('Validation Error');
+            err.title = "Validation Error"
+            err.message = "Validation Error";
+            err.status = 400;
+            err.errors.description = "Description is required";
+            // next(err);
+        }
+        if (!price) {
+            // err = new Error('Validation Error');
+            err.title = "Validation Error"
+            err.message = "Validation Error";
+            err.status = 400;
+            err.errors.price = "Price per day is required";
+            // next(err);
+        }
 
-
+        next(err);
     }
 });
 
