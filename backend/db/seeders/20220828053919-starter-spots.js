@@ -25,7 +25,7 @@ module.exports = {
             lat: -39.16,
             lng: 175.63,
             name: 'Barad-dur',
-            description: 'Includes free heating for those cold nights! Perfect view of Mount Doom. Please remember to bring your jewelry :)',
+            description: 'Includes free heating for those cold nights! Free 24/7 security! Perfect view of Mount Doom. Please remember to bring your jewelry :)',
             price: 1
         },
         {
