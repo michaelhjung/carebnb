@@ -102,8 +102,9 @@ router.get('/', async (req, res, next) => {
 
         Object.assign(spot, aggregates);
         // Only send final response when all avgRatings & previewImages have been added
-        if (i === spots.length - 1) res.json({ Spots: spots });
+        // if (i === spots.length - 1) res.json({ Spots: spots });
     }
+    res.json({ Spots: spots });
 });
 
 // Get all Spots owned by the Current Owner
