@@ -46,10 +46,10 @@ const validateSpot = [
 /*--------------------------------------------------------------------------*/
 
 /*--------------------------------- ROUTES ---------------------------------*/
-// Get all Spots ---> STILL NEEDS avgRating and previewImage
+// Get all Spots
 router.get('/', async (req, res, next) => {
 
-    // // EAGER LOADING:
+    // // EAGER LOADING (NOT YET WORKING):
     // const spots = await Spot.findAll({
     //     attributes: {
     //         include: [
@@ -99,19 +99,36 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-// Get all Spots owned by the Current Owner ---> STILL NEEDS avgRating and previewImage
+// Get all Spots owned by the Current Owner
 router.get('/current', requireAuth, async (req, res, next) => {
     const userId = req.user.id;
+    const mySpots = await Spot.findAll({ where: { ownerId: userId }, raw: true });
 
-    const mySpots = await Spot.findAll({
-        where: {
-            ownerId: userId
-        }
-    });
+    for (let i = 0; i < mySpots.length; i++) {
+        const spot = mySpots[i];
 
-    res.json({
-        Spots: mySpots
-    });
+        const aggregates = {};
+        const avgSpotRating = await Review.findOne({
+            where: { spotId: spot.id },
+            attributes: {
+                include: [
+                    [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]
+                ]
+            },
+            raw: true
+        });
+        aggregates.avgRating = avgSpotRating.avgRating;
+
+        const spotPreviews = await SpotImage.findAll({ where: { spotId: spot.id }, raw: true });
+        spotPreviews.forEach(image => {
+            if (image.preview === 1) aggregates.previewImage = image.url;
+        });
+        if (!aggregates.previewImage) aggregates.previewImage = null;
+
+        Object.assign(spot, aggregates);
+        // Only send final response when all avgRatings & previewImages have been added
+        if (i === mySpots.length - 1) res.json({ Spots: mySpots });
+    }
 });
 
 // Get details of a Spot from an id
