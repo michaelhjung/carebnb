@@ -68,7 +68,7 @@ router.get('/', async (req, res, next) => {
     // res.json({ Spots: spots });
 
 
-    // LAZY LOADING:
+    // LAZY LOADING (& N+1):
     const spots = await Spot.findAll({ raw: true });
 
     for (let i = 0; i < spots.length; i++) {
@@ -85,8 +85,16 @@ router.get('/', async (req, res, next) => {
             raw: true
         });
         aggregates.avgRating = avgSpotRating.avgRating;
-        Object.assign(spot, aggregates);
 
+        const spotPreviews = await SpotImage.findAll({ where: { spotId: spot.id }, raw: true });
+        spotPreviews.forEach(image => {
+            if (image.preview === 1) aggregates.previewImage = image.url;
+        });
+        if (!aggregates.previewImage) aggregates.previewImage = null;
+
+
+        Object.assign(spot, aggregates);
+        // Only send final response when all avgRatings & previewImages have been added
         if (i === spots.length - 1) res.json({ Spots: spots });
     }
 });
