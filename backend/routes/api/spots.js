@@ -75,8 +75,7 @@ router.get('/', async (req, res, next) => {
     for (let i = 0; i < spots.length; i++) {
         const spot = spots[i];
 
-        const aggregates = {};
-        // const avgSpotRating = await Review.findOne({
+        // const spotDataWithAvgRating = await Review.findOne({
         //     where: { spotId: spot.id },
         //     attributes: {
         //         include: [
@@ -85,25 +84,21 @@ router.get('/', async (req, res, next) => {
         //     },
         //     raw: true
         // });
-        // aggregates.avgRating = avgSpotRating.avgRating;
+        // spot.avgRating = spotDataWithAvgRating.avgRating;
         const numReviews = await Review.count({ where: { spotId: spot.id } });
         const sumRatings = await Review.sum('stars', { where: { spotId: spot.id } });
         // console.log(`${spot.name}, sumRating: ${numReviews}`);
         // console.log(`${spot.name}, sumRating: ${sumRatings}`);
-        if (numReviews > 0 && sumRatings > 0) aggregates.avgRating = sumRatings / numReviews
-        else aggregates.avgRating = null;
+        if (numReviews > 0 && sumRatings > 0) spot.avgRating = sumRatings / numReviews
+        else spot.avgRating = null;
 
         const spotPreviews = await SpotImage.findAll({ where: { spotId: spot.id }, raw: true });
         spotPreviews.forEach(image => {
-            if (image.preview === 1) aggregates.previewImage = image.url;
+            if (image.preview === 1) spot.previewImage = image.url;
         });
-        if (!aggregates.previewImage) aggregates.previewImage = null;
-
-
-        Object.assign(spot, aggregates);
-        // Only send final response when all avgRatings & previewImages have been added
-        // if (i === spots.length - 1) res.json({ Spots: spots });
+        if (!spot.previewImage) spot.previewImage = null;
     }
+
     res.json({ Spots: spots });
 });
 
