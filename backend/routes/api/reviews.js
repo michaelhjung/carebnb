@@ -119,13 +119,54 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
 });
 
 // Edit a Review
-router.put('/:reviewId', requireAuth, async (req, res, next) => {
+router.put('/:reviewId', requireAuth, validateReview, async (req, res, next) => {
+    const userReview = await Review.findByPk(req.params.reviewId);
+    if (userReview) {
+        if (userReview.userId === req.user.id) {
+            const { review, stars } = req.body;
 
+            if (review) userReview.review = review;
+            if (stars) userReview.stars = stars;
+            await userReview.save();
+
+            res.json(userReview);
+        }
+
+        // if review does not belong to current user
+        else res.status(401).json({
+            message: "Unauthorized user",
+            statusCode: 401
+        });
+    }
+
+    // if review not found
+    else res.status(404).json({
+        message: "Review couldn't be found",
+        statusCode: 404
+    });
 });
 
 // Delete a Review
 router.delete('/:reviewId', requireAuth, async (req, res, next) => {
+    const review = await Review.findByPk(req.params.reviewId);
+    if (review) {
+        if (review.userId === req.user.id) {
 
+
+        }
+
+        // if review does not belong to current user
+        else res.status(401).json({
+            message: "Unauthorized user",
+            statusCode: 401
+        });
+    }
+
+    // if review not found
+    else res.status(404).json({
+        message: "Review couldn't be found",
+        statusCode: 404
+    });
 });
 
 
