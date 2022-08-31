@@ -24,7 +24,40 @@ const validateReview = [
 /*--------------------------------- ROUTES ---------------------------------*/
 // Get all Reviews of the Current User
 router.get('/current', requireAuth, async (req, res, next) => {
+    const userReviews = await Review.findAll({ where: { userId: req.user.id }, raw: true });
 
+    const currUser = await User.findOne({
+        where: { id: req.user.id },
+        attributes: { exclude: ['username'] },
+        raw: true
+    });
+
+    for (let i = 0; i < userReviews.length; i++) {
+        const review = userReviews[i];
+
+        const spotData = await Spot.findOne({
+             where: { id: review.spotId },
+             attributes: { exclude: ['createdAt', 'updatedAt'] },
+             raw: true
+        });
+        const spotPreviews = await SpotImage.findAll({ where: { spotId: spotData.id }, raw: true });
+        spotPreviews.forEach(image => {
+            if (image.preview === true || image.preview === 1) spotData.previewImage = image.url;
+        });
+        if (!spotData.previewImage) spotData.previewImage = null;
+
+        const reviewImageData = await ReviewImage.findAll({
+            where: { reviewId: review.id },
+            attributes: ['id', 'url'],
+            raw: true
+        });
+
+        review.User = currUser;
+        review.Spot = spotData;
+        review.ReviewImages = reviewImageData;
+    }
+
+    res.json(userReviews);
 });
 
 

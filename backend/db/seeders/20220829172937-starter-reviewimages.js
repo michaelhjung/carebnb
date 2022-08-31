@@ -7,7 +7,11 @@ module.exports = {
         {
             reviewId: 1,
             url: 'https://bit.ly/3KrOfyi'
-        }
+        },
+        {
+            reviewId: 2,
+            url: 'https://bit.ly/3AZl2Yo'
+        },
     ]);
   },
 
@@ -15,7 +19,8 @@ module.exports = {
     await queryInterface.bulkDelete('ReviewImages', {
         reviewId: {
             [Op.in]: [
-                1
+                1,
+                2
             ]
         }
     });
