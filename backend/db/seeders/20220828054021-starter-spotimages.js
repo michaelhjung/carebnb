@@ -10,6 +10,16 @@ module.exports = {
             preview: true
         },
         {
+            spotId: 1,
+            url: 'https://bit.ly/3KMRY9X',
+            preview: false
+        },
+        {
+            spotId: 1,
+            url: 'https://bit.ly/3cwiGqx',
+            preview: false
+        },
+        {
             spotId: 2,
             url: 'https://bit.ly/3wG0odj',
             preview: true

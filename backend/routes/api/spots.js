@@ -43,72 +43,89 @@ const validateSpot = [
         .exists({ checkFalsy: true })
         .withMessage('Price per day is required'),
 ];
-
-
 /*--------------------------------------------------------------------------*/
 
 /*--------------------------------- ROUTES ---------------------------------*/
 // Get all Spots
 router.get('/', async (req, res, next) => {
 
+    // // EAGER LOADING:
     // const spots = await Spot.findAll({
-    //     include: [
-    //         {
-    //             model: Review,
-    //             attributes: [],
-    //             required: false
-    //         },
-    //         {
-    //             model: SpotImage,
-    //             // as: 'previewImage',
-    //             attributes: ['url'],
-    //             where: {
-    //                 preview: true
-    //             },
-    //             required: false
-    //         }
-    //     ],
     //     attributes: {
     //         include: [
-    //             [
-    //                 sequelize.fn("AVG", sequelize.col("Reviews.stars")),
-    //                 "avgRating"
-    //             ]
-    //         ],
-    //         required: false
-    //     }
+    //             [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"],
+    //         ]
+    //     },
+
+    //     include:
+    //         { model: Review, attributes: [] },
+
+    //     group:
+    //         ["Reviews.spotId"]
+    //         // ["Reviews.spotId", "SpotImages.url"]
     // });
 
-    const spots = await Spot.findAll();
+    // res.json({ Spots: spots });
 
-    const spotsData = [];
 
-    spots.forEach(async (spot) => {
-        const reviewSum = await Review.sum('stars', {
+
+    // LAZY LOADING:
+    const spots = await Spot.findAll({ raw: true });
+
+    spots.forEach(async spot => {
+        const spotWithAvgRatingData = await Spot.findOne({
             where: {
-                spotId: spot.id
-            }
-        })
-        const reviewCount = await Review.count({
-            where: {
-                spotId: spot.id
-            }
-        })
+                id: spot.id
+            },
+            attributes: {
+                include: [
+                    [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"]
+                ]
+            },
+            include: { model: Review, attributes: [] },
+            group: [
+                "Reviews.spotId"
+            ],
+            raw: true
+        });
 
-        const spotData = spot.toJSON();
-        if (reviewSum && reviewCount) {
-            spotData.avgRating = reviewSum / reviewCount;
-            // console.log("------->" + spotData.avgRating);
-        }
-
-        // console.log(spotData);
-        spotsData.push(spotData);
+        // console.log(spotWithAvgRatingData);
+        spot.avgRating = spotWithAvgRatingData.avgRating
+        // Object.assign(spot, spotWithAvgRatingData);
     });
 
-    // console.log("*******" + spotsData);
+    // const spotsData = spots.map(async (spot) => {
+    //     const spotData = spot.toJSON();
+    //     spotData.poop = 123234
+
+        // const avgSpotRating = await Spot.findOne({
+        //     where: {
+        //         id: spot.id
+        //     },
+        //     attributes: {
+        //         include: [
+        //             [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"]
+        //         ]
+        //     },
+        //     include: { model: Review, attributes: [] },
+        //     group: [
+        //         "Reviews.spotId"
+        //     ],
+        //     raw: true
+        // });
+
+    //     // console.log(avgSpotRating)
+    //     // console.log(spotsData)
+
+    //     spotData.avgRating = avgSpotRating.avgRating
+
+    //     spotsData.push(avgSpotRating);
+    // });
+
+    // console.log(spotsData);
 
     res.json({
-        Spots: [...spotsData]
+        Spots: spots
     });
 });
 
@@ -131,27 +148,14 @@ router.get('/current', requireAuth, async (req, res, next) => {
 router.get('/:spotId', async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId);
 
-
     if (spot) {
         const spotData = spot.toJSON();
-        spotData.numReviews = await Review.count({
-            where: {
-                spotId: spot.id
-            }
-        });
 
-        const reviewSum = await Review.sum('stars', {
-            where: {
-                spotId: spot.id
-            }
-        });
-
+        spotData.numReviews = await Review.count({ where: { spotId: spot.id } });
+        const reviewSum = await Review.sum('stars', { where: { spotId: spot.id } });
         spotData.avgStarRating = reviewSum / spotData.numReviews;
-
         spotData.spotImages = await SpotImage.findAll({
-            where: {
-                spotId: spot.id
-            },
+            where: { spotId: spot.id },
             attributes: ['id', 'url', 'preview']
         });
         spotData.Owner = await User.findByPk(spot.ownerId, {attributes: ['id', 'firstName', 'lastName'] });
@@ -188,79 +192,19 @@ router.post('/', requireAuth, validateSpot, async (req, res, next) => {
         let err = {};
         err.errors = {};
 
-        if (!address) {
-            // err = new Error('Validation Error');
-            err.title = "Validation Error"
-            err.message = "Validation Error";
-            err.status = 400;
-            err.errors.address = "Street address is required";
-            // next(err);
-        }
-        if (!city) {
-            // err = new Error('Validation Error');
-            err.title = "Validation Error"
-            err.message = "Validation Error";
-            err.status = 400;
-            err.errors.city = "City is required";
-            // next(err);
-        }
-        if (!state) {
-            // err = new Error('Validation Error');
-            err.title = "Validation Error"
-            err.message = "Validation Error";
-            err.status = 400;
-            err.errors.state = "State is required";
-            // next(err);
-        }
-        if (!country) {
-            // err = new Error('Validation Error');
-            err.title = "Validation Error"
-            err.message = "Validation Error";
-            err.status = 400;
-            err.errors.country = "Country is required";
-            // next(err);
-        }
-        if (!lat) {
-            // err = new Error('Validation Error');
-            err.title = "Validation Error"
-            err.message = "Validation Error";
-            err.status = 400;
-            err.errors.lat = "Latitude is not valid";
-            // next(err);
-        }
-        if (!lng) {
-            // err = new Error('Validation Error');
-            err.title = "Validation Error"
-            err.message = "Validation Error";
-            err.status = 400;
-            err.errors.lng = "Longitude is not valid";
-            // next(err);
-        }
-        if (!name) {
-            // err = new Error('Validation Error');
-            err.title = "Validation Error"
-            err.message = "Validation Error";
-            err.status = 400;
-            err.errors.name = "Name must be less than 50 characters";
-            // next(err);
-        }
-        if (!description) {
-            // err = new Error('Validation Error');
-            err.title = "Validation Error"
-            err.message = "Validation Error";
-            err.status = 400;
-            err.errors.description = "Description is required";
-            // next(err);
-        }
-        if (!price) {
-            // err = new Error('Validation Error');
-            err.title = "Validation Error"
-            err.message = "Validation Error";
-            err.status = 400;
-            err.errors.price = "Price per day is required";
-            // next(err);
-        }
+        if (!address) err.errors.address = "Street address is required";
+        if (!city) err.errors.city = "City is required";
+        if (!state) err.errors.state = "State is required";
+        if (!country) err.errors.country = "Country is required";
+        if (!lat) err.errors.lat = "Latitude is not valid";
+        if (!lng) err.errors.lng = "Longitude is not valid";
+        if (!name) err.errors.name = "Name must be less than 50 characters";
+        if (!description) err.errors.description = "Description is required";
+        if (!price) err.errors.price = "Price per day is required";
 
+        err.title = "Validation Error"
+        err.message = "Validation Error";
+        err.status = 400;
         next(err);
     }
 });
