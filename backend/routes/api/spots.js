@@ -44,6 +44,18 @@ const validateSpot = [
         .withMessage('Price per day is required'),
     handleValidationErrors
 ];
+
+const validateReview = [
+    check('review')
+        .exists({ checkFalsy: true })
+        .withMessage('Review text is required'),
+    check('stars')
+        .exists({ checkFalsy: true })
+        .withMessage('Stars is required')
+        .isLength({ min: 1, max: 5 })
+        .withMessage('Stars must be an integer from 1 to 5'),
+    handleValidationErrors
+];
 /*--------------------------------------------------------------------------*/
 
 /*--------------------------------- ROUTES ---------------------------------*/
@@ -352,8 +364,41 @@ router.get('/:spotId/reviews', async (req, res, next) => {
 });
 
 // Create a Review for a Spot based on the Spot's id
-router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
+router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, next) => {
+    const spot = await Spot.findByPk(req.params.spotId);
+    if (spot) {
+        // check if review from current user already exists
+        const spotReviews = await Review.findAll({ where: { spotId: req.params.spotId }, raw: true });
+        console.log(spotReviews)
+        for (let i = 0; i < spotReviews.length; i++) {
+            const review = spotReviews[i];
+            if (review.userId === req.user.id) {
+                res.status(403).json({
+                    message: "User already has a review for this spot",
+                    statusCode: 403
+                });
+                return;
+            }
+        }
 
+        const { review, stars } = req.body;
+        if (review && stars) {
+            const newReview = await Review.create({
+                spotId: req.params.spotId,
+                userId: req.user.id,
+                review,
+                stars
+            });
+
+            res.status(201).json(newReview);
+        }
+    }
+
+    // if spot not found
+    else res.status(404).json({
+        message: "Spot couldn't be found",
+        statusCode: 404
+    });
 });
 
 
