@@ -209,6 +209,46 @@ router.post('/', requireAuth, validateSpot, async (req, res, next) => {
     }
 });
 
+// Add an Image to a Spot based on the Spot's id
+router.post('/:spotId/images', requireAuth, async (req, res, next) => {
+    const spot = await Spot.findByPk(parseInt(req.params.spotId));
+    const { url, preview } = req.body;
+
+    if (spot) {
+        console.log(url)
+        console.log(preview)
+        if (url && (preview === true || preview === false)) {
+            const spotImage = await SpotImage.create({
+                spotId: parseInt(req.params.spotId),
+                url,
+                preview
+            });
+
+            const spotImageData = {};
+            spotImageData.id = spotImage.id
+            spotImageData.url = spotImage.url
+            spotImageData.preview = spotImage.preview
+
+            res.json(spotImageData);
+        } else {
+            res.status(400).json({
+                message: "The values: url and preview (boolean) are required",
+                statusCode: 400
+            })
+        }
+    } else {
+        res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        });
+    }
+});
+
+// Edit a Spot
+router.put('/:spotId', async (req, res, next) => {
+
+});
+
 
 /*--------------------------------------------------------------------------*/
 
