@@ -17,6 +17,30 @@ module.exports = {
             price: 145
         },
         {
+            ownerId: 5,
+            address: '123 Elf Road',
+            city: 'North Pole',
+            state: 'Very Cold',
+            country: 'Anti-arctica',
+            lat: 90,
+            lng: 135,
+            name: 'Santa\'s (former) House',
+            description: 'A newly aquired building! Renovated with amenities including air conditioning and a new refrigerator!',
+            price: 500
+        },
+        {
+            ownerId: 5,
+            address: 'Even Yisra\'el St 3',
+            city: 'Jerusalem',
+            state: 'Israel',
+            country: 'Israel',
+            lat: 31.78,
+            lng: 35.22,
+            name: 'The Upper Room',
+            description: 'In the area? Come stay at the Upper Room for some nice time of undistracted meditation and prayer!',
+            price: 30
+        },
+        {
             ownerId: 11,
             address: '123 NW Way',
             city: 'Gorgoroth',
