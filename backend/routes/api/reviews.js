@@ -24,7 +24,9 @@ const validateReview = [
 /*--------------------------------- ROUTES ---------------------------------*/
 // Get all Reviews of the Current User
 router.get('/current', requireAuth, async (req, res, next) => {
+    const userReviews = await Review.findAll({ where: { userId: req.user.id } });
 
+    res.json(userReviews);
 });
 
 
