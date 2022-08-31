@@ -307,7 +307,12 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
     if (spot) {
         // Check if spot belongs to current user
         if (spot.ownerId === req.user.id) {
+            await spot.destroy();
 
+            res.json({
+                message: "Successfully deleted",
+                statusCode: 200
+            });
         }
 
         // Error if current user is not owner of spot
