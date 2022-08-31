@@ -68,65 +68,27 @@ router.get('/', async (req, res, next) => {
     // res.json({ Spots: spots });
 
 
-
     // LAZY LOADING:
     const spots = await Spot.findAll({ raw: true });
 
-    spots.forEach(async spot => {
-        const spotWithAvgRatingData = await Spot.findOne({
-            where: {
-                id: spot.id
-            },
+    for (let i = 0; i < spots.length; i++) {
+        const spot = spots[i];
+
+        const aggregates = {};
+        const avgSpotRating = await Review.findOne({
+            where: { spotId: spot.id },
             attributes: {
                 include: [
-                    [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"]
+                    [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]
                 ]
             },
-            include: { model: Review, attributes: [] },
-            group: [
-                "Reviews.spotId"
-            ],
             raw: true
         });
+        aggregates.avgRating = avgSpotRating.avgRating;
+        Object.assign(spot, aggregates);
 
-        // console.log(spotWithAvgRatingData);
-        spot.avgRating = spotWithAvgRatingData.avgRating
-        // Object.assign(spot, spotWithAvgRatingData);
-    });
-
-    // const spotsData = spots.map(async (spot) => {
-    //     const spotData = spot.toJSON();
-    //     spotData.poop = 123234
-
-        // const avgSpotRating = await Spot.findOne({
-        //     where: {
-        //         id: spot.id
-        //     },
-        //     attributes: {
-        //         include: [
-        //             [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"]
-        //         ]
-        //     },
-        //     include: { model: Review, attributes: [] },
-        //     group: [
-        //         "Reviews.spotId"
-        //     ],
-        //     raw: true
-        // });
-
-    //     // console.log(avgSpotRating)
-    //     // console.log(spotsData)
-
-    //     spotData.avgRating = avgSpotRating.avgRating
-
-    //     spotsData.push(avgSpotRating);
-    // });
-
-    // console.log(spotsData);
-
-    res.json({
-        Spots: spots
-    });
+        if (i === spots.length - 1) res.json({ Spots: spots });
+    }
 });
 
 // Get all Spots owned by the Current Owner ---> STILL NEEDS avgRating and previewImage
