@@ -55,9 +55,9 @@ router.get('/current', requireAuth, async (req, res, next) => {
         review.User = currUser;
         review.Spot = spotData;
         review.ReviewImages = reviewImageData;
-    }
+    };
 
-    res.json(userReviews);
+    res.json({ Reviews: userReviews });
 });
 
 
