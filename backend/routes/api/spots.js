@@ -90,7 +90,7 @@ router.get('/', async (req, res, next) => {
             if (!spot.previewImage) spot.previewImage = null;
         }
         else spot.previewImage = null;
-    }
+    };
 
     res.json({ Spots: spots });
 });
@@ -118,7 +118,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
             if (!spot.previewImage) spot.previewImage = null;
         }
         else spot.previewImage = null;
-    }
+    };
 
     res.json({ Spots: mySpots });
 });
@@ -318,7 +318,37 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
 
 // Get all Reviews by a Spot's id
 router.get('/:spotId/reviews', async (req, res, next) => {
+    const spot = await Spot.findByPk(req.params.spotId);
+    if (spot) {
+        const spotReviews = await Review.findAll({ where: { spotId: req.params.spotId }, raw: true });
 
+        for (let i = 0; i < spotReviews.length; i++) {
+            const review = spotReviews[i];
+
+            const user = await User.findOne({
+                where: { id: review.userId },
+                attributes: { exclude: ['username'] },
+                raw: true
+            });
+
+            let reviewImages = await ReviewImage.findAll({
+                where: { reviewId: review.id },
+                attributes: ['id', 'url'],
+                raw: true
+            });
+
+            review.User = user;
+            review.ReviewImages = reviewImages;
+        };
+
+        res.json({ Reviews: spotReviews });
+    }
+
+    // if spot not found
+    else res.status(404).json({
+        message: "Spot couldn't be found",
+        statusCode: 404
+    });
 });
 
 // Create a Review for a Spot based on the Spot's id
