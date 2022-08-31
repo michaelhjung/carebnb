@@ -13,7 +13,11 @@
     "migrate-undo": "dotenv npx sequelize db:migrate:undo:all",
     "seed": "dotenv npx sequelize db:seed:all",
     "seed-undo": "dotenv npx sequelize db:seed:undo:all",
-    "push-heroku": "git push heroku main"
+    "heroku-push": "git push heroku main",
+    "heroku-migrate": "heroku run npm run sequelize db:migrate",
+    "heroku-migrate-undo": "heroku run npm run sequelize db:migrate:undo:all",
+    "heroku-seed": "heroku run npm run sequelize db:seed:all",
+    "heroku-seed-undo": "heroku run npm run sequelize db:seed:undo:all"
   },
   "keywords": [],
   "author": "",
