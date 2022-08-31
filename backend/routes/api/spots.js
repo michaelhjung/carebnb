@@ -93,10 +93,15 @@ router.get('/', async (req, res, next) => {
         else spot.avgRating = null;
 
         const spotPreviews = await SpotImage.findAll({ where: { spotId: spot.id }, raw: true });
-        spotPreviews.forEach(image => {
-            if (image.preview === 1) spot.previewImage = image.url;
-        });
-        if (!spot.previewImage) spot.previewImage = null;
+        console.log(spotPreviews);
+        if (spotPreviews) {
+            spotPreviews.forEach(image => {
+                if (image.preview === true || image.preview === 1) spot.previewImage = image.url;
+            });
+
+            if (!spot.previewImage) spot.previewImage = null;
+        }
+        else spot.previewImage = null;
     }
 
     res.json({ Spots: spots });
