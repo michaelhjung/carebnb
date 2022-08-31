@@ -46,7 +46,7 @@ const validateSpot = [
 /*--------------------------------------------------------------------------*/
 
 /*--------------------------------- ROUTES ---------------------------------*/
-// Get all Spots
+// Get all Spots ---> STILL NEEDS avgRating and previewImage
 router.get('/', async (req, res, next) => {
 
     // // EAGER LOADING:
@@ -129,7 +129,7 @@ router.get('/', async (req, res, next) => {
     });
 });
 
-// Get all Spots owned by the Current Owner
+// Get all Spots owned by the Current Owner ---> STILL NEEDS avgRating and previewImage
 router.get('/current', requireAuth, async (req, res, next) => {
     const userId = req.user.id;
 
@@ -259,9 +259,73 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     }
 });
 
-// Edit a Spot
-router.put('/:spotId', async (req, res, next) => {
+// Edit a Spot ---> BODY VALIDATION ERROR STILL NOT WORKING
+router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
+    const spot = await Spot.findByPk(parseInt(req.params.spotId));
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
+    if (spot) {
+        // Check if spot belongs to current user
+        if (spot.ownerId === req.user.id) {
+            if (address) spot.address = address;
+            if (city) spot.city = city;
+            if (state) spot.state = state;
+            if (country) spot.country = country;
+            if (lat) spot.lat = lat;
+            if (lng) spot.lng = lng;
+            if (name) spot.name = name;
+            if (description) spot.description = description;
+            if (price) spot.price = price;
+
+            await spot.save();
+
+            res.json(spot);
+        }
+
+        // Error if current user is not owner of spot
+        else {
+            const err = new Error("Unauthorized user");
+            err.title = "Authorization Error";
+            err.message = "Unauthorized user";
+            err.status = 401;
+            next(err);
+        }
+    }
+
+    else {
+        res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        });
+    }
+});
+
+// Delete a Spot
+router.delete('/:spotId', requireAuth, async (req, res, next) => {
+    const spot = await Spot.findByPk(parseInt(req.params.spotId));
+
+    if (spot) {
+        // Check if spot belongs to current user
+        if (spot.ownerId === req.user.id) {
+
+        }
+
+        // Error if current user is not owner of spot
+        else {
+            const err = new Error("Unauthorized user");
+            err.title = "Authorization Error";
+            err.message = "Unauthorized user";
+            err.status = 401;
+            next(err);
+        }
+    }
+
+    else {
+        res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        });
+    }
 });
 
 
