@@ -76,17 +76,18 @@ router.get('/', async (req, res, next) => {
         const spot = spots[i];
 
         const aggregates = {};
-        const avgSpotRating = await Review.findOne({
+        const avgSpotRating = await Review.findAll({
             where: { spotId: spot.id },
             attributes: {
                 include: [
                     [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]
                 ],
-                group: ["Review.spotId"]
+                group: ["Review.spotId"],
             },
             raw: true
         });
-        aggregates.avgRating = avgSpotRating.avgRating;
+        // console.log(avgSpotRating[0].avgRating);
+        aggregates.avgRating = avgSpotRating[0].avgRating;
 
         const spotPreviews = await SpotImage.findAll({ where: { spotId: spot.id }, raw: true });
         spotPreviews.forEach(image => {
