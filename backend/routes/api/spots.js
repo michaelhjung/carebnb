@@ -202,7 +202,7 @@ router.post('/', requireAuth, validateSpot, async (req, res, next) => {
         if (!description) err.errors.description = "Description is required";
         if (!price) err.errors.price = "Price per day is required";
 
-        err.title = "Validation Error"
+        err.title = "Validation Error";
         err.message = "Validation Error";
         err.status = 400;
         next(err);
@@ -215,28 +215,43 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     const { url, preview } = req.body;
 
     if (spot) {
-        console.log(url)
-        console.log(preview)
-        if (url && (preview === true || preview === false)) {
-            const spotImage = await SpotImage.create({
-                spotId: parseInt(req.params.spotId),
-                url,
-                preview
-            });
+        // Check if spot belongs to current user
+        if (spot.ownerId === req.user.id) {
 
-            const spotImageData = {};
-            spotImageData.id = spotImage.id
-            spotImageData.url = spotImage.url
-            spotImageData.preview = spotImage.preview
+            // Check if preview is a boolean value
+            if (url && (preview === true || preview === false)) {
+                const spotImage = await SpotImage.create({
+                    spotId: parseInt(req.params.spotId),
+                    url,
+                    preview
+                });
 
-            res.json(spotImageData);
+                const spotImageData = {};
+                spotImageData.id = spotImage.id
+                spotImageData.url = spotImage.url
+                spotImageData.preview = spotImage.preview
+
+                res.json(spotImageData);
+            }
+
+            else {
+                res.status(400).json({
+                    message: "The values: url and preview (boolean) are required",
+                    statusCode: 400
+                })
+            }
+
+        // Error if current user is not owner of spot
         } else {
-            res.status(400).json({
-                message: "The values: url and preview (boolean) are required",
-                statusCode: 400
-            })
+            const err = new Error("Unauthorized user");
+            err.title = "Authorization Error";
+            err.message = "Unauthorized user";
+            err.status = 401;
+            next(err);
         }
-    } else {
+    }
+
+    else {
         res.status(404).json({
             message: "Spot couldn't be found",
             statusCode: 404
