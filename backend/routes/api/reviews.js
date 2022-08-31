@@ -151,8 +151,12 @@ router.delete('/:reviewId', requireAuth, async (req, res, next) => {
     const review = await Review.findByPk(req.params.reviewId);
     if (review) {
         if (review.userId === req.user.id) {
+            await review.destroy();
 
-
+            res.json({
+                message: "Successfully deleted",
+                statusCode: 200
+            });
         }
 
         // if review does not belong to current user
