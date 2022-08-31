@@ -18,7 +18,7 @@ const validateSpot = [
     check('state')
         .exists({ checkFalsy: true })
         .withMessage('State is required'),
-    check('county')
+    check('country')
         .exists({ checkFalsy: true })
         .withMessage('Country is required'),
     check('lat')
@@ -42,6 +42,7 @@ const validateSpot = [
     check('price')
         .exists({ checkFalsy: true })
         .withMessage('Price per day is required'),
+    handleValidationErrors
 ];
 /*--------------------------------------------------------------------------*/
 
@@ -156,7 +157,7 @@ router.get('/:spotId', async (req, res, next) => {
     });
 });
 
-// Create a Spot
+// Create a Spot ---> BODY VALIDATIONS WORKS, BUT DOES NOT SHOW KEYS FOR EA ERROR
 router.post('/', requireAuth, validateSpot, async (req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
@@ -175,25 +176,27 @@ router.post('/', requireAuth, validateSpot, async (req, res, next) => {
         });
 
         res.status(201).json(spot);
-    } else {
-        let err = {};
-        err.errors = {};
-
-        if (!address) err.errors.address = "Street address is required";
-        if (!city) err.errors.city = "City is required";
-        if (!state) err.errors.state = "State is required";
-        if (!country) err.errors.country = "Country is required";
-        if (!lat) err.errors.lat = "Latitude is not valid";
-        if (!lng) err.errors.lng = "Longitude is not valid";
-        if (!name) err.errors.name = "Name must be less than 50 characters";
-        if (!description) err.errors.description = "Description is required";
-        if (!price) err.errors.price = "Price per day is required";
-
-        err.title = "Validation Error";
-        err.message = "Validation Error";
-        err.status = 400;
-        next(err);
     }
+
+    // else {
+    //     let err = {};
+    //     err.errors = {};
+
+    //     if (!address) err.errors.address = "Street address is required";
+    //     if (!city) err.errors.city = "City is required";
+    //     if (!state) err.errors.state = "State is required";
+    //     if (!country) err.errors.country = "Country is required";
+    //     if (!lat) err.errors.lat = "Latitude is not valid";
+    //     if (!lng) err.errors.lng = "Longitude is not valid";
+    //     if (!name) err.errors.name = "Name must be less than 50 characters";
+    //     if (!description) err.errors.description = "Description is required";
+    //     if (!price) err.errors.price = "Price per day is required";
+
+    //     err.title = "Validation Error";
+    //     err.message = "Validation Error";
+    //     err.status = 400;
+    //     next(err);
+    // }
 });
 
 // Add an Image to a Spot based on the Spot's id
@@ -246,7 +249,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     }
 });
 
-// Edit a Spot ---> BODY VALIDATION ERROR STILL NOT WORKING
+// Edit a Spot ---> BODY VALIDATIONS WORKS, BUT DOES NOT SHOW KEYS FOR EA ERROR
 router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
     const spot = await Spot.findByPk(parseInt(req.params.spotId));
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
