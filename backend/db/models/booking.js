@@ -28,8 +28,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATEONLY,
         allowNull: false,
         validate: {
-            // double-check what date date.now checks
-            // dates must not conflict with an existing booking
             isAfter: new Date(Date.now())
         }
     },
@@ -37,8 +35,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATEONLY,
         allowNull: false,
         validate: {
-            // endDate must be AFTER startDate
-            // dates must not conflict with an existing booking
             isAfter: this.startDate
         }
     }
