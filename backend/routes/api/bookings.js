@@ -21,7 +21,13 @@ const validateBooking = [
 /*--------------------------------- ROUTES ---------------------------------*/
 // Get all of the Current User's Bookings
 router.get('/current', requireAuth, async (req, res, next) => {
+    const userBookings = await Booking.findAll({
+        where: {
+            userId: req.user.id
+        }
+    });
 
+    res.json(userBookings);
 });
 
 
