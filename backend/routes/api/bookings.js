@@ -62,23 +62,83 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
 // Edit a Booking
 router.put('/:bookingId', requireAuth, async (req, res, next) => {
-    const booking = await Review.findByPk(req.params.bookingId);
+    const booking = await Booking.findByPk(req.params.bookingId);
+
     if (booking) {
         if (booking.userId === req.user.id) {
-            const today = new Date(Date.now());
-            const parsedStartDate = new Date(Date.parse(booking.startDate));
-            // *****TO-DO: ADD SOME CODE HERE!!!!!*****
+            const { startDate, endDate } = req.body;
+            const requestedStart = Date.parse(startDate);
+            const requestedEnd = Date.parse(endDate);
+            const bookedStart = Date.parse(booking.startDate);
+            const bookedEnd = Date.parse(booking.endDate);
+            const today = Date.parse(new Date(Date.now()));
+            let err = {};
+            err.errors = {};
+            err.errors.middleDates = [];
+
+            // error handling: if the booked startDate or endDate has already past
+            if (today > bookedStart || today > bookedEnd) {
+                res.status(403).json({
+                    message: "Past bookings can't be modified",
+                    statusCode: 403
+                })
+            }
+
+            // error handling: if endDate is on or before startDate
+            if (requestedEnd <= requestedStart) {
+                if (err.errors.middleDates.length === 0) delete err.errors.middleDates;
+                err.errors.endDate = "endDate cannot come before startDate";
+                err.title = "Booking Conflict";
+                err.message = "Validation error";
+                err.status = 400;
+                next(err);
+                return;
+            }
 
 
+            const allBookings = await Booking.findAll({ where: { spotId: booking.spotId }, raw: true });
+            // check for booking conflict
+            for (let i = 0; i < allBookings.length; i++) {
+                const booking = allBookings[i];
+                const bookedSet = new Set();
+                const bookedStart = Date.parse(booking.startDate);
+                const bookedEnd = Date.parse(booking.endDate);
 
+                // note: 86,400,000 milliseconds in 1 day
+                for (let i = bookedStart; i <= bookedEnd; i += 86_400_000) {
+                    bookedSet.add(i);
+                };
 
-            res.json({
-                message: "Successfully deleted",
-                statusCode: 200
-            });
+                for (let j = requestedStart; j <= requestedEnd; j += 86_400_000) {
+                    if (bookedSet.has(j)) {
+                        if (bookedSet.has(requestedStart)) err.errors.startDate = "Start date conflicts with an existing booking";
+                        if (bookedSet.has(requestedEnd)) err.errors.endDate = "End date conflicts with an existing booking";
+                        if ((j !== requestedStart && j !== requestedEnd) && bookedSet.has(j)) {
+                            err.errors.middleDates.push(`The date ${new Date(j).toISOString().split('T')[0]} conflicts with an existing booking`);
+                        }
+                    }
+                };
+
+                // actual error response for booking conflict
+                if (err.errors.startDate || err.errors.endDate || err.errors.middleDates.length > 0) {
+                    if (err.errors.middleDates.length === 0) delete err.errors.middleDates;
+                    err.title = "Booking Conflict";
+                    err.message = "Sorry, this spot is already booked for the specified dates";
+                    err.status = 403;
+                    next(err);
+                    return;
+                }
+            };
+
+            // if no conflicts
+            if (startDate && (today < requestedStart)) booking.startDate = startDate;
+            if (endDate) booking.endDate = endDate;
+            await booking.save();
+
+            res.json(booking);
         }
 
-        // if booking does not belong to current user or spot does not bleong to owner
+        // if booking does not belong to current user
         else res.status(401).json({
             message: "Unauthorized user",
             statusCode: 401

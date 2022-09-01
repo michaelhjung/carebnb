@@ -478,6 +478,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
                         return;
                     }
 
+                    // check for booking conflict
                     else {
                         // note: 86,400,000 milliseconds in 1 day
                         for (let i = bookedStart; i <= bookedEnd; i += 86_400_000) {
@@ -485,7 +486,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
                         };
 
                         for (let j = requestedStart; j <= requestedEnd; j += 86_400_000) {
-                            // if booking conflict
                             if (bookedSet.has(j)) {
                                 if (bookedSet.has(requestedStart)) err.errors.startDate = "Start date conflicts with an existing booking";
                                 if (bookedSet.has(requestedEnd)) err.errors.endDate = "End date conflicts with an existing booking";
