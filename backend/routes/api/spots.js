@@ -230,10 +230,10 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 
         // Error if current user is not owner of spot
         } else {
-            const err = new Error("Unauthorized user");
+            const err = new Error("Forbidden");
             err.title = "Authorization Error";
-            err.message = "Unauthorized user";
-            err.status = 401;
+            err.message = "Forbidden";
+            err.status = 403;
             next(err);
         }
     }
@@ -271,10 +271,10 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
 
         // Error if current user is not owner of spot
         else {
-            const err = new Error("Unauthorized user");
+            const err = new Error("Forbidden");
             err.title = "Authorization Error";
-            err.message = "Unauthorized user";
-            err.status = 401;
+            err.message = "Forbidden";
+            err.status = 403;
             next(err);
         }
     }
@@ -304,10 +304,10 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
 
         // Error if current user is not owner of spot
         else {
-            const err = new Error("Unauthorized user");
+            const err = new Error("Forbidden");
             err.title = "Authorization Error";
-            err.message = "Unauthorized user";
-            err.status = 401;
+            err.message = "Forbidden";
+            err.status = 403;
             next(err);
         }
     }
@@ -444,9 +444,10 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId);
     if (spot) {
         if (spot.ownerId === req.user.id) {
-            res.status(400).json({
-                message: "You are the owner of this spot!",
-                statusCode: 400
+            // owner is not allowed to book at his own spot
+            res.status(403).json({
+                message: "Forbidden",
+                statusCode: 403
             });
         }
 

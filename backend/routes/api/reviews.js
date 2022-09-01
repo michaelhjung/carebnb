@@ -105,9 +105,9 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
         }
 
         // if review does not belong to current user
-        else res.status(401).json({
-            message: "Unauthorized user",
-            statusCode: 401
+        else res.status(403).json({
+            message: "Forbidden",
+            statusCode: 403
         });
     }
 
@@ -133,9 +133,9 @@ router.put('/:reviewId', requireAuth, validateReview, async (req, res, next) => 
         }
 
         // if review does not belong to current user
-        else res.status(401).json({
-            message: "Unauthorized user",
-            statusCode: 401
+        else res.status(403).json({
+            message: "Forbidden",
+            statusCode: 403
         });
     }
 
@@ -160,9 +160,9 @@ router.delete('/:reviewId', requireAuth, async (req, res, next) => {
         }
 
         // if review does not belong to current user
-        else res.status(401).json({
-            message: "Unauthorized user",
-            statusCode: 401
+        else res.status(403).json({
+            message: "Forbidden",
+            statusCode: 403
         });
     }
 

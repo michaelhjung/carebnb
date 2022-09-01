@@ -146,9 +146,9 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
         }
 
         // if booking does not belong to current user
-        else res.status(401).json({
-            message: "Unauthorized user",
-            statusCode: 401
+        else res.status(403).json({
+            message: "Forbidden",
+            statusCode: 403
         });
     }
 
@@ -184,9 +184,9 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
         }
 
         // if booking does not belong to current user or spot does not bleong to owner
-        else res.status(401).json({
-            message: "Unauthorized user",
-            statusCode: 401
+        else res.status(403).json({
+            message: "Forbidden",
+            statusCode: 403
         });
     }
 
