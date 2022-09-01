@@ -94,9 +94,10 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
 
 // Delete a Booking
 router.delete('/:bookingId', requireAuth, async (req, res, next) => {
-    const booking = await Review.findByPk(req.params.bookingId);
-    const spot = await Spot.findByPk(booking.spotId);
+    const booking = await Booking.findByPk(req.params.bookingId);
+
     if (booking) {
+        const spot = await Spot.findByPk(booking.spotId);
         if (booking.userId === req.user.id || spot.ownerId === req.user.id) {
             const today = new Date(Date.now());
             const parsedStartDate = new Date(Date.parse(booking.startDate));
