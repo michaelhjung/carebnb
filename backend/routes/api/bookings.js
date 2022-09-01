@@ -28,10 +28,30 @@ router.get('/current', requireAuth, async (req, res, next) => {
     const userBookings = await Booking.findAll({
         where: {
             userId: req.user.id
-        }
+        },
+        raw: true
     });
 
-    res.json(userBookings);
+    for (let i = 0; i < userBookings.length; i++) {
+        const booking = userBookings[i];
+        const spot = await Spot.findOne({
+            where: { id: booking.spotId },
+            attributes: {
+                exclude: ['description', 'createdAt', 'updatedAt']
+            },
+            raw: true
+        });
+
+        const spotPreviews = await SpotImage.findAll({ where: { spotId: spot.id }, raw: true });
+        spotPreviews.forEach(image => {
+            if (image.preview === true || image.preview === 1) spot.previewImage = image.url;
+        });
+        if (!spot.previewImage) spot.previewImage = null;
+
+        booking.Spot = spot;
+    }
+
+    res.json({ Bookings: userBookings });
 });
 
 
