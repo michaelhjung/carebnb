@@ -56,6 +56,15 @@ const validateReview = [
         .withMessage('Stars must be an integer from 1 to 5'),
     handleValidationErrors
 ];
+
+const validateBooking = [
+    check('endDate')
+        .exists({ checkFalsy: true })
+        .withMessage('endDate is required')
+        .isAfter('startDate')
+        .withMessage('endDate cannot be on or before startDate'),
+    handleValidationErrors
+];
 /*--------------------------------------------------------------------------*/
 
 /*--------------------------------- ROUTES ---------------------------------*/
@@ -399,6 +408,18 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, ne
         message: "Spot couldn't be found",
         statusCode: 404
     });
+});
+
+
+
+// Get all Bookings for a Spot based on the Spot's id
+router.get('/', requireAuth, async (req, res, next) => {
+
+});
+
+// Create a Booking from a Spot based on the Spot's id***
+router.post('/', requireAuth, validateBooking, async (req, res, next) => {
+
 });
 
 
