@@ -159,7 +159,7 @@ router.get('/', async (req, res, next) => {
         else spot.previewImage = null;
     };
 
-    res.json({ Spots: spots });
+    res.json({ Spots: spots, page, size });
 });
 
 // Get all Spots owned by the Current Owner
