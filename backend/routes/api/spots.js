@@ -72,33 +72,9 @@ const validateReview = [
 // ];
 /*--------------------------------------------------------------------------*/
 
-/*---------------------------- HELPER FUNCTIONS ----------------------------*/
-const formatDate = (date) => new Date(Date.parse(date)).toISOString().split('T')[0];
-/*--------------------------------------------------------------------------*/
-
 /*--------------------------------- ROUTES ---------------------------------*/
 // Get all Spots
 router.get('/', async (req, res, next) => {
-
-    // // EAGER LOADING (NOT YET WORKING):
-    // const spots = await Spot.findAll({
-    //     attributes: {
-    //         include: [
-    //             [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"],
-    //         ]
-    //     },
-
-    //     include:
-    //         { model: Review, attributes: [] },
-
-    //     group:
-    //         ["Reviews.spotId"]
-    //         // ["Reviews.spotId", "SpotImages.url"]
-    // });
-
-    // res.json({ Spots: spots });
-
-
     // LAZY LOADING (& N+1):
     const spots = await Spot.findAll({ raw: true });
 
@@ -178,8 +154,8 @@ router.get('/:spotId', async (req, res, next) => {
     });
 });
 
-// Create a Spot ---> BODY VALIDATIONS WORKS, BUT DOES NOT SHOW KEYS FOR EA ERROR
-router.post('/', requireAuth, validateSpot, async (req, res, next) => {
+// Create a Spot
+router.post('/', requireAuth, async (req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
     if (address && city && state && country && lat && lng && name && description && price) {
@@ -199,25 +175,25 @@ router.post('/', requireAuth, validateSpot, async (req, res, next) => {
         res.status(201).json(spot);
     }
 
-    // else {
-    //     let err = {};
-    //     err.errors = {};
+    else {
+        let err = {};
+        err.errors = {};
 
-    //     if (!address) err.errors.address = "Street address is required";
-    //     if (!city) err.errors.city = "City is required";
-    //     if (!state) err.errors.state = "State is required";
-    //     if (!country) err.errors.country = "Country is required";
-    //     if (!lat) err.errors.lat = "Latitude is not valid";
-    //     if (!lng) err.errors.lng = "Longitude is not valid";
-    //     if (!name) err.errors.name = "Name must be less than 50 characters";
-    //     if (!description) err.errors.description = "Description is required";
-    //     if (!price) err.errors.price = "Price per day is required";
+        if (!address) err.errors.address = "Street address is required";
+        if (!city) err.errors.city = "City is required";
+        if (!state) err.errors.state = "State is required";
+        if (!country) err.errors.country = "Country is required";
+        if (!lat) err.errors.lat = "Latitude is not valid";
+        if (!lng) err.errors.lng = "Longitude is not valid";
+        if (!name) err.errors.name = "Name must be less than 50 characters";
+        if (!description) err.errors.description = "Description is required";
+        if (!price) err.errors.price = "Price per day is required";
 
-    //     err.title = "Validation Error";
-    //     err.message = "Validation Error";
-    //     err.status = 400;
-    //     next(err);
-    // }
+        err.title = "Validation Error";
+        err.message = "Validation Error";
+        err.status = 400;
+        next(err);
+    }
 });
 
 // Add an Image to a Spot based on the Spot's id
@@ -478,26 +454,66 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
             let { startDate, endDate } = req.body;
             if (startDate && endDate) {
                 const allBookings = await Booking.findAll({ where: { spotId: req.params.spotId }, raw: true });
+
+                // error handling inside this for loop
                 for (let i = 0; i < allBookings.length; i++) {
                     const booking = allBookings[i];
-                    const bookedStart = booking.startDate;
-                    const bookedEnd = booking.endDate;
-                    const requestedStart = startDate;
-                    const requestedEnd = endDate;
+                    const bookedSet = new Set();
+                    const bookedStart = Date.parse(booking.startDate);
+                    const bookedEnd = Date.parse(booking.endDate);
+                    const requestedStart = Date.parse(startDate);
+                    const requestedEnd = Date.parse(endDate);
+                    let err = {};
+                    err.errors = {};
+                    err.errors.middleDates = [];
 
-                    // WAITING FOR CLARIFICATION ON DOCS BEFORE HANDLING
-                    // BOOKING CONFLICTS
+                    // if endDate is on or before startDate
+                    if (requestedEnd <= requestedStart) {
+                        if (err.errors.middleDates.length === 0) delete err.errors.middleDates;
+                        err.errors.endDate = "endDate cannot be on or before startDate";
+                        err.title = "Booking Conflict";
+                        err.message = "Sorry, this spot is already booked for the specified dates";
+                        err.status = 403;
+                        next(err);
+                    }
 
+                    else {
+                        // note: 86,400,000 milliseconds in 1 day
+                        for (let i = bookedStart; i <= bookedEnd; i += 86_400_000) {
+                            bookedSet.add(i);
+                        };
 
-                    const newBooking = await Booking.create({
-                        spotId: req.params.spotId,
-                        userId: req.user.id,
-                        startDate,
-                        endDate
-                    });
+                        for (let j = requestedStart; j <= requestedEnd; j += 86_400_000) {
+                            // if booking conflict
+                            if (bookedSet.has(j)) {
+                                if (bookedSet.has(requestedStart)) err.errors.startDate = "Start date conflicts with an existing booking";
+                                if (bookedSet.has(requestedEnd)) err.errors.endDate = "End date conflicts with an existing booking";
+                                if ((j !== requestedStart && j !== requestedEnd) && bookedSet.has(j)) {
+                                    err.errors.middleDates.push(`The date ${new Date(j).toISOString().split('T')[0]} conflicts with an existing booking`);
+                                }
+                            }
+                        };
 
-                    res.json(newBooking);
+                        // actual error response for booking conflict
+                        if (err.errors.startDate || err.errors.endDate || err.errors.middleDates.length > 0) {
+                            if (err.errors.middleDates.length === 0) delete err.errors.middleDates;
+                            err.title = "Booking Conflict";
+                            err.message = "Sorry, this spot is already booked for the specified dates";
+                            err.status = 403;
+                            next(err);
+                        }
+                    }
                 };
+
+                // if no conflicts
+                const newBooking = await Booking.create({
+                    spotId: req.params.spotId,
+                    userId: req.user.id,
+                    startDate,
+                    endDate
+                });
+
+                res.json(newBooking);
             }
         }
     }
