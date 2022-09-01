@@ -18,6 +18,10 @@ const validateBooking = [
 ];
 /*--------------------------------------------------------------------------*/
 
+/*---------------------------- HELPER FUNCTIONS ----------------------------*/
+const formatDate = (date) => new Date(Date.parse(date)).toISOString().split('T')[0];
+/*--------------------------------------------------------------------------*/
+
 /*--------------------------------- ROUTES ---------------------------------*/
 // Get all of the Current User's Bookings
 router.get('/current', requireAuth, async (req, res, next) => {
