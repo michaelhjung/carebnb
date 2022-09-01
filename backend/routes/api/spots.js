@@ -57,14 +57,23 @@ const validateReview = [
     handleValidationErrors
 ];
 
-const validateBooking = [
-    check('endDate')
-        .exists({ checkFalsy: true })
-        .withMessage('endDate is required')
-        .isAfter('startDate')
-        .withMessage('endDate cannot be on or before startDate'),
-    handleValidationErrors
-];
+// const validateBooking = [
+//     check('endDate')
+//         .exists({ checkFalsy: true })
+//         .withMessage('endDate is required')
+//         // .custom((value, { req }) => {
+//         //     if (new Date(value) <= new Date(req.body.startDate)) {
+//         //         throw new Error('endDate cannot be on or before startDate');
+//         //     }
+//         // })
+//         .isAfter('endDate', ['startDate'])
+//         .withMessage('endDate cannot be on or before startDate'),
+//     handleValidationErrors
+// ];
+/*--------------------------------------------------------------------------*/
+
+/*---------------------------- HELPER FUNCTIONS ----------------------------*/
+const formatDate = (date) => new Date(Date.parse(date)).toISOString().split('T')[0];
 /*--------------------------------------------------------------------------*/
 
 /*--------------------------------- ROUTES ---------------------------------*/
@@ -454,9 +463,50 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
     });
 });
 
-// Create a Booking from a Spot based on the Spot's id
-router.post('/:spotId/bookings', requireAuth, validateBooking, async (req, res, next) => {
+// Create a Booking from a Spot based on the Spot's id ---> VALIDATE BOOKING NOT YET WORKING
+router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
+    const spot = await Spot.findByPk(req.params.spotId);
+    if (spot) {
+        if (spot.ownerId === req.user.id) {
+            res.status(400).json({
+                message: "You are the owner of this spot!",
+                statusCode: 400
+            });
+        }
 
+        else {
+            let { startDate, endDate } = req.body;
+            if (startDate && endDate) {
+                const allBookings = await Booking.findAll({ where: { spotId: req.params.spotId }, raw: true });
+                for (let i = 0; i < allBookings.length; i++) {
+                    const booking = allBookings[i];
+                    const bookedStart = booking.startDate;
+                    const bookedEnd = booking.endDate;
+                    const requestedStart = startDate;
+                    const requestedEnd = endDate;
+
+                    // WAITING FOR CLARIFICATION ON DOCS BEFORE HANDLING
+                    // BOOKING CONFLICTS
+
+
+                    const newBooking = await Booking.create({
+                        spotId: req.params.spotId,
+                        userId: req.user.id,
+                        startDate,
+                        endDate
+                    });
+
+                    res.json(newBooking);
+                };
+            }
+        }
+    }
+
+    // if spot not found
+    else res.status(404).json({
+        message: "Spot couldn't be found",
+        statusCode: 404
+    });
 });
 
 
