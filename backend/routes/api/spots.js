@@ -475,6 +475,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
                         err.message = "Sorry, this spot is already booked for the specified dates";
                         err.status = 403;
                         next(err);
+                        return;
                     }
 
                     else {
@@ -501,6 +502,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
                             err.message = "Sorry, this spot is already booked for the specified dates";
                             err.status = 403;
                             next(err);
+                            return;
                         }
                     }
                 };
