@@ -145,7 +145,10 @@ module.exports = {
             'sauron',
             'eowyn',
             'galadriel',
-            'tomthebomb'
+            'tomthebomb',
+            'pepperpotts',
+            'nursejoy',
+            'tchalla'
         ]
       }
     }, {});

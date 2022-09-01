@@ -21,6 +21,18 @@ module.exports = {
             userId: 17,
             startDate: '2022-10-11',
             endDate: '2022-10-13'
+        },
+        {
+            spotId: 7,
+            userId: 4,
+            startDate: '2022-10-11',
+            endDate: '2022-10-13'
+        },
+        {
+            spotId: 5,
+            userId: 4,
+            startDate: '2023-06-02',
+            endDate: '2023-06-04'
         }
     ]);
   },
@@ -31,7 +43,8 @@ module.exports = {
             [Op.in]: [
                 9,
                 16,
-                17
+                17,
+                4
             ]
         }
     });

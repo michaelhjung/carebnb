@@ -65,7 +65,11 @@ module.exports = {
     await queryInterface.bulkDelete('Reviews', {
         spotId: {
             [Op.in]: [
-                1
+                1,
+                2,
+                4,
+                6,
+                7
             ]
         }
     });
