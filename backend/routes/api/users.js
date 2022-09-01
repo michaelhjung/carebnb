@@ -68,7 +68,7 @@ router.post(
         else {
             const user = await User.signup({ firstName, lastName, email, username, password });
 
-            await setTokenCookie(res, user);
+            const jwtToken = await setTokenCookie(res, user);
 
             const userData = {};
             userData.id = user.id;
@@ -76,7 +76,7 @@ router.post(
             userData.lastName = user.lastName;
             userData.email = user.email;
             userData.username = user.username;
-            userData.token = "";
+            userData.token = jwtToken;
 
             return res.json({
                 ...userData
