@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
     },
     startDate: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
         validate: {
             // double-check what date date.now checks
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     },
     endDate: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
         validate: {
             // endDate must be AFTER startDate
