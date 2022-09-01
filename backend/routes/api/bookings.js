@@ -76,14 +76,6 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
             err.errors = {};
             err.errors.middleDates = [];
 
-            // error handling: if the booked startDate or endDate has already past
-            if (today > bookedStart || today > bookedEnd) {
-                res.status(403).json({
-                    message: "Past bookings can't be modified",
-                    statusCode: 403
-                })
-            }
-
             // error handling: if endDate is on or before startDate
             if (requestedEnd <= requestedStart) {
                 if (err.errors.middleDates.length === 0) delete err.errors.middleDates;
@@ -95,6 +87,21 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
                 return;
             }
 
+            // error handling: if the booked end date has already past
+            if (today > bookedEnd) {
+                res.status(403).json({
+                    message: "Past bookings can't be modified",
+                    statusCode: 403
+                })
+            }
+
+            // error handling: if the booked start date has already passed
+            if (startDate && (today >= bookedStart)) {
+                res.status(403).json({
+                    message: "Unable to modify start date once it has passed",
+                    statusCode: 403
+                })
+            }
 
             const allBookings = await Booking.findAll({ where: { spotId: booking.spotId }, raw: true });
             // check for booking conflict
@@ -131,7 +138,7 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
             };
 
             // if no conflicts
-            if (startDate && (today < requestedStart)) booking.startDate = startDate;
+            if (startDate && (today < bookedStart)) booking.startDate = startDate;
             if (endDate) booking.endDate = endDate;
             await booking.save();
 
