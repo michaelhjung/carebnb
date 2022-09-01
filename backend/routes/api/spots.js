@@ -75,8 +75,69 @@ const validateReview = [
 /*--------------------------------- ROUTES ---------------------------------*/
 // Get all Spots
 router.get('/', async (req, res, next) => {
+        // QUERY FILTERS:
+        let err = { errors: {} };
+        let { size, page, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+        size = parseInt(size);
+        page = parseInt(page);
+        minLat = parseFloat(minLat);
+        maxLat = parseFloat(maxLat);
+        minLng = parseFloat(minLng);
+        maxLng = parseFloat(maxLng);
+        minPrice = parseFloat(minPrice);
+        maxPrice = parseFloat(maxPrice);
+
+        const pagination = {};
+        if (size >= 1 && size <= 20) size = size;
+        if (page >= 1 && page <= 10) page = page;
+        if (size < 1 || size > 20) err.errors.size = "Size must be greater than or equal to 1";
+        if (page < 1 || page > 10) err.errors.page = "Page must be greater than or equal to 1";
+        // default size & page:
+        if ((!size && size !== 0) || isNaN(size)) size = 20;
+        if ((!page && page !== 0) || isNaN(page)) page = 1;
+        pagination.limit = size;
+        pagination.offset = size * (page - 1);
+
+        // other queries:
+        const where = {};
+        if (minLat) {
+            if (minLat >= -90) where.lat = minLat;
+            else err.errors.minLat = "Minimum latitude is invalid";
+        };
+        if (maxLat) {
+            if (maxLat <= 90) where.lat = maxLat;
+            else err.errors.maxLat = "Maximum latitude is invalid";
+        };
+        if (minLng) {
+            if (minLng >= -180) where.lng = minLng;
+            else err.errors.minLng = "Minimum longitude is invalid";
+        };
+        if (maxLng) {
+            if (maxLng <= 180) where.lng = maxLng;
+            else err.errors.maxLng = "Maximum longitude is invalid";
+        };
+        if (minPrice) {
+            if (minPrice >= 0) where.price = minPrice;
+            else err.errors.minPrice = "Minimum price must be greater than or equal to 0";
+        };
+        if (maxPrice) {
+            if (maxPrice >= 0) where.price = maxPrice;
+            else err.errors.maxPrice = "Maximum price must be greater than or equal to 0";
+        };
+
+
+        // QUERY PARAMATER VALIDATION ERRORS:
+        if (err.errors.size || err.errors.page || err.errors.minLat || err.errors.maxLat ||
+            err.errors.minLng || err.errors.maxLng || err.errors.minPrice || err.errors.maxPrice) {
+                err.title = "Validation Error";
+                err.message = "Validation Error";
+                err.status = 400;
+                return next(err);
+        }
+
+
     // LAZY LOADING (& N+1):
-    const spots = await Spot.findAll({ raw: true });
+    const spots = await Spot.findAll({ where, raw: true, ...pagination });
 
     for (let i = 0; i < spots.length; i++) {
         const spot = spots[i];
@@ -192,7 +253,7 @@ router.post('/', requireAuth, async (req, res, next) => {
         err.title = "Validation Error";
         err.message = "Validation Error";
         err.status = 400;
-        next(err);
+        return next(err);
     }
 });
 
@@ -234,7 +295,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
             err.title = "Authorization Error";
             err.message = "Forbidden";
             err.status = 403;
-            next(err);
+            return next(err);
         }
     }
 
@@ -275,7 +336,7 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
             err.title = "Authorization Error";
             err.message = "Forbidden";
             err.status = 403;
-            next(err);
+            return next(err);
         }
     }
 
@@ -308,7 +369,7 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
             err.title = "Authorization Error";
             err.message = "Forbidden";
             err.status = 403;
-            next(err);
+            return next(err);
         }
     }
 
@@ -475,8 +536,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
                         err.title = "Booking Conflict";
                         err.message = "Sorry, this spot is already booked for the specified dates";
                         err.status = 403;
-                        next(err);
-                        return;
+                        return next(err);
                     }
 
                     // check for booking conflict
@@ -502,8 +562,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
                             err.title = "Booking Conflict";
                             err.message = "Sorry, this spot is already booked for the specified dates";
                             err.status = 403;
-                            next(err);
-                            return;
+                            return next(err);
                         }
                     }
                 };
