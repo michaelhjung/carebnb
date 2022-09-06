@@ -56,20 +56,6 @@ const validateReview = [
         .withMessage('Stars must be an integer from 1 to 5'),
     handleValidationErrors
 ];
-
-// const validateBooking = [
-//     check('endDate')
-//         .exists({ checkFalsy: true })
-//         .withMessage('endDate is required')
-//         // .custom((value, { req }) => {
-//         //     if (new Date(value) <= new Date(req.body.startDate)) {
-//         //         throw new Error('endDate cannot be on or before startDate');
-//         //     }
-//         // })
-//         .isAfter('endDate', ['startDate'])
-//         .withMessage('endDate cannot be on or before startDate'),
-//     handleValidationErrors
-// ];
 /*--------------------------------------------------------------------------*/
 
 /*--------------------------------- ROUTES ---------------------------------*/
@@ -307,7 +293,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     }
 });
 
-// Edit a Spot ---> BODY VALIDATIONS WORKS, BUT DOES NOT SHOW KEYS FOR EA ERROR
+// Edit a Spot
 router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
     const spot = await Spot.findByPk(parseInt(req.params.spotId));
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
