@@ -7,7 +7,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
-/*------------------------------- MIDDLEWARE -------------------------------*/
+/* ------------------------------- MIDDLEWARE ------------------------------- */
 const validateBooking = [
     check('endDate')
         .exists({ checkFalsy: true })
@@ -16,13 +16,13 @@ const validateBooking = [
         .withMessage('endDate cannot be on or before startDate'),
     handleValidationErrors
 ];
-/*--------------------------------------------------------------------------*/
 
-/*---------------------------- HELPER FUNCTIONS ----------------------------*/
+
+/* ---------------------------- HELPER FUNCTIONS ---------------------------- */
 const formatDate = (date) => new Date(Date.parse(date)).toISOString().split('T')[0];
-/*--------------------------------------------------------------------------*/
 
-/*--------------------------------- ROUTES ---------------------------------*/
+
+/* --------------------------------- ROUTES --------------------------------- */
 // Get all of the Current User's Bookings
 router.get('/current', requireAuth, async (req, res, next) => {
     const userBookings = await Booking.findAll({
@@ -53,7 +53,6 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
     res.json({ Bookings: userBookings });
 });
-
 
 
 // ***CHECK SPOTS ROUTER FOR: Get all Bookings for a Spot based on the Spot's id***
@@ -196,11 +195,6 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
         statusCode: 404
     });
 });
-
-
-/*--------------------------------------------------------------------------*/
-
-
 
 
 module.exports = router;

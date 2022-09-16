@@ -1,4 +1,4 @@
-/*----------------------------- PACKAGES SETUP -----------------------------*/
+/* ----------------------------- PACKAGES SETUP ----------------------------- */
 const express = require('express');
 require('express-async-errors');
 const morgan = require('morgan');
@@ -15,13 +15,13 @@ const app = express();
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
-/*--------------------------------------------------------------------------*/
 
-/*--------------------------- ADDITIONAL IMPORTS ---------------------------*/
+
+/* --------------------------- ADDITIONAL IMPORTS --------------------------- */
 const { ValidationError } = require('sequelize');
-/*--------------------------------------------------------------------------*/
 
-/*------------------------------- MIDDLEWARE -------------------------------*/
+
+/* ------------------------------- MIDDLEWARE ------------------------------- */
 // Security Middleware
 if (!isProduction) {
     // enable cors only in development
@@ -39,27 +39,21 @@ app.use(
 app.use(
     csurf({
         cookie: {
-        secure: isProduction,
-        sameSite: isProduction && "Lax",
-        httpOnly: true
+            secure: isProduction,
+            sameSite: isProduction && "Lax",
+            httpOnly: true
         }
     })
 );
-/*--------------------------------------------------------------------------*/
 
-/*--------------------------------- ROUTES ---------------------------------*/
+
+/* --------------------------------- ROUTES --------------------------------- */
 const routes = require('./routes');
 
 app.use(routes); // Connect all the routes
-/*--------------------------------------------------------------------------*/
 
 
-
-
-
-
-
-/*----------------------------- ERROR HANDLERS -----------------------------*/
+/* ----------------------------- ERROR HANDLERS ----------------------------- */
 // Catch unhandled requests and forward to error handler.
 app.use((_req, _res, next) => {
     const err = new Error("The requested resource couldn't be found.");
@@ -91,6 +85,6 @@ app.use((err, _req, res, _next) => {
         // stack: isProduction ? null : err.stack
     });
 });
-/*--------------------------------------------------------------------------*/
+
 
 module.exports = app;

@@ -9,10 +9,10 @@ const spotImagesRouter = require('./spotimages.js');
 const reviewImagesRouter = require('./reviewimages.js');
 
 
-/*--------------------------------- ROUTERS ---------------------------------*/
+/* -------------------------------- ROUTERS -------------------------------- */
 // Connect restoreUser middleware to the API router
-  // If current user session is valid, set req.user to the user in the database
-  // If current user session is not valid, set req.user to null
+// If current user session is valid, set req.user to the user in the database
+// If current user session is not valid, set req.user to null
 router.use(restoreUser);
 
 router.use('/session', sessionRouter);
@@ -23,10 +23,9 @@ router.use('/bookings', bookingsRouter);
 router.use('/spot-images', spotImagesRouter);
 router.use('/review-images', reviewImagesRouter);
 
-/*---------------------------------------------------------------------------*/
 
-/*------------------------------- TEST ROUTES -------------------------------*/
-router.post('/test', function(req, res) {
+/* ------------------------------ TEST ROUTES ------------------------------ */
+router.post('/test', function (req, res) {
     res.json({ requestBody: req.body });
 });
 
@@ -60,15 +59,6 @@ router.post('/test', function(req, res) {
 //         return res.json(req.user);
 //     }
 // );
-
-/*---------------------------------------------------------------------------*/
-
-/*------------------------------ ACTUAL ROUTES ------------------------------*/
-
-
-
-
-/*---------------------------------------------------------------------------*/
 
 
 module.exports = router;
