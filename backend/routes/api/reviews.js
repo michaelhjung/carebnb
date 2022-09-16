@@ -7,7 +7,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
-/*------------------------------- MIDDLEWARE -------------------------------*/
+/* ------------------------------- MIDDLEWARE ------------------------------- */
 const validateReview = [
     check('review')
         .exists({ checkFalsy: true })
@@ -19,9 +19,9 @@ const validateReview = [
         .withMessage('Stars must be an integer from 1 to 5'),
     handleValidationErrors
 ];
-/*--------------------------------------------------------------------------*/
 
-/*--------------------------------- ROUTES ---------------------------------*/
+
+/* --------------------------------- ROUTES --------------------------------- */
 // Get all Reviews of the Current User
 router.get('/current', requireAuth, async (req, res, next) => {
     const userReviews = await Review.findAll({ where: { userId: req.user.id }, raw: true });
@@ -172,11 +172,6 @@ router.delete('/:reviewId', requireAuth, async (req, res, next) => {
         statusCode: 404
     });
 });
-
-
-/*--------------------------------------------------------------------------*/
-
-
 
 
 module.exports = router;

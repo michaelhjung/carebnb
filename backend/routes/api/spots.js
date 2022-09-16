@@ -7,7 +7,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
-/*------------------------------- MIDDLEWARE -------------------------------*/
+/* ------------------------------- MIDDLEWARE ------------------------------- */
 const validateSpot = [
     check('address')
         .exists({ checkFalsy: true })
@@ -56,70 +56,70 @@ const validateReview = [
         .withMessage('Stars must be an integer from 1 to 5'),
     handleValidationErrors
 ];
-/*--------------------------------------------------------------------------*/
 
-/*--------------------------------- ROUTES ---------------------------------*/
+
+/* --------------------------------- ROUTES --------------------------------- */
 // Get all Spots
 router.get('/', async (req, res, next) => {
-        // QUERY FILTERS:
-        let err = { errors: {} };
-        let { size, page, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
-        size = parseInt(size);
-        page = parseInt(page);
-        minLat = parseFloat(minLat);
-        maxLat = parseFloat(maxLat);
-        minLng = parseFloat(minLng);
-        maxLng = parseFloat(maxLng);
-        minPrice = parseFloat(minPrice);
-        maxPrice = parseFloat(maxPrice);
+    // QUERY FILTERS:
+    let err = { errors: {} };
+    let { size, page, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+    size = parseInt(size);
+    page = parseInt(page);
+    minLat = parseFloat(minLat);
+    maxLat = parseFloat(maxLat);
+    minLng = parseFloat(minLng);
+    maxLng = parseFloat(maxLng);
+    minPrice = parseFloat(minPrice);
+    maxPrice = parseFloat(maxPrice);
 
-        const pagination = {};
-        if (size >= 1 && size <= 20) size = size;
-        if (page >= 1 && page <= 10) page = page;
-        if (size < 1 || size > 20) err.errors.size = "Size must be greater than or equal to 1";
-        if (page < 1 || page > 10) err.errors.page = "Page must be greater than or equal to 1";
-        // default size & page:
-        if ((!size && size !== 0) || isNaN(size)) size = 20;
-        if ((!page && page !== 0) || isNaN(page)) page = 1;
-        pagination.limit = size;
-        pagination.offset = size * (page - 1);
+    const pagination = {};
+    if (size >= 1 && size <= 20) size = size;
+    if (page >= 1 && page <= 10) page = page;
+    if (size < 1 || size > 20) err.errors.size = "Size must be greater than or equal to 1";
+    if (page < 1 || page > 10) err.errors.page = "Page must be greater than or equal to 1";
+    // default size & page:
+    if ((!size && size !== 0) || isNaN(size)) size = 20;
+    if ((!page && page !== 0) || isNaN(page)) page = 1;
+    pagination.limit = size;
+    pagination.offset = size * (page - 1);
 
-        // other queries:
-        const where = {};
-        if (minLat) {
-            if (minLat >= -90) where.lat = minLat;
-            else err.errors.minLat = "Minimum latitude is invalid";
-        };
-        if (maxLat) {
-            if (maxLat <= 90) where.lat = maxLat;
-            else err.errors.maxLat = "Maximum latitude is invalid";
-        };
-        if (minLng) {
-            if (minLng >= -180) where.lng = minLng;
-            else err.errors.minLng = "Minimum longitude is invalid";
-        };
-        if (maxLng) {
-            if (maxLng <= 180) where.lng = maxLng;
-            else err.errors.maxLng = "Maximum longitude is invalid";
-        };
-        if (minPrice) {
-            if (minPrice >= 0) where.price = minPrice;
-            else err.errors.minPrice = "Minimum price must be greater than or equal to 0";
-        };
-        if (maxPrice) {
-            if (maxPrice >= 0) where.price = maxPrice;
-            else err.errors.maxPrice = "Maximum price must be greater than or equal to 0";
-        };
+    // other queries:
+    const where = {};
+    if (minLat) {
+        if (minLat >= -90) where.lat = minLat;
+        else err.errors.minLat = "Minimum latitude is invalid";
+    };
+    if (maxLat) {
+        if (maxLat <= 90) where.lat = maxLat;
+        else err.errors.maxLat = "Maximum latitude is invalid";
+    };
+    if (minLng) {
+        if (minLng >= -180) where.lng = minLng;
+        else err.errors.minLng = "Minimum longitude is invalid";
+    };
+    if (maxLng) {
+        if (maxLng <= 180) where.lng = maxLng;
+        else err.errors.maxLng = "Maximum longitude is invalid";
+    };
+    if (minPrice) {
+        if (minPrice >= 0) where.price = minPrice;
+        else err.errors.minPrice = "Minimum price must be greater than or equal to 0";
+    };
+    if (maxPrice) {
+        if (maxPrice >= 0) where.price = maxPrice;
+        else err.errors.maxPrice = "Maximum price must be greater than or equal to 0";
+    };
 
 
-        // QUERY PARAMATER VALIDATION ERRORS:
-        if (err.errors.size || err.errors.page || err.errors.minLat || err.errors.maxLat ||
-            err.errors.minLng || err.errors.maxLng || err.errors.minPrice || err.errors.maxPrice) {
-                err.title = "Validation Error";
-                err.message = "Validation Error";
-                err.status = 400;
-                return next(err);
-        }
+    // QUERY PARAMATER VALIDATION ERRORS:
+    if (err.errors.size || err.errors.page || err.errors.minLat || err.errors.maxLat ||
+        err.errors.minLng || err.errors.maxLng || err.errors.minPrice || err.errors.maxPrice) {
+        err.title = "Validation Error";
+        err.message = "Validation Error";
+        err.status = 400;
+        return next(err);
+    }
 
 
     // LAZY LOADING (& N+1):
@@ -190,7 +190,7 @@ router.get('/:spotId', async (req, res, next) => {
             where: { spotId: spot.id },
             attributes: ['id', 'url', 'preview']
         });
-        spotData.Owner = await User.findByPk(spot.ownerId, {attributes: ['id', 'firstName', 'lastName'] });
+        spotData.Owner = await User.findByPk(spot.ownerId, { attributes: ['id', 'firstName', 'lastName'] });
 
 
         res.json(spotData);
@@ -275,7 +275,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
                 })
             }
 
-        // Error if current user is not owner of spot
+            // Error if current user is not owner of spot
         } else {
             const err = new Error("Forbidden");
             err.title = "Authorization Error";
@@ -368,7 +368,6 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
 });
 
 
-
 // Get all Reviews by a Spot's id
 router.get('/:spotId/reviews', async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId);
@@ -441,7 +440,6 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, ne
         statusCode: 404
     });
 });
-
 
 
 // Get all Bookings for a Spot based on the Spot's id
@@ -572,11 +570,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
         statusCode: 404
     });
 });
-
-
-/*--------------------------------------------------------------------------*/
-
-
 
 
 module.exports = router;

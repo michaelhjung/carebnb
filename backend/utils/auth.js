@@ -1,12 +1,12 @@
-/*--------------------------------- IMPORTS ---------------------------------*/
+/* -------------------------------- IMPORTS -------------------------------- */
 const jwt = require('jsonwebtoken');
 const { jwtConfig } = require('../config');
 const { User } = require('../db/models');
 
 const { secret, expiresIn } = jwtConfig;
-/*---------------------------------------------------------------------------*/
 
-/*-------------------------- USER AUTH MIDDLEWARES --------------------------*/
+
+/* ------------------------- USER AUTH MIDDLEWARES ------------------------- */
 const setTokenCookie = (res, user) => {
     // Create the token.
     const token = jwt.sign(
@@ -62,6 +62,6 @@ const requireAuth = function (req, _res, next) {
     err.status = 401;
     return next(err);
 }
-/*---------------------------------------------------------------------------*/
+
 
 module.exports = { setTokenCookie, restoreUser, requireAuth };

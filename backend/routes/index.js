@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-/*------------------------------- API ROUTES -------------------------------*/
+/* ------------------------------- API ROUTES ------------------------------- */
 const apiRouter = require('./api');
 
 router.use('/api', apiRouter);
@@ -39,9 +39,8 @@ if (process.env.NODE_ENV !== 'production') {
     });
 }
 
-/*--------------------------------------------------------------------------*/
 
-/*------------------------------- TEST ROUTES -------------------------------*/
+/* ------------------------------ TEST ROUTES ------------------------------ */
 router.get('/', function (req, res) {
     res.send({ message: 'The server is live!' });
 });
@@ -59,7 +58,6 @@ router.get("/api/csrf/restore", (req, res) => {
         'XSRF-Token': csrfToken
     });
 });
-/*---------------------------------------------------------------------------*/
 
 
 module.exports = router;

@@ -7,7 +7,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
-/*------------------------------- MIDDLEWARE -------------------------------*/
+/* ------------------------------- MIDDLEWARE ------------------------------- */
 const validateSignup = [
     check('email')
         .exists({ checkFalsy: true })
@@ -40,9 +40,9 @@ const validateSignup = [
         .withMessage('Password must be 6 characters or more.'),
     handleValidationErrors
 ];
-/*--------------------------------------------------------------------------*/
 
-/*--------------------------------- ROUTES ---------------------------------*/
+
+/* --------------------------------- ROUTES --------------------------------- */
 // Sign up
 router.post(
     '/',
@@ -84,12 +84,6 @@ router.post(
         }
     }
 );
-
-
-
-/*--------------------------------------------------------------------------*/
-
-
 
 
 module.exports = router;

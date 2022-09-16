@@ -7,7 +7,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
-/*------------------------------- MIDDLEWARE -------------------------------*/
+/* ------------------------------- MIDDLEWARE ------------------------------- */
 const validateLogin = [
     check('credential')
         .exists({ checkFalsy: true })
@@ -19,9 +19,9 @@ const validateLogin = [
         .withMessage('Password is required'),
     handleValidationErrors
 ];
-/*--------------------------------------------------------------------------*/
 
-/*--------------------------------- ROUTES ---------------------------------*/
+
+/* --------------------------------- ROUTES --------------------------------- */
 // Log in
 router.post(
     '/',
@@ -77,12 +77,6 @@ router.get(
         } else return res.json(null);
     }
 );
-
-
-
-/*--------------------------------------------------------------------------*/
-
-
 
 
 module.exports = router;

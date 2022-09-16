@@ -7,7 +7,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
-/*--------------------------------- ROUTES ---------------------------------*/
+/* -------------------------------- ROUTES -------------------------------- */
 router.delete('/:imageId', requireAuth, async (req, res, next) => {
     const reviewImage = await ReviewImage.findByPk(req.params.imageId);
     if (reviewImage) {
@@ -33,11 +33,6 @@ router.delete('/:imageId', requireAuth, async (req, res, next) => {
         statusCode: 404
     });
 });
-
-
-/*--------------------------------------------------------------------------*/
-
-
 
 
 module.exports = router;
