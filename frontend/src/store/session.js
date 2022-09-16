@@ -6,7 +6,6 @@ const REMOVE_USER = 'session/removeUser';
 
 /* ---------------------------- ACTION CREATORS: ---------------------------- */
 const setUser = (userData) => {
-    console.log("PAYLOAD SENT TO REDUCER WITH SET USER ACTION CREATOR:", userData);
     return {
         type: SET_USER,
         payload: userData,
@@ -31,7 +30,6 @@ export const login = (userInfo) => async (dispatch) => {
         }),
     });
     const user = await response.json();
-    console.log("DATA THAT COMES BACK FROM LOGIN THUNK:", user);
     dispatch(setUser(user));
     return response;
 };
@@ -39,7 +37,6 @@ export const login = (userInfo) => async (dispatch) => {
 export const restoreUser = () => async dispatch => {
     const response = await csrfFetch('/api/session');
     const userInfo = await response.json();
-    console.log("DATA COMING BACK FROM RESTORE USER THUNK:", userInfo);
     dispatch(setUser(userInfo));
     return response;
 };
@@ -57,7 +54,6 @@ export const signup = (userInfo) => async (dispatch) => {
         }),
     });
     const newUser = await response.json();
-    console.log("DATA THAT COMES BACK FROM SIGN UP THUNK:", newUser);
     dispatch(setUser(newUser));
     return response;
 };
@@ -80,7 +76,6 @@ const sessionReducer = (state = initialState, action) => {
         case SET_USER:
             newState = { ...state }
             newState.user = action.payload;
-            console.log("NEWSTATE AFTER SET_USER ACTION", newState);
             return newState;
         case REMOVE_USER:
             newState = { ...state };
