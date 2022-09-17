@@ -6,11 +6,31 @@ module.exports = {
         await queryInterface.bulkInsert('ReviewImages', [
             {
                 reviewId: 1,
-                url: 'https://bit.ly/3KrOfyi'
+                url: 'https://bit.ly/3xvhuL6'
             },
             {
-                reviewId: 2,
-                url: 'https://bit.ly/3AZl2Yo'
+                reviewId: 3,
+                url: 'https://bit.ly/3Bn8GYT'
+            },
+            {
+                reviewId: 6,
+                url: 'https://bit.ly/3eVzojR'
+            },
+            {
+                reviewId: 10,
+                url: 'https://bit.ly/3R6CHSV'
+            },
+            {
+                reviewId: 11,
+                url: 'https://bit.ly/3LmlMu1'
+            },
+            {
+                reviewId: 13,
+                url: 'https://bit.ly/3UveHf9'
+            },
+            {
+                reviewId: 15,
+                url: 'https://bit.ly/3BP8qU2'
             },
         ]);
     },
@@ -20,7 +40,12 @@ module.exports = {
             reviewId: {
                 [Op.in]: [
                     1,
-                    2
+                    3,
+                    6,
+                    10,
+                    11,
+                    13,
+                    15
                 ]
             }
         });

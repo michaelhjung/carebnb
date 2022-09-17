@@ -6,25 +6,25 @@ module.exports = {
     up: async (queryInterface, Sequelize) => {
         return queryInterface.bulkInsert('Users', [
             {
-                firstName: 'Demo',
-                lastName: 'Lition',
-                email: 'demo@user.io',
-                username: 'Demo-lition',
-                hashedPassword: bcrypt.hashSync('password')
+                firstName: 'Michael',
+                lastName: 'Jung',
+                email: 'michael@user.io',
+                username: 'michael',
+                hashedPassword: bcrypt.hashSync('ilovegrace')
             },
             {
-                firstName: 'Fake',
-                lastName: 'User1',
-                email: 'user1@user.io',
-                username: 'FakeUser1',
-                hashedPassword: bcrypt.hashSync('password2')
+                firstName: 'Grace',
+                lastName: 'Jung',
+                email: 'grace@user.io',
+                username: 'grace',
+                hashedPassword: bcrypt.hashSync('ilovemichael')
             },
             {
-                firstName: 'Fake',
-                lastName: 'User2',
-                email: 'user2@user.io',
-                username: 'FakeUser2',
-                hashedPassword: bcrypt.hashSync('password3')
+                firstName: 'Audrey',
+                lastName: 'Jung',
+                email: 'audrey@user.io',
+                username: 'audrey',
+                hashedPassword: bcrypt.hashSync('ilovedaddy')
             },
             {
                 firstName: 'Peter',
@@ -124,6 +124,27 @@ module.exports = {
                 username: 'tchalla',
                 hashedPassword: bcrypt.hashSync('wakandaforever')
             },
+            {
+                firstName: 'Stan',
+                lastName: 'Lee',
+                email: 'stan@user.io',
+                username: 'stanlee',
+                hashedPassword: bcrypt.hashSync('friends')
+            },
+            {
+                firstName: 'Bob',
+                lastName: 'Kane',
+                email: 'bob@user.io',
+                username: 'bobkane',
+                hashedPassword: bcrypt.hashSync('batman')
+            },
+            {
+                firstName: 'John',
+                lastName: 'Doe',
+                email: 'demouser@user.io',
+                username: 'demouser',
+                hashedPassword: bcrypt.hashSync('password')
+            }
         ], {});
     },
 
@@ -132,9 +153,9 @@ module.exports = {
         return queryInterface.bulkDelete('Users', {
             username: {
                 [Op.in]: [
-                    'Demo-lition',
-                    'FakeUser1',
-                    'FakeUser2',
+                    'michael',
+                    'grace',
+                    'audrey',
                     'friendlyspider',
                     'monopolyman',
                     'frodo',
@@ -148,7 +169,10 @@ module.exports = {
                     'tomthebomb',
                     'pepperpotts',
                     'nursejoy',
-                    'tchalla'
+                    'tchalla',
+                    'stanlee',
+                    'bobkane',
+                    'demouser'
                 ]
             }
         }, {});
