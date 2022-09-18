@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 
-function LoginForm() {
+function LoginForm({ setShowMenu, closeMenu }) {
     const dispatch = useDispatch();
     const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
@@ -10,6 +10,7 @@ function LoginForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        document.addEventListener('click', closeMenu);
         setErrors([]);
         return dispatch(sessionActions.login({ credential, password })).catch(
             async (res) => {
