@@ -3,17 +3,16 @@
     height: 32px;
 }
 
-ul>li {
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     list-style: none;
 }
 
-.profile-drop-div {
+.profile-dropdown {
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 
