@@ -7,6 +7,7 @@ import * as spotsActions from "./store/spots";
 import Navigation from "./components/Navigation";
 import SpotsBrowser from "./components/SpotsBrowser";
 import SpotDetails from "./components/SpotDetails/SpotDetails";
+import CreateSpotForm from "./components/CreateSpotForm";
 
 function App() {
     const dispatch = useDispatch();
@@ -32,6 +33,10 @@ function App() {
 
                     <Route path="/api/spots/:spotId">
                         <SpotDetails spots={spots} />
+                    </Route>
+
+                    <Route path="/api/spots">
+                        <CreateSpotForm />
                     </Route>
                 </Switch>
             )}

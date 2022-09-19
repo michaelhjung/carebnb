@@ -12,6 +12,14 @@ header {
     padding: 10px 80px 20px;
 }
 
+.navbar--right {
+    display: flex;
+}
+
+.link--create-spot {
+    margin-right: 47px;
+}
+
 .button--profile {
     width: 77px;
     height: 42px;
@@ -23,6 +31,22 @@ header {
 
 .button--profile:hover {
     box-shadow: 0px 2px 4px 0.5px #DDD;
+    cursor: pointer;
+}
+
+.button--create-spot {
+    width: 130px;
+    height: 42px;
+    padding: 5px 5px 5px 12px;
+    font-weight: 600;
+    background-color: #FFF;
+    border: 0px solid #DDD;
+    border-radius: 21px;
+}
+
+.button--create-spot:hover {
+    background-color: #F6F6F6;
+    cursor: pointer;
 }
 
 .icon--profile {
@@ -51,7 +75,8 @@ header {
 }
 
 .button--dropdown-item:hover {
-    background-color: #EEE;
+    background-color: #F6F6F6;
+    cursor: pointer;
 }
 
 .button--modal {

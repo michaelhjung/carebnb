@@ -10,12 +10,14 @@ function Navigation() {
     return (
         <header>
             <div className='navbar--left'>
-                <NavLink exact to="/">
+                <NavLink exact to="/" className='link--home'>
                     <img src={logo} className='logo' alt="carebnb-logo" />
                 </NavLink>
             </div>
             <div className='navbar--right'>
-
+                <NavLink to="/api/spots" className='link--create-spot'>
+                    <button className='button button--create-spot'>Create a Spot</button>
+                </NavLink>
                 <ProfileButton />
             </div>
         </header>
