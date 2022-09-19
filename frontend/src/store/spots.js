@@ -32,7 +32,7 @@ export const getSingleSpot = (spotId) => async dispatch => {
 
     if (response.ok) {
         const spot = await response.json();
-        console.log("JSONIFIED SINGLE SPOT DATA AFTER THUNK:", spot);
+        // console.log("JSONIFIED SINGLE SPOT DATA AFTER THUNK:", spot);
         dispatch(loadOne(spot));
     }
 }
@@ -54,10 +54,10 @@ const spotsReducer = (state = initialState, action) => {
             return newState;
         case LOAD_ONE:
             newState = { ...state }
-            console.log("LOAD_ONE ACTION.PAYLOAD IS:", action.payload);
-            const newSingleSpot = {};
+            // console.log("LOAD_ONE ACTION.PAYLOAD IS:", action.payload);
+            const newSingleSpot = { ...action.payload };
             newState.singleSpot = newSingleSpot;
-            console.log("NEWSTATE AFTER LOAD_ONE ACTION:", newState);
+            // console.log("NEWSTATE AFTER LOAD_ONE ACTION:", newState);
             return newState;
         default:
             return state;
