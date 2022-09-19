@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import ProfileButton from './ProfileButton';
 
 import './Navigation.css';
-import logo from '../../logo/carebnb-logo-v2.png';
+import logo from '../../logo/carebnb-logo-v3.png';
 
 function Navigation() {
 
