@@ -30,13 +30,13 @@ function ProfileButton() {
     };
 
     return (
-        <div className='profile-drop-div'>
-            <button onClick={openMenu} className="profile-button">
-                <i className="fa-solid fa-bars profile-icon" />
-                <i className="fas fa-user-circle profile-icon" />
+        <div className='container--profile'>
+            <button onClick={openMenu} className="button button--profile">
+                <i className="fa-solid fa-bars icon--profile" />
+                <i className="fas fa-user-circle icon--profile" />
             </button>
             {sessionUser && showMenu && (
-                <ul className="profile-dropdown">
+                <ul className="list--profile-dropdown">
                     <li>{sessionUser.username}</li>
                     <li>{sessionUser.email}</li>
                     <li>
@@ -45,13 +45,13 @@ function ProfileButton() {
                 </ul>
             )}
             {!sessionUser && showMenu && (
-                <ul className="profile-dropdown">
+                <ul className="list--profile-dropdown">
                     <LoginFormModal
                         setShowMenu={setShowMenu}
                         closeMenu={closeMenu}
                     />
                     <NavLink to="/signup">
-                        <button className="signup-button">
+                        <button className="signup-button button--dropdown-item">
                             Sign Up
                         </button>
                     </NavLink>

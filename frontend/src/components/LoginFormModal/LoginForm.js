@@ -21,8 +21,8 @@ function LoginForm({ setShowMenu, closeMenu }) {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <ul>
+        <form onSubmit={handleSubmit} className="form--login">
+            <ul className="list--errors">
                 {errors.map((error, idx) => (
                     <li key={idx}>{error}</li>
                 ))}

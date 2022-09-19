@@ -12,12 +12,7 @@ header {
     padding: 10px 80px 20px;
 }
 
-.profile-dropdown {
-    display: flex;
-    flex-direction: column;
-}
-
-.profile-button {
+.button--profile {
     width: 77px;
     height: 42px;
     padding: 5px 5px 5px 12px;
@@ -26,12 +21,39 @@ header {
     border-radius: 21px;
 }
 
-.profile-button:hover {
+.button--profile:hover {
     box-shadow: 0px 2px 4px 0.5px #DDD;
 }
 
-.profile-icon {
+.icon--profile {
     margin: 5px;
     height: 16px;
     width: 16px;
+}
+
+.list--profile-dropdown {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    align-items: flex-start;
+    top: 65px;
+    right: 85px;
+    box-shadow: 2px -2px 4px 0.5px #DDD;
+    border-radius: 15px;
+    padding: 10px 0px;
+    list-style: none;
+}
+
+.button--dropdown-item {
+    border: none;
+    background-color: #FFF;
+    padding: 15px 185px 15px 15px;
+}
+
+.button--dropdown-item:hover {
+    background-color: #EEE;
+}
+
+.button--modal {
+    font-weight: 600;
 }
