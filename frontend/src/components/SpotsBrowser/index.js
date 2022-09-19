@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as spotsActions from '../../store/spots';
+import './SpotsBrowser.css'
+import SpotCard from '../SpotDetails/SpotCard';
 
 export default function SpotsBrowser() {
     const dispatch = useDispatch();
@@ -10,13 +13,15 @@ export default function SpotsBrowser() {
         dispatch(spotsActions.getSpots());
     }, [dispatch]);
 
-    console.log("FINAL SPOTS RETURNED AFTER FETCH:", spots);
-
     if (!spots) return null;
     return (
         <main className='container--spots'>
             {Object.values(spots).map(spot => (
-                <div key={spot.id}>{spot.name}</div>
+                <div key={spot.id} className="spot-card">
+                    <NavLink to={`/api/spots/${spot.id}`} className="link--spot">
+                        <SpotCard spot={spot} />
+                    </NavLink>
+                </div>
             ))}
         </main>
     )
