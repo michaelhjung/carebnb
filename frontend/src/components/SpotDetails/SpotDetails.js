@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as spotsActions from '../../store/spots';
+import './SpotDetails.css';
 
 export default function SpotDetails({ spots }) {
     const dispatch = useDispatch();
@@ -29,10 +30,9 @@ export default function SpotDetails({ spots }) {
             </div>
 
             <div className='spot-details--imgs-container'>
-                {spot.spotImages.forEach(img => {
-                    console.log("img:", img)
-                    return <img src={img.url} alt={img.url} className='spot-details--img' />
-                })}
+                {spot.spotImages.map(img => (
+                    <img src={img.url} alt={img.url} className='spot-details--img' />
+                ))}
             </div>
 
             <div className='spot-details--title-host-info'>
