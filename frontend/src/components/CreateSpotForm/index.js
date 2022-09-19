@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import * as spotsActions from "../../store/spots";
 
 export default function CreateSpotForm() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
@@ -24,7 +26,6 @@ export default function CreateSpotForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setErrors([]);
 
         const newSpot = {
             address,
@@ -38,20 +39,20 @@ export default function CreateSpotForm() {
             price
         }
 
-        console.log("NEW SPOT DATA BEING SENT TO THUNK", newSpot)
-
         const createdSpot = await dispatch(spotsActions.createSpot(newSpot))
             // TODO:
             //   1) SET UP ERRORS
-            //   2) DE-BUG REDIRECT NOT WORKING
 
-        if (createdSpot) return <Redirect to="/" />;
+        if (createdSpot) {
+            setErrors([]);
+            history.replace('/');
+        }
     };
 
     return (
         <form onSubmit={handleSubmit} className="form--create-spot">
             <ul className="list--errors">
-                {errors.map((error, idx) => <li key={idx} className="error-li">{error}</li>)}
+                {errors.map((error) => <li key={error} className="error-li">{error}</li>)}
             </ul>
             <label>
                 Address
