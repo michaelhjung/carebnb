@@ -22,7 +22,7 @@
 ## About The Project
 ![carebnb-logo]
 
-[carebnb-logo]: ./frontend/src/logo/carebnb-logo-v4.png
+[carebnb-logo]: ./frontend/src/logo/carebnb-logo-v5.png
 
 [CareBnB](https://carebnb-2022.herokuapp.com/) is a web application inspired by AirBnB. CareBnB provides a platform for
 users to offer or find vacation rentals around the world.
