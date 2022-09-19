@@ -57,12 +57,13 @@ export const createSpot = (data) => async dispatch => {
         body: JSON.stringify(data)
     });
 
-    console.log("RESPONSE AFTER CREATE SPOT FETCH:", response);
+    // console.log("RESPONSE AFTER CREATE SPOT FETCH:", response);
 
     if (response.ok) {
         const newSpot = await response.json();
-        console.log("JSONIFIED NEW-SPOT DATA AFTER THUNK:", newSpot);
+        // console.log("JSONIFIED NEW-SPOT DATA AFTER THUNK:", newSpot);
         dispatch(addOne(newSpot));
+        return newSpot;
     }
 }
 
@@ -102,7 +103,7 @@ const spotsReducer = (state = initialState, action) => {
             newState = { ...state }
             const newSpot = { ...action.payload };
             newState.allSpots[action.payload.id] = newSpot;
-            console.log("NEWSTATE AFTER ADD_ONE ACTION:", newState);
+            // console.log("NEWSTATE AFTER ADD_ONE ACTION:", newState);
             return newState;
         case REMOVE_ONE:
             newState = { ...state }
