@@ -9,10 +9,15 @@ function Navigation() {
 
     return (
         <header>
-            <NavLink exact to="/">
-                <img src={logo} className='logo' alt="carebnb-logo" />
-            </NavLink>
-            <ProfileButton />
+            <div className='navbar--left'>
+                <NavLink exact to="/">
+                    <img src={logo} className='logo' alt="carebnb-logo" />
+                </NavLink>
+            </div>
+            <div className='navbar--right'>
+
+                <ProfileButton />
+            </div>
         </header>
     );
 }
