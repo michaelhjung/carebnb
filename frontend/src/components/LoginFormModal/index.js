@@ -18,7 +18,7 @@ function LoginFormModal({ setShowMenu, closeMenu }) {
     return (
         <>
             <button
-                className='modal-button'
+                className='button--modal button--dropdown-item'
                 onClick={clickHandler}
             >Log In</button>
             {showModal && (
