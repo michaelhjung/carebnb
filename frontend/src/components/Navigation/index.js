@@ -3,14 +3,14 @@ import { NavLink } from 'react-router-dom';
 import ProfileButton from './ProfileButton';
 
 import './Navigation.css';
-import LoginFormModal from '../LoginFormModal';
+import logo from '../../logo/carebnb-logo-v2.png';
 
 function Navigation() {
 
     return (
         <header>
             <NavLink exact to="/">
-                <img src="https://bit.ly/3xArrqL" className='home-logo' alt="airbnb-logo" />
+                <img src={logo} className='logo' alt="carebnb-logo" />
             </NavLink>
             <ProfileButton />
         </header>
