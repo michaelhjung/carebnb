@@ -1,0 +1,30 @@
+.container--spots {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: 1fr;
+    grid-gap: 45px 25px;
+}
+
+.spot-card {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 333px;
+    height: auto;
+}
+
+.link--spot {
+    text-decoration: none;
+    color: black;
+}
+
+.spot-card--img {
+    width: 333px;
+    height: 315px;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.spot-card--info-location {
+    font-weight: 500;
+}
