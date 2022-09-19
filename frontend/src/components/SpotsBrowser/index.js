@@ -4,17 +4,20 @@ import * as spotsActions from '../../store/spots';
 
 export default function SpotsBrowser() {
     const dispatch = useDispatch();
+    const spots = useSelector(state => state.spots.allSpots);
+
     useEffect(() => {
         dispatch(spotsActions.getSpots());
     }, [dispatch]);
-    const spots = useSelector(state => state.spots);
-    const spotsArr = Object.values(spots);
+
     console.log("FINAL SPOTS RETURNED AFTER FETCH:", spots);
-    console.log("SPOTS ARRAY:", spotsArr);
 
+    if (!spots) return null;
     return (
-        <main className='spots-list-container'>
-
+        <main className='container--spots'>
+            {Object.values(spots).map(spot => (
+                <div key={spot.id}>{spot.name}</div>
+            ))}
         </main>
     )
 }

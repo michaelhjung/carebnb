@@ -10,7 +10,7 @@ function LoginForm({ setShowMenu, closeMenu }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        document.addEventListener('click', closeMenu);
+        setShowMenu(false);
         setErrors([]);
         return dispatch(sessionActions.login({ credential, password })).catch(
             async (res) => {

@@ -35,7 +35,7 @@ const spotsReducer = (state = initialState, action) => {
             action.payload.Spots.forEach(spot => newAllSpots[spot.id] = spot);
             newState.allSpots = newAllSpots;
             console.log("NEWSTATE AFTER LOAD_ALL ACTION:", newState);
-            return newState.allSpots;
+            return newState;
         default:
             return state;
     }
