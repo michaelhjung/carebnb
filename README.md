@@ -12,11 +12,7 @@
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-      </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
@@ -24,6 +20,10 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+![carebnb-logo]
+
+[carebnb-logo]: ./frontend/src/logo/carebnb-logo-v2.png
+
 [CareBnB](https://carebnb-2022.herokuapp.com/) is a web application inspired by AirBnB. CareBnB provides a platform for
 users to offer or find vacation rentals around the world.
 
@@ -38,6 +38,8 @@ users to offer or find vacation rentals around the world.
 
 ### Built With
 #### Frameworks, Platforms, & Libraries:
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
@@ -47,6 +49,7 @@ users to offer or find vacation rentals around the world.
 
 #### Database:
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -56,24 +59,46 @@ users to offer or find vacation rentals around the world.
 
 To get a local copy up and running follow these simple example steps.
 
-### Prerequisites
-* cd into the backend folder and npm install the packages.
-  ```sh
-  npm install
-  ```
-* npm start and check to make sure the server is running.
-  ```sh
-  npm start
-  ```
-* cd into the frontend folder and npm install the packages.
-* npm start and make sure you are redirected to http://localhost:3000/
+1. Clone the repo:
 
+    SSH version:
+    ```sh
+    git clone git@github.com:michaelhjung/airBnB-clone.git
+    ```
+    or
 
-<!-- USAGE EXAMPLES -->
-## Usage
+    HTTPS version:
+    ```sh
+    git clone https://github.com/michaelhjung/airBnB-clone.git
+    ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
+2. cd into the backend folder and npm install the packages.
+    ```sh
+    npm install
+    ```
+3. Use the .env.example file to create a .env file at the root of the backend folder and change the appropriate fields. For example:
+    ```sh
+    cp .env.example .env
+    ```
+4. Migrate and seed the files. There are the following json scripts for your convenience:
+    ```sh
+    npm run migrate
+    ```
+    ```sh
+    npm run seed
+    ```
+5. Check to make sure the server is running by running npm start.
+    ```sh
+    npm start
+    ```
+6. cd into the frontend folder and npm install the packages.
+    ```sh
+    npm install
+    ```
+7. npm start and make sure you are redirected to http://localhost:3000/
+    ```sh
+    npm start
+    ```
 
 <!-- ROADMAP -->
 ## Roadmap
