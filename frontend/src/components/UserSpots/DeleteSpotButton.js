@@ -7,8 +7,8 @@ export default function DeleteSpotButton({ user, spot }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const handleClick = () => {
-        dispatch(spotsActions.deleteSpot(spot.id));
+    const handleClick = async () => {
+        await dispatch(spotsActions.deleteSpot(spot.id));
         // <Redirect to={`/user/${user.id}/spots`} />
         history.replace(`/user/${user.id}/spots`);
     }
