@@ -34,7 +34,9 @@ export default function UserSpots() {
                                 <AddSpotImageButton />
                             </NavLink>
 
-                            <EditSpotButton />
+                            <NavLink to={`/spots/${spot.id}/edit`}>
+                                <EditSpotButton />
+                            </NavLink>
 
                             <DeleteSpotButton />
 
