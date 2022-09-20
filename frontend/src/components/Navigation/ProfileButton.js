@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginFormModal from '../LoginFormModal';
+import SignUpButton from "./SignUpButton";
 import DemoUserButton from './DemoUserButton';
 import * as sessionActions from '../../store/session';
 
@@ -39,11 +40,11 @@ function ProfileButton() {
                 <ul className="list--profile-dropdown">
                     <li>
                         <NavLink to="/my-spots">
-                            <button className="button--dropdown-item button--dropdown-item-link">My Spots</button>
+                            <button id="button--my-spots" className="button--dropdown-item button--dropdown-item-link">My Spots</button>
                         </NavLink>
                     </li>
-                    <li className="button--dropdown-item">{sessionUser.username}</li>
-                    <li className="button--dropdown-item">{sessionUser.email}</li>
+                    <li className="button--dropdown-item button--dropdown-item-user-data">{sessionUser.username}</li>
+                    <li className="button--dropdown-item button--dropdown-item-user-data">{sessionUser.email}</li>
                     <li>
                         <button onClick={logout} className="button--dropdown-item button--dropdown-item-link">Log Out</button>
                     </li>
@@ -56,9 +57,7 @@ function ProfileButton() {
                         closeMenu={closeMenu}
                     />
                     <NavLink to="/signup">
-                        <button className="signup-button button--dropdown-item button--dropdown-item-link">
-                            Sign Up
-                        </button>
+                        <SignUpButton />
                     </NavLink>
                     <DemoUserButton />
                 </ul>
