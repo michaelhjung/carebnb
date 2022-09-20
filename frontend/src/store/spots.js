@@ -6,9 +6,7 @@ const LOAD_ONE = '/spots/LOAD_ONE';
 const ADD_ONE = '/spots/ADD_ONE';
 const ADD_IMG = '/spots/ADD_IMG';
 const UPDATE = '/spots/UPDATE';
-const REMOVE_ONE = '/spots/REMOVE_ONE';
-
-
+const REMOVE_SPOT = '/spots/REMOVE_SPOT';
 
 
 /* ---------------------------- ACTION CREATORS: ---------------------------- */
@@ -40,8 +38,8 @@ const editSpot = (spotData) => ({
     payload: spotData
 })
 
-const removeOne = (spotId) => ({
-    type: REMOVE_ONE,
+const removeSpot = (spotId) => ({
+    type: REMOVE_SPOT,
     payload: spotId
 });
 
@@ -133,16 +131,10 @@ export const deleteSpot = (spotId) => async dispatch => {
 
     if (response.ok) {
         const successMessage = await response.json();
-        dispatch(removeOne(spotId));
+        dispatch(removeSpot(spotId));
         return successMessage;
     }
 }
-
-/*
-FUNCTIONALITIES TODO:
-    - implement editSpot
-    - implement deleteSpot
-*/
 
 
 /* -------------------------------- REDUCER: -------------------------------- */
@@ -184,11 +176,11 @@ const spotsReducer = (state = initialState, action) => {
             newState.allSpots[action.payload.id] = updatedSpot;
             // console.log("NEWSTATE AFTER ADD_ONE ACTION:", newState);
             return newState;
-        case REMOVE_ONE:
+        case REMOVE_SPOT:
             newState = { ...state };
             delete newState.allSpots[action.payload];
             newState = { ...newState };
-            console.log("NEWSTATE AFTER REMOVE_ONE ACTION:", newState);
+            // console.log("NEWSTATE AFTER REMOVE_SPOT ACTION:", newState);
             return newState;
         default:
             return state;
