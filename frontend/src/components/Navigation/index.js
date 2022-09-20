@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import ProfileButton from './ProfileButton';
+import ProfileButton from '../ProfileButton';
 
 import './Navigation.css';
 import logo from '../../logo/carebnb-logo-v5.png';
