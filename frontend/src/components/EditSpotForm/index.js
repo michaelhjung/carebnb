@@ -11,28 +11,23 @@ export default function EditSpotForm() {
     const sessionUser = useSelector((state) => state.session.user);
     const spot = useSelector(state => state.spots.singleSpot);
 
-    console.log("SPOT ID IS:", spotId);
-    console.log("SESSION USER IS:", sessionUser);
-    console.log("SPOT IS:", spot);
-
     useEffect(() => {
         dispatch(spotsActions.getSingleSpot(spotId));
     }, [dispatch, spotId]);
 
-    // THE FOLLOWING HAS A RENDER DELAY BECAUSE NEW SPOT STATE HAS NOT RENDERED YET WHEN PAGE LOADS
-    // useEffect(() => {
-    //     if (spot) {
-    //         setAddress(spot.address);
-    //         setCity(spot.city);
-    //         setState(spot.state);
-    //         setCountry(spot.country);
-    //         setLat(spot.lat);
-    //         setLng(spot.lng);
-    //         setName(spot.name);
-    //         setDescription(spot.description);
-    //         setPrice(spot.price);
-    //     }
-    // }, []);
+    useEffect(() => {
+        if (spot) {
+            setAddress(spot.address);
+            setCity(spot.city);
+            setState(spot.state);
+            setCountry(spot.country);
+            setLat(spot.lat);
+            setLng(spot.lng);
+            setName(spot.name);
+            setDescription(spot.description);
+            setPrice(spot.price);
+        }
+    }, [spot]);
 
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
@@ -47,14 +42,13 @@ export default function EditSpotForm() {
 
     if (!sessionUser) return <Redirect to="/" />;
 
-    // if (spot) {
-    //     if (sessionUser.id.toString() !== spot.ownerId.toString()) {
-    //         alert("You do not have access to update this spot");
-    //         history.replace("/");
-    //     }
-    // }
-
-    if (!spot) history.replace("/page-not-found");
+    if (spot) {
+        if (sessionUser.id.toString() !== spot.ownerId.toString()) {
+            alert("You do not have access to update this spot");
+            history.replace("/");
+        }
+    }
+    if (!spot) history.push("/page-not-found");
 
     const handleSubmit = async (e) => {
         e.preventDefault();

@@ -40,15 +40,15 @@ function App() {
                         <CreateSpotForm />
                     </Route>
 
-                    <Route path="/user/:userId/spots/:spotId/add-image">
+                    <Route exact path="/user/:userId/spots/:spotId/add-image">
                         <AddSpotImageForm />
                     </Route>
 
-                    <Route path='/user/:userId/spots/:spotId/edit'>
+                    <Route exact path='/user/:userId/spots/:spotId/edit'>
                         <EditSpotForm />
                     </Route>
 
-                    <Route path="/user/:userId/spots">
+                    <Route exact path="/user/:userId/spots">
                         <UserSpots />
                     </Route>
 
