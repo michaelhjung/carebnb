@@ -41,14 +41,14 @@ export const getBookings = (spotId) => async dispatch => {
     }
 }
 
-export const getUserbookings = () => async dispatch => {
+export const getUserBookings = () => async dispatch => {
     const response = await csrfFetch(`/api/bookings/current`);
 
     if (response.ok) {
-        const userbookings = await response.json();
-        // console.log("JSONIFIED bookings DATA AFTER THUNK:", bookings);
-        dispatch(loadAll(userbookings));
-        return userbookings;
+        const userBookings = await response.json();
+        // console.log("JSONIFIED bookings DATA AFTER THUNK:", userBookings);
+        dispatch(loadAll(userBookings));
+        return userBookings;
     }
 }
 
@@ -103,11 +103,11 @@ const bookingsReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case LOAD_ALL:
-            newState = { ...state, allbookings: { ...state.allbookings }  };
+            newState = { ...state, user: { ...state.user }, spot: { ...state.spot } };
             // console.log("LOAD_ALL ACTION.PAYLOAD IS:", action.payload);
             const newAllbookings = {};
-            action.payload.bookings.forEach(booking => newAllbookings[booking.id] = booking);
-            newState.allbookings = newAllbookings;
+            action.payload.Bookings.forEach(booking => newAllbookings[booking.id] = booking);
+            newState.user = newAllbookings;
             // console.log("NEWSTATE AFTER LOAD_ALL ACTION:", newState);
             return newState;
         case ADD_BOOKING:

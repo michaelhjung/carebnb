@@ -89,6 +89,7 @@ header {
     font-weight: 600;
 }
 
-#button--user-spots {
+#button--user-spots,
+#button--user-bookings {
     font-weight: 600;
 }
