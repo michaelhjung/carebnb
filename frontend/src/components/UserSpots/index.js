@@ -30,16 +30,15 @@ export default function UserSpots() {
                             <SpotCard spot={spot} />
                         </NavLink>
                         <div className='spot-card--buttons'>
-                            <NavLink to={`/spots/${spot.id}/add-image`}>
+                            <NavLink to={`/user/${sessionUser.id}/spots/${spot.id}/add-image`}>
                                 <AddSpotImageButton />
                             </NavLink>
 
-                            <NavLink to={`/spots/${spot.id}/edit`}>
+                            <NavLink to={`/user/${sessionUser.id}/spots/${spot.id}/edit`}>
                                 <EditSpotButton />
                             </NavLink>
 
-                            <DeleteSpotButton />
-
+                            <DeleteSpotButton spot={spot} user={sessionUser} />
                         </div>
                     </div>
                 ))}

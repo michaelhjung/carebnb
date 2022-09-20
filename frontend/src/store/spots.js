@@ -132,7 +132,9 @@ export const deleteSpot = (spotId) => async dispatch => {
     });
 
     if (response.ok) {
+        const successMessage = await response.json();
         dispatch(removeOne(spotId));
+        return successMessage;
     }
 }
 
@@ -150,7 +152,7 @@ const spotsReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case LOAD_ALL:
-            newState = { ...state }
+            newState = { ...state };
             // console.log("LOAD_ALL ACTION.PAYLOAD IS:", action.payload);
             const newAllSpots = {};
             action.payload.Spots.forEach(spot => newAllSpots[spot.id] = spot);
@@ -158,33 +160,34 @@ const spotsReducer = (state = initialState, action) => {
             // console.log("NEWSTATE AFTER LOAD_ALL ACTION:", newState);
             return newState;
         case LOAD_ONE:
-            newState = { ...state }
+            newState = { ...state };
             // console.log("LOAD_ONE ACTION.PAYLOAD IS:", action.payload);
             const newSingleSpot = { ...action.payload };
             newState.singleSpot = newSingleSpot;
             // console.log("NEWSTATE AFTER LOAD_ONE ACTION:", newState);
             return newState;
         case ADD_ONE:
-            newState = { ...state }
+            newState = { ...state };
             const newSpot = { ...action.payload };
             newState.allSpots[action.payload.id] = newSpot;
             // console.log("NEWSTATE AFTER ADD_ONE ACTION:", newState);
             return newState;
         case ADD_IMG:
-            newState = { ...state }
+            newState = { ...state };
             newState.singleSpot = action.payload.spotData;
             newState.singleSpot.spotImages.push(action.payload.imgData);
             // console.log("NEWSTATE AFTER ADD_ONE ACTION:", newState);
             return newState;
         case UPDATE:
-            newState = { ...state }
+            newState = { ...state };
             const updatedSpot = { ...action.payload };
             newState.allSpots[action.payload.id] = updatedSpot;
             // console.log("NEWSTATE AFTER ADD_ONE ACTION:", newState);
             return newState;
         case REMOVE_ONE:
-            newState = { ...state }
-            delete newState.allSpots[action.payload]
+            newState = { ...state };
+            delete newState.allSpots[action.payload];
+            newState = { ...newState };
             console.log("NEWSTATE AFTER REMOVE_ONE ACTION:", newState);
             return newState;
         default:
