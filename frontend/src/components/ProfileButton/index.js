@@ -39,13 +39,13 @@ function ProfileButton() {
                 <ul className="list--profile-dropdown">
                     <li>
                         <NavLink to="/my-spots">
-                            <button>My Spots</button>
+                            <button className="button--dropdown-item">My Spots</button>
                         </NavLink>
                     </li>
                     <li>{sessionUser.username}</li>
                     <li>{sessionUser.email}</li>
                     <li>
-                        <button onClick={logout}>Log Out</button>
+                        <button onClick={logout} className="button--dropdown-item">Log Out</button>
                     </li>
                 </ul>
             )}
