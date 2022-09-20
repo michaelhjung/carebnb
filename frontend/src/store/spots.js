@@ -4,7 +4,11 @@ import { csrfFetch } from './csrf';
 const LOAD_ALL = '/spots/LOAD_ALL';
 const LOAD_ONE = '/spots/LOAD_ONE';
 const ADD_ONE = '/spots/ADD_ONE';
+const ADD_IMG = '/spots/ADD_IMG';
+const UPDATE = '/spots/UPDATE';
 const REMOVE_ONE = '/spots/REMOVE_ONE';
+
+
 
 
 /* ---------------------------- ACTION CREATORS: ---------------------------- */
@@ -21,6 +25,14 @@ const loadOne = (spot) => ({
 const addOne = (spotData) => ({
     type: ADD_ONE,
     payload: spotData
+});
+
+const addImg = (spotData, imgData) => ({
+    type: ADD_IMG,
+    payload: {
+        spotData,
+        imgData
+    }
 });
 
 const removeOne = (spotId) => ({
@@ -67,13 +79,30 @@ export const createSpot = (data) => async dispatch => {
         body: JSON.stringify(data)
     });
 
-    // console.log("RESPONSE AFTER CREATE SPOT FETCH:", response);
-
     if (response.ok) {
         const newSpot = await response.json();
         // console.log("JSONIFIED NEW-SPOT DATA AFTER THUNK:", newSpot);
         dispatch(addOne(newSpot));
         return newSpot;
+    }
+}
+
+export const addSpotImg = (spotId, imgData) => async dispatch => {
+    const responseGetSpot = await fetch(`/api/spots/${spotId}`);
+    let spot;
+    if (responseGetSpot.ok) spot = await responseGetSpot.json();
+
+    const responseAddImg = await csrfFetch(`/api/spots/${spotId}/images`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(imgData)
+    });
+
+    if (responseAddImg.ok) {
+        const returnedImgData = await responseAddImg.json();
+        // console.log("JSONIFIED SPOT IMG DATA AFTER THUNK:", img);
+        await dispatch(addImg(spot, returnedImgData));
+        return returnedImgData;
     }
 }
 
@@ -89,8 +118,6 @@ export const deleteSpot = (spotId) => async dispatch => {
 
 /*
 FUNCTIONALITIES TODO:
-    - createSpot error handling
-    - implement addSpotImage
     - implement editSpot
     - implement deleteSpot
 */
@@ -121,6 +148,12 @@ const spotsReducer = (state = initialState, action) => {
             newState = { ...state }
             const newSpot = { ...action.payload };
             newState.allSpots[action.payload.id] = newSpot;
+            // console.log("NEWSTATE AFTER ADD_ONE ACTION:", newState);
+            return newState;
+        case ADD_IMG:
+            newState = { ...state }
+            newState.singleSpot = action.payload.spotData;
+            newState.singleSpot.spotImages.push(action.payload.imgData);
             // console.log("NEWSTATE AFTER ADD_ONE ACTION:", newState);
             return newState;
         case REMOVE_ONE:

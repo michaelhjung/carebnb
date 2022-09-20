@@ -17,7 +17,7 @@ export default function CreateSpotForm() {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
-    const [errors, setErrors] = useState([]);
+    const [validationErrors, setValidationErrors] = useState([]);
 
     if (!sessionUser) {
         alert("You must be logged in to create a spot!");
@@ -38,22 +38,27 @@ export default function CreateSpotForm() {
             description,
             price
         }
+        try {
+            const createdSpot = await dispatch(spotsActions.createSpot(newSpot))
+            if (createdSpot) {
+                setValidationErrors([]);
+                history.replace('/');
+            }
+        }
 
-        const createdSpot = await dispatch(spotsActions.createSpot(newSpot))
-            // TODO:
-            //   1) SET UP ERRORS
-
-        if (createdSpot) {
-            setErrors([]);
-            history.replace('/');
+        catch (res) {
+            const data = await res.json();
+            if (data && data.errors) setValidationErrors(data.errors);
         }
     };
 
     return (
         <form onSubmit={handleSubmit} className="form--create-spot">
-            <ul className="list--errors">
-                {errors.map((error) => <li key={error} className="error-li">{error}</li>)}
-            </ul>
+            {validationErrors.length > 0 && (
+                <ul className="list--errors">
+                    {validationErrors.map((error) => <li key={error} className="error-li">{error}</li>)}
+                </ul>
+            )}
             <label>
                 Address
                 <input
