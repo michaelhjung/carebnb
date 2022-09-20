@@ -9,6 +9,8 @@ import SpotDetails from "./components/SpotDetails/SpotDetails";
 import CreateSpotForm from "./components/CreateSpotForm";
 import UserSpots from "./components/UserSpots";
 import AddSpotImageForm from "./components/AddSpotImageForm";
+import EditSpotForm from "./components/EditSpotForm";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
     const dispatch = useDispatch();
@@ -46,8 +48,12 @@ function App() {
                         <AddSpotImageForm />
                     </Route>
 
+                    <Route path='/spots/:spotId/edit'>
+                        <EditSpotForm />
+                    </Route>
+
                     <Route>
-                        Page Not Found!
+                        <PageNotFound />
                     </Route>
                 </Switch>
             )}

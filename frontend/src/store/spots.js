@@ -35,6 +35,11 @@ const addImg = (spotData, imgData) => ({
     }
 });
 
+const editSpot = (spotData) => ({
+    type: UPDATE,
+    payload: spotData
+})
+
 const removeOne = (spotId) => ({
     type: REMOVE_ONE,
     payload: spotId
@@ -72,11 +77,11 @@ export const getSingleSpot = (spotId) => async dispatch => {
     }
 }
 
-export const createSpot = (data) => async dispatch => {
+export const createSpot = (spotData) => async dispatch => {
     const response = await csrfFetch(`/api/spots`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify(spotData)
     });
 
     if (response.ok) {
@@ -103,6 +108,21 @@ export const addSpotImg = (spotId, imgData) => async dispatch => {
         // console.log("JSONIFIED SPOT IMG DATA AFTER THUNK:", img);
         await dispatch(addImg(spot, returnedImgData));
         return returnedImgData;
+    }
+}
+
+export const updateSpot = (spotId, spotData) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(spotData)
+    });
+
+    if (response.ok) {
+        const updatedSpot = await response.json();
+        // console.log("JSONIFIED UPDATED SPOT DATA AFTER THUNK:", updatedSpot);
+        dispatch(editSpot(updatedSpot));
+        return updatedSpot;
     }
 }
 
@@ -154,6 +174,12 @@ const spotsReducer = (state = initialState, action) => {
             newState = { ...state }
             newState.singleSpot = action.payload.spotData;
             newState.singleSpot.spotImages.push(action.payload.imgData);
+            // console.log("NEWSTATE AFTER ADD_ONE ACTION:", newState);
+            return newState;
+        case UPDATE:
+            newState = { ...state }
+            const updatedSpot = { ...action.payload };
+            newState.allSpots[action.payload.id] = updatedSpot;
             // console.log("NEWSTATE AFTER ADD_ONE ACTION:", newState);
             return newState;
         case REMOVE_ONE:

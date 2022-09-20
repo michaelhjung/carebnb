@@ -10,7 +10,7 @@ export default function AddSpotImageForm() {
     const { spotId } = useParams();
     const sessionUser = useSelector((state) => state.session.user);
     const [url, setUrl] = useState("");
-    const [preview, setPreview] = useState("");
+    const [preview, setPreview] = useState(false);
     const [validationErrors, setValidationErrors] = useState([]);
 
     if (!sessionUser) {
@@ -21,11 +21,7 @@ export default function AddSpotImageForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const newImg = {
-            url,
-            preview: Boolean(preview)
-        }
-
+        const newImg = { url, preview: Boolean(preview) }
         try {
             const createdImg = await dispatch(spotsActions.addSpotImg(spotId, newImg));
 
@@ -34,7 +30,6 @@ export default function AddSpotImageForm() {
                 history.replace(`/spots/${spotId}`);
             }
         }
-
         catch (res) {
             const data = await res.json();
             if (data && data.errors) setValidationErrors(data.errors);
