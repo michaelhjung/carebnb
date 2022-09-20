@@ -11,7 +11,7 @@ export default function SpotsBrowser({ spots }) {
             <main className='container--spots'>
                 {Object.values(spots).map(spot => (
                     <div key={spot.id} className="spot-card">
-                        <NavLink to={`/api/spots/${spot.id}`} className="link--spot">
+                        <NavLink to={`/spots/${spot.id}`} className="link--spot">
                             <SpotCard spot={spot} />
                         </NavLink>
                     </div>

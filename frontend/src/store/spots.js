@@ -40,6 +40,16 @@ export const getSpots = () => async dispatch => {
     }
 }
 
+export const getUserSpots = () => async dispatch => {
+    const response = await csrfFetch(`/api/spots/current`);
+
+    if (response.ok) {
+        const userSpots = await response.json();
+        // console.log("JSONIFIED SPOTS DATA AFTER THUNK:", spots);
+        dispatch(loadAll(userSpots));
+    }
+}
+
 export const getSingleSpot = (spotId) => async dispatch => {
     const response = await fetch(`/api/spots/${spotId}`);
 

@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import SpotsBrowser from "./components/SpotsBrowser";
 import SpotDetails from "./components/SpotDetails/SpotDetails";
 import CreateSpotForm from "./components/CreateSpotForm";
+import UserSpots from "./components/UserSpots";
 
 function App() {
     const dispatch = useDispatch();
@@ -31,12 +32,16 @@ function App() {
                         <SpotsBrowser spots={spots} />
                     </Route>
 
-                    <Route path="/api/spots/:spotId">
+                    <Route path="/spots/:spotId">
                         <SpotDetails spots={spots} />
                     </Route>
 
-                    <Route path="/api/spots">
+                    <Route path="/create-spot">
                         <CreateSpotForm />
+                    </Route>
+
+                    <Route path="/my-spots">
+                        <UserSpots />
                     </Route>
                 </Switch>
             )}
