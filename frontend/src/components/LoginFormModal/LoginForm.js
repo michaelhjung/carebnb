@@ -6,16 +6,16 @@ function LoginForm({ setShowMenu, closeMenu }) {
     const dispatch = useDispatch();
     const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
-    const [errors, setErrors] = useState([]);
+    const [validationErrors, setValidationErrors] = useState([]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setShowMenu(false);
-        setErrors([]);
+        setValidationErrors([]);
         return dispatch(sessionActions.login({ credential, password })).catch(
             async (res) => {
                 const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
+                if (data && data.errors) setValidationErrors(data.errors);
             }
         );
     };
@@ -23,7 +23,7 @@ function LoginForm({ setShowMenu, closeMenu }) {
     return (
         <form onSubmit={handleSubmit} className="form--login">
             <ul className="list--errors">
-                {errors.map((error, idx) => (
+                {validationErrors.map((error, idx) => (
                     <li key={idx}>{error}</li>
                 ))}
             </ul>

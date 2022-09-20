@@ -31,7 +31,7 @@ export default function SpotDetails() {
 
             <div className='spot-details--imgs-container'>
                 {spot.spotImages.map(img => (
-                    <img src={img.url} alt={img.url} className='spot-details--img' />
+                    <img key={img.url} src={img.url} alt={img.url} className='spot-details--img' />
                 ))}
             </div>
 
