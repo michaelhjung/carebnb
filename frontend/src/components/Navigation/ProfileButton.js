@@ -39,8 +39,8 @@ function ProfileButton() {
             {sessionUser && showMenu && (
                 <ul className="list--profile-dropdown">
                     <li>
-                        <NavLink to="/my-spots">
-                            <button id="button--my-spots" className="button--dropdown-item button--dropdown-item-link">My Spots</button>
+                        <NavLink to={`/user/${sessionUser.id}/spots`}>
+                            <button id="button--user-spots" className="button--dropdown-item button--dropdown-item-link">My Spots</button>
                         </NavLink>
                     </li>
                     <li className="button--dropdown-item button--dropdown-item-user-data">{sessionUser.username}</li>
