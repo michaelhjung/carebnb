@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from 'react-router-dom';
 import './SpotsBrowser.css'
-import SpotCard from '../SpotDetails/SpotCard';
+import SpotCard from './SpotCard';
 import * as spotsActions from '../../store/spots';
 
 export default function SpotsBrowser() {

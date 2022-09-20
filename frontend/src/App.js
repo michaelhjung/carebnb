@@ -45,6 +45,10 @@ function App() {
                     <Route path="/spots/:spotId/add-image">
                         <AddSpotImageForm />
                     </Route>
+
+                    <Route>
+                        Page Not Found!
+                    </Route>
                 </Switch>
             )}
         </>

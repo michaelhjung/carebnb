@@ -2,7 +2,10 @@ import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import * as spotsActions from '../../store/spots';
-import SpotCard from '../SpotDetails/SpotCard';
+import SpotCard from '../SpotsBrowser/SpotCard';
+import AddSpotImageButton from './AddSpotImageButton';
+import EditSpotButton from './EditSpotButton';
+import DeleteSpotButton from './DeleteSpotButton';
 
 export default function UserSpots() {
     const dispatch = useDispatch();
@@ -27,10 +30,13 @@ export default function UserSpots() {
                         </NavLink>
                         <div className='spot-card--buttons'>
                             <NavLink to={`/spots/${spot.id}/add-image`}>
-                                <button className='spot-card--button'>Add Image</button>
+                                <AddSpotImageButton />
                             </NavLink>
-                            <button className='spot-card--button'>Edit Spot</button>
-                            <button className='spot-card--button'>Delete Spot</button>
+
+                            <EditSpotButton />
+
+                            <DeleteSpotButton />
+
                         </div>
                     </div>
                 ))}
