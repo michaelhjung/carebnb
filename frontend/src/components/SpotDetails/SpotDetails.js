@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as spotsActions from '../../store/spots';
 import './SpotDetails.css';
 
-export default function SpotDetails({ spots }) {
+export default function SpotDetails() {
     const dispatch = useDispatch();
     const { spotId } = useParams();
     const spot = useSelector(state => state.spots.singleSpot);

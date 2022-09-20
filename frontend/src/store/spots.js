@@ -87,6 +87,14 @@ export const deleteSpot = (spotId) => async dispatch => {
     }
 }
 
+/*
+FUNCTIONALITIES TODO:
+    - createSpot error handling
+    - implement addSpotImage
+    - implement editSpot
+    - implement deleteSpot
+*/
+
 
 /* -------------------------------- REDUCER: -------------------------------- */
 const initialState = { allSpots: null, singleSpot: null };
