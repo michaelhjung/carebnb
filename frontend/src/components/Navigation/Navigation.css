@@ -60,6 +60,7 @@ header {
     flex-direction: column;
     position: fixed;
     align-items: flex-start;
+    background-color: #FFF;
     top: 65px;
     right: 85px;
     box-shadow: 2px -2px 4px 0.5px #DDD;
@@ -75,11 +76,19 @@ header {
     font-size: .8rem;
 }
 
+.button--dropdown-item-user-data {
+    font-style: italic;
+}
+
 .button--dropdown-item-link:hover {
     background-color: #F6F6F6;
     cursor: pointer;
 }
 
 .button--modal {
+    font-weight: 600;
+}
+
+#button--my-spots {
     font-weight: 600;
 }
