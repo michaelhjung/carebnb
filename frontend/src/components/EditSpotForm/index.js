@@ -48,7 +48,6 @@ export default function EditSpotForm() {
             history.replace("/");
         }
     }
-    if (!spot) history.push("/page-not-found");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
