@@ -15,7 +15,7 @@ function Navigation() {
                 </NavLink>
             </div>
             <div className='navbar--right'>
-                <NavLink to="/api/spots" className='link--create-spot'>
+                <NavLink to="/create-spot" className='link--create-spot'>
                     <button className='button button--create-spot'>Create a Spot</button>
                 </NavLink>
                 <ProfileButton />
