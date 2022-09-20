@@ -42,15 +42,13 @@ export default function EditSpotForm() {
 
     if (!sessionUser) return <Redirect to="/" />;
 
-    if (spot) {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
         if (sessionUser.id.toString() !== spot.ownerId.toString()) {
             alert("You do not have access to update this spot");
             history.replace("/");
         }
-    }
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
 
         const spotDetails = {
             address,
