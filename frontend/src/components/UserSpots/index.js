@@ -15,8 +15,6 @@ export default function UserSpots() {
         dispatch(spotsActions.getUserSpots());
     }, [dispatch]);
 
-    console.log("USER SPOTS:", userSpots);
-
     if (!sessionUser) return <Redirect to="/" />
     if (!userSpots) return null;
 

@@ -125,12 +125,14 @@ export const updateSpot = (spotId, spotData) => async dispatch => {
 }
 
 export const deleteSpot = (spotId) => async dispatch => {
+    console.log("DELETE SPOT THUNK:", spotId);
     const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'DELETE'
     });
 
     if (response.ok) {
         const successMessage = await response.json();
+        console.log("THIS IS THUNK SUCCESS MSG:", successMessage, spotId);
         dispatch(removeSpot(spotId));
         return successMessage;
     }
@@ -152,7 +154,7 @@ const spotsReducer = (state = initialState, action) => {
             // console.log("NEWSTATE AFTER LOAD_ALL ACTION:", newState);
             return newState;
         case LOAD_ONE:
-            newState = { ...state };
+            newState = { ...state, singleSpot: { ...state.singleSpot } };
             // console.log("LOAD_ONE ACTION.PAYLOAD IS:", action.payload);
             const newSingleSpot = { ...action.payload };
             newState.singleSpot = newSingleSpot;
@@ -177,7 +179,7 @@ const spotsReducer = (state = initialState, action) => {
             // console.log("NEWSTATE AFTER ADD_ONE ACTION:", newState);
             return newState;
         case REMOVE_SPOT:
-            newState = { ...state };
+            newState = { ...state, allSpots: { ...state.allSpots } };
             delete newState.allSpots[action.payload];
             newState = { ...newState };
             // console.log("NEWSTATE AFTER REMOVE_SPOT ACTION:", newState);
