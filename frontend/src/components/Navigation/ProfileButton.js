@@ -39,13 +39,13 @@ function ProfileButton() {
                 <ul className="list--profile-dropdown">
                     <li>
                         <NavLink to="/my-spots">
-                            <button className="button--dropdown-item">My Spots</button>
+                            <button className="button--dropdown-item button--dropdown-item-link">My Spots</button>
                         </NavLink>
                     </li>
-                    <li>{sessionUser.username}</li>
-                    <li>{sessionUser.email}</li>
+                    <li className="button--dropdown-item">{sessionUser.username}</li>
+                    <li className="button--dropdown-item">{sessionUser.email}</li>
                     <li>
-                        <button onClick={logout} className="button--dropdown-item">Log Out</button>
+                        <button onClick={logout} className="button--dropdown-item button--dropdown-item-link">Log Out</button>
                     </li>
                 </ul>
             )}
@@ -56,7 +56,7 @@ function ProfileButton() {
                         closeMenu={closeMenu}
                     />
                     <NavLink to="/signup">
-                        <button className="signup-button button--dropdown-item">
+                        <button className="signup-button button--dropdown-item button--dropdown-item-link">
                             Sign Up
                         </button>
                     </NavLink>
