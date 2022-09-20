@@ -11,7 +11,7 @@ function DemoUserButton() {
     }
 
     return (
-        <button onClick={clickHandler} className="button--dropdown-item">Demo User</button>
+        <button onClick={clickHandler} className="button--dropdown-item button--dropdown-item-link">Demo User</button>
     );
 }
 

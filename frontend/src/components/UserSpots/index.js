@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import * as spotsActions from '../../store/spots';
 import SpotCard from '../SpotsBrowser/SpotCard';
@@ -17,6 +17,7 @@ export default function UserSpots() {
 
     console.log("USER SPOTS:", userSpots);
 
+    if (!sessionUser) return <Redirect to="/" />
     if (!userSpots) return null;
 
     return (
