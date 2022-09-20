@@ -10,23 +10,42 @@ export default function EditSpotForm() {
     const { spotId } = useParams();
     const sessionUser = useSelector((state) => state.session.user);
     const spot = useSelector(state => state.spots.singleSpot);
+
+    console.log("SPOT ID IS:", spotId);
+    console.log("SESSION USER IS:", sessionUser);
+    console.log("SPOT IS:", spot);
+
     useEffect(() => {
         dispatch(spotsActions.getSingleSpot(spotId));
     }, [dispatch, spotId]);
-    const [address, setAddress] = useState(spot.address);
-    const [city, setCity] = useState(spot.city);
-    const [state, setState] = useState(spot.state);
-    const [country, setCountry] = useState(spot.country);
-    const [lat, setLat] = useState(spot.lat);
-    const [lng, setLng] = useState(spot.lng);
-    const [name, setName] = useState(spot.name);
-    const [description, setDescription] = useState(spot.description);
-    const [price, setPrice] = useState(spot.price);
+
+    // THE FOLLOWING HAS A RENDER DELAY BECAUSE NEW SPOT STATE HAS NOT RENDERED YET WHEN PAGE LOADS
+    // useEffect(() => {
+    //     if (spot) {
+    //         setAddress(spot.address);
+    //         setCity(spot.city);
+    //         setState(spot.state);
+    //         setCountry(spot.country);
+    //         setLat(spot.lat);
+    //         setLng(spot.lng);
+    //         setName(spot.name);
+    //         setDescription(spot.description);
+    //         setPrice(spot.price);
+    //     }
+    // }, []);
+
+    const [address, setAddress] = useState("");
+    const [city, setCity] = useState("");
+    const [state, setState] = useState("");
+    const [country, setCountry] = useState("");
+    const [lat, setLat] = useState("");
+    const [lng, setLng] = useState("");
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [price, setPrice] = useState("");
     const [validationErrors, setValidationErrors] = useState([]);
 
     if (!sessionUser) return <Redirect to="/" />;
-    console.log("SESSION USER IS:", sessionUser);
-    console.log("SPOT IS:", spot);
 
     // if (spot) {
     //     if (sessionUser.id.toString() !== spot.ownerId.toString()) {
@@ -55,7 +74,7 @@ export default function EditSpotForm() {
             const updatedSpot = await dispatch(spotsActions.updateSpot(spotId, spotDetails));
             if (updatedSpot) {
                 setValidationErrors([]);
-                history.replace('/');
+                history.replace(`/spots/${updatedSpot.id}`);
             }
         }
 
