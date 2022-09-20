@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
-import * as spotsActions from "./store/spots";
 import Navigation from "./components/Navigation";
 import SpotsBrowser from "./components/SpotsBrowser";
 import SpotDetails from "./components/SpotDetails/SpotDetails";
@@ -13,10 +12,8 @@ import UserSpots from "./components/UserSpots";
 function App() {
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false);
-    const spots = useSelector(state => state.spots.allSpots);
     useEffect(() => {
         dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
-        dispatch(spotsActions.getSpots());
     }, [dispatch]);
 
     return (
@@ -29,11 +26,11 @@ function App() {
                     </Route>
 
                     <Route exact path="/">
-                        <SpotsBrowser spots={spots} />
+                        <SpotsBrowser />
                     </Route>
 
                     <Route path="/spots/:spotId">
-                        <SpotDetails spots={spots} />
+                        <SpotDetails />
                     </Route>
 
                     <Route path="/create-spot">
