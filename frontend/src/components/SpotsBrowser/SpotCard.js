@@ -3,8 +3,9 @@ import React from 'react'
 export default function SpotCard({ spot }) {
   return (
     <>
-        {spot.name}
-        <img src={spot.previewImage} alt={spot.description} className="spot-card--img" />
+        <div className='container--spot-card--img'>
+            <img src={spot.previewImage} alt={spot.description} className="spot-card--img" />
+        </div>
         <div className='spot-card--info'>
             <div className='spot-card--info-avgRating'>
                 <i className="fa-solid fa-star icon--star" />

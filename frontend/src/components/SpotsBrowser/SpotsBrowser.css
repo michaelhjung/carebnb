@@ -1,15 +1,15 @@
-.container--spots {
+#container--spots {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(333px, 1fr));
     grid-auto-rows: 1fr;
     grid-gap: 45px 25px;
+    max-width: 100%;
+    padding: 25px 0px;
 }
 
 .spot-card {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    width: 333px;
     height: auto;
 }
 
@@ -18,11 +18,22 @@
     color: black;
 }
 
-.spot-card--img {
-    width: 333px;
-    height: 315px;
+.container--spot-card--img {
     border-radius: 15px;
+    flex: 1 1 333px;
+    height: auto;
+}
+
+.spot-card--img {
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
+}
+
+.spot-card--info {
+    flex: 1 1 333px;
 }
 
 .spot-card--info-location {

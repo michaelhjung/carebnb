@@ -29,7 +29,6 @@ function SignupForm({ setShowMenu, closeMenu }) {
             } catch (res) {
                 const data = await res.json();
                 const errors = [];
-                console.log("SIGNUP ERRORS:", data);
                 if (data) errors.push(data.message);
 
                 return setValidationErrors(errors);
