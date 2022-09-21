@@ -1,0 +1,55 @@
+.container--login-form {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-title {
+    align-self: center;
+    font-weight: 600;
+    border-bottom: 1px solid #DDD;
+}
+
+.login-welcome {
+    align-self: flex-start;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.form--login {
+    display: flex;
+    flex-direction: column;
+}
+
+.container--login-fields {
+    border: 1.5px solid #DDD;
+    overflow: hidden;
+    margin-bottom: 55px;
+}
+
+.container--login-fields,
+.container--login-field,
+.login-field {
+    border-radius: 7px;
+}
+
+.container--login-field-credenital {
+    border-bottom: 1px solid #DDD;
+}
+
+.login-field {
+    width: 500px;
+    padding: 18px;
+    border: none;
+}
+
+#login-submit-button {
+    background-color: #e31c5f;
+    color: #FFF;
+    font-weight: 500;
+    padding: 15px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+}

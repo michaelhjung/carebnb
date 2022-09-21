@@ -8,45 +8,62 @@ function LoginForm({ setShowMenu, closeMenu }) {
     const [password, setPassword] = useState("");
     const [validationErrors, setValidationErrors] = useState([]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setShowMenu(false);
-        setValidationErrors([]);
-        return dispatch(sessionActions.login({ credential, password })).catch(
-            async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setValidationErrors(data.errors);
+
+        try {
+            const response = await dispatch(sessionActions.login({ credential, password }));
+            if (response) {
+                setShowMenu(false);
+                setValidationErrors([]);
             }
-        );
+        } catch (res) {
+            const data = await res.json();
+            const errors = [];
+            if (data) errors.push(data.message);
+
+            setValidationErrors(errors);
+        }
     };
 
     return (
-        <form onSubmit={handleSubmit} className="form--login">
-            <ul className="list--errors">
-                {validationErrors.map((error, idx) => (
-                    <li key={idx}>{error}</li>
-                ))}
-            </ul>
-            <label>
-                Username or Email
-                <input
-                    type="text"
-                    value={credential}
-                    onChange={(e) => setCredential(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Password
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-            </label>
-            <button type="submit">Log In</button>
-        </form>
+        <div className='container--login-form'>
+            <div className='login-title'>
+                Log in
+            </div>
+
+            <h1 className='login-welcome'>Welcome to Carebnb</h1>
+            <form onSubmit={handleSubmit} className="form--login">
+                <ul className="list--errors">
+                    {validationErrors.map((error, idx) => (
+                        <li key={idx} className='error-li'>{error}</li>
+                    ))}
+                </ul>
+                <div className="container--login-fields">
+                    <div className="container--login-field container--login-field-credenital">
+                        <input
+                            type="text"
+                            value={credential}
+                            onChange={(e) => setCredential(e.target.value)}
+                            placeholder="Username or Email"
+                            required
+                            className="login-field login-field--credential"
+                        />
+                    </div>
+                    <div className="container--login-field container--login-field-password">
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Password"
+                            required
+                            className="login-field login-field--password"
+                        />
+                    </div>
+                </div>
+                <button type="submit" id='login-submit-button'>Log In</button>
+            </form>
+        </div>
     );
 }
 
