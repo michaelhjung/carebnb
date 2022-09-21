@@ -41,7 +41,7 @@ function LoginForm({ setShowMenu, closeMenu }) {
                     ))}
                 </ul>
                 <div className="container--login-signup-fields container--login-fields">
-                    <div id="container--login-field-credenital" className="container--login-signup-field container--login-field" >
+                    <div id="container--login-field-credential" className="container--login-signup-field container--login-field" >
                         <input
                             type="text"
                             value={credential}
