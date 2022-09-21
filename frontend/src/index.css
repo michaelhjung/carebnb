@@ -6,3 +6,8 @@
     font-family: 'Plus Jakarta Sans', 'Montserrat Alternates', 'Open Sans', 'Arimo', 'Roboto', sans-serif;
     font-weight: 300;
 }
+
+.error-li {
+    color: #FF385C;
+    font-weight: 600;
+}
