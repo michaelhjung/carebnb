@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import LoginFormModal from '../LoginFormModal';
-import SignUpButton from "./SignUpButton";
+import LoginFormModal from '../LoginSignupForm/LoginFormModal';
+import SignupFormModal from "../LoginSignupForm/SignupFormModal";
 import DemoUserButton from './DemoUserButton';
 import * as sessionActions from '../../store/session';
 
@@ -62,9 +62,10 @@ function ProfileButton() {
                         setShowMenu={setShowMenu}
                         closeMenu={closeMenu}
                     />
-                    <NavLink to="/signup">
-                        <SignUpButton />
-                    </NavLink>
+                    <SignupFormModal
+                        setShowMenu={setShowMenu}
+                        closeMenu={closeMenu}
+                    />
                     <DemoUserButton />
                 </ul>
             )}
