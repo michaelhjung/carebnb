@@ -9,7 +9,6 @@ export default function UserBookings() {
     const sessionUser = useSelector(state => state.session.user);
     const userBookings = useSelector(state => state.bookings.user);
 
-    console.log("USER BOOKINGS:", userBookings);
     useEffect(() => {
         dispatch(bookingsActions.getUserBookings());
     }, [dispatch]);
