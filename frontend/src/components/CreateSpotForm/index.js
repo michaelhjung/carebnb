@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import * as spotsActions from "../../store/spots";
@@ -24,6 +24,25 @@ export default function CreateSpotForm() {
         history.replace("/");
     }
 
+    useEffect(() => {
+        const errors = [];
+
+        if (Number.isNaN(Number(lat)) ||
+            (Number(lat)) > 90 ||
+            (Number(lat)) < -90)
+            errors.push("Latitude must be a number between -90.0 and 90.0");
+
+        if (Number.isNaN(Number(lng)) ||
+            (Number(lng)) > 180 ||
+            (Number(lng)) < -180)
+            errors.push("Longitude must be a number between -180.0 and 180.0");
+
+        if (Number.isNaN(Number(price)) && Number(price) !== 0 && price.length !== 0) errors.push("Please enter a valid price");
+        if ((Number(price)) < 0 && price.length !== 0) errors.push("The price cannot be negative... but if you're feeling generous, you can make it free :)");
+
+        setValidationErrors(errors);
+    }, [lat, lng, price]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -41,7 +60,7 @@ export default function CreateSpotForm() {
         try {
             const createdSpot = await dispatch(spotsActions.createSpot(newSpot));
             if (createdSpot) {
-                if (url) {
+                if (url.length) {
                     const newImg = { url, preview: true }
                     try {
                         const createdImg = await dispatch(spotsActions.addSpotImg(createdSpot.id, newImg));
@@ -49,7 +68,7 @@ export default function CreateSpotForm() {
                     }
                     catch (res) {
                         const data = await res.json();
-                        if (data && data.errors) setValidationErrors(data.errors);
+                        if (data && data.errors) return setValidationErrors(data.errors);
                     }
                 }
 
@@ -60,7 +79,7 @@ export default function CreateSpotForm() {
 
         catch (res) {
             const data = await res.json();
-            if (data && data.errors) setValidationErrors(data.errors);
+            if (data && data.errors) return setValidationErrors(data.errors);
         }
     };
 
@@ -160,7 +179,7 @@ export default function CreateSpotForm() {
                     required
                 />
             </label>
-            <button type="submit">Submit</button>
+            <button type="submit" disabled={validationErrors.length}>Submit</button>
         </form>
     );
 }

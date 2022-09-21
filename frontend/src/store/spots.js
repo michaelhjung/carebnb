@@ -160,7 +160,7 @@ const spotsReducer = (state = initialState, action) => {
             // console.log("NEWSTATE AFTER LOAD_ONE ACTION:", newState);
             return newState;
         case ADD_SPOT:
-            newState = { ...state };
+            newState = { ...state, allSpots: { ...state.allSpots } };
             const newSpot = { ...action.payload };
             newState.allSpots[action.payload.id] = newSpot;
             // console.log("NEWSTATE AFTER ADD_SPOT ACTION:", newState);

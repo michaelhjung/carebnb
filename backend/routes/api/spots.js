@@ -234,7 +234,7 @@ router.post('/', requireAuth, async (req, res, next) => {
         if (!lng) err.errors.lng = "Longitude is not valid";
         if (!name) err.errors.name = "Name must be less than 50 characters";
         if (!description) err.errors.description = "Description is required";
-        if (!price) err.errors.price = "Price per day is required";
+        if (price.length === 0) err.errors.price = "Price per day is required";
 
         err.title = "Validation Error";
         err.message = "Validation Error";
