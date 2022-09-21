@@ -9,16 +9,25 @@ header {
     align-items: center;
     list-style: none;
     border-bottom: 1px solid #DDD;
-    padding: 10px 80px 20px;
+    padding: 10px 0px 20px;
 }
 
 .navbar--right {
     display: flex;
 }
 
+.navbar--middle {
+    margin-left: 147px;
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
 .link--create-spot {
     margin-right: 47px;
 }
+
+/*****************************************************************************/
+/* STYLES FOR PROFILE BUTTON */
 
 .button--profile {
     width: 77px;
@@ -58,15 +67,16 @@ header {
 .list--profile-dropdown {
     display: flex;
     flex-direction: column;
-    position: fixed;
+    position: absolute;
     align-items: flex-start;
     background-color: #FFF;
-    top: 65px;
-    right: 85px;
-    box-shadow: 2px -2px 4px 0.5px #DDD;
+    top: 75px;
+    right: 242px;
+    box-shadow: 2px -2px 2px 0.5px #DDD;
     border-radius: 15px;
     padding: 10px 0px;
     list-style: none;
+    width: 250px;
 }
 
 .button--dropdown-item {
@@ -74,6 +84,9 @@ header {
     background-color: #FFF;
     padding: 15px 185px 15px 15px;
     font-size: .8rem;
+    width: 250px;
+    text-align: left;
+    white-space: nowrap;
 }
 
 .button--dropdown-item-user-data {
@@ -85,6 +98,20 @@ header {
     cursor: pointer;
 }
 
+#demo-user-button {
+    background-color: #e31c5f;
+    color: #FFF;
+    font-weight: 600;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+#demo-user-button:hover {
+    background-color: #D31c5f;
+    color: #FFF;
+    opacity: 0.9;
+}
+
 .button--modal {
     font-weight: 600;
 }
@@ -92,4 +119,9 @@ header {
 #button--user-spots,
 #button--user-bookings {
     font-weight: 600;
+}
+
+#session-username {
+    font-weight: 600;
+    color: #FF5A5F;
 }

@@ -50,7 +50,7 @@ function SignupForm({ setShowMenu, closeMenu }) {
                     {validationErrors.map((error, idx) => <li key={idx} className="error-li">{error}</li>)}
                 </ul>
                 <div className="container--login-signup-fields container--signup-fields">
-                <div id="container--signup-field-first-name" className="container--login-signup-field container--signup-field" >
+                    <div id="container--signup-field-first-name" className="container--login-signup-field container--signup-field" >
                         <input
                             type="text"
                             value={firstName}
