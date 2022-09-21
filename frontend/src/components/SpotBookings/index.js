@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 // THIS COMPONENT IS NESTED IN SPOT DETAILS //
 
-export default function SpotBookings({ spot, spotId, user, bookings }) {
+export default function SpotBookings({ spot, user, bookings }) {
 
     const [showBookings, setShowBookings] = useState(false);
     const [bookingsButtonText, setBookingsButtonText] = useState("See Bookings for This Spot!");
