@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Redirect, useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux";
-import * as spotsActions from "../../store/spots";
+import { useDispatch, useSelector } from 'react-redux';
+import * as spotsActions from '../../store/spots';
 
 export default function AddSpotImageForm() {
     const dispatch = useDispatch();
@@ -27,7 +27,7 @@ export default function AddSpotImageForm() {
 
             if (createdImg) {
                 setValidationErrors([]);
-                history.replace(`/spots/${spotId}`);
+                history.push(`/spots/${spotId}`);
             }
         }
         catch (res) {
