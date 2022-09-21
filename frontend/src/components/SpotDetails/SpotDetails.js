@@ -15,7 +15,7 @@ export default function SpotDetails() {
     useEffect(() => {
         dispatch(spotsActions.getSingleSpot(spotId));
         dispatch(bookingsActions.getSpotBookings(spotId));
-    }, [dispatch, spotId]);
+    }, [dispatch, spotId, sessionUser]);
 
     if (!spot) return null;
 
@@ -51,7 +51,6 @@ export default function SpotDetails() {
             <div className='spot-bookings--container'>
                     <SpotBookings
                         spot={spot}
-                        spotId={spotId}
                         user={sessionUser}
                         bookings={spotBookings}
                     />
