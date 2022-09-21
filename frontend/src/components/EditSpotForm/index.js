@@ -26,35 +26,37 @@ export default function EditSpotForm() {
     }, [dispatch, spotId]);
 
     useEffect(() => {
-        const errors = [];
+        if (spot) {
+            const errors = [];
 
-        if (Number.isNaN(Number(lat)) ||
-            (Number(lat)) > 90 ||
-            (Number(lat)) < -90)
-            errors.push("Latitude must be a number between -90.0 and 90.0");
+            if (Number.isNaN(Number(lat)) ||
+                (Number(lat)) > 90 ||
+                (Number(lat)) < -90)
+                errors.push("Latitude must be a number between -90.0 and 90.0");
 
-        if (Number.isNaN(Number(lng)) ||
-            (Number(lng)) > 180 ||
-            (Number(lng)) < -180)
-            errors.push("Longitude must be a number between -180.0 and 180.0");
+            if (Number.isNaN(Number(lng)) ||
+                (Number(lng)) > 180 ||
+                (Number(lng)) < -180)
+                errors.push("Longitude must be a number between -180.0 and 180.0");
 
-        if (Number.isNaN(Number(price)) && Number(price) !== 0 && price.length !== 0) errors.push("Please enter a valid price");
-        if ((Number(price)) < 0 && price.length !== 0) errors.push("The price cannot be negative... but if you're feeling generous, you can make it free :)");
+            if (Number.isNaN(Number(price)) && Number(price) !== 0 && price) errors.push("Please enter a valid price");
+            if ((Number(price)) < 0 && price.length !== 0) errors.push("The price cannot be negative... but if you're feeling generous, you can make it free :)");
 
-        setValidationErrors(errors);
-    }, [lat, lng, price]);
+            setValidationErrors(errors);
+        }
+    }, [lat, lng, price, spot]);
 
     useEffect(() => {
         if (spot) {
-            setAddress(spot.address);
-            setCity(spot.city);
-            setState(spot.state);
-            setCountry(spot.country);
-            setLat(spot.lat);
-            setLng(spot.lng);
-            setName(spot.name);
-            setDescription(spot.description);
-            setPrice(spot.price);
+            setAddress(spot.address || '');
+            setCity(spot.city || '');
+            setState(spot.state || '');
+            setCountry(spot.country || '');
+            setLat(spot.lat || '');
+            setLng(spot.lng || '');
+            setName(spot.name || '');
+            setDescription(spot.description || '');
+            setPrice(spot.price || '');
         }
     }, [spot]);
 
