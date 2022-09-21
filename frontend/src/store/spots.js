@@ -145,7 +145,7 @@ const spotsReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case LOAD_ALL:
-            newState = { ...state, allSpots: { ...state.allSpots }  };
+            newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot } };
             // console.log("LOAD_ALL ACTION.PAYLOAD IS:", action.payload);
             const newAllSpots = {};
             action.payload.Spots.forEach(spot => newAllSpots[spot.id] = spot);
@@ -153,32 +153,32 @@ const spotsReducer = (state = initialState, action) => {
             // console.log("NEWSTATE AFTER LOAD_ALL ACTION:", newState);
             return newState;
         case LOAD_ONE:
-            newState = { ...state, singleSpot: { ...state.singleSpot } };
+            newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot } };
             // console.log("LOAD_ONE ACTION.PAYLOAD IS:", action.payload);
             const newSingleSpot = { ...action.payload };
             newState.singleSpot = newSingleSpot;
             // console.log("NEWSTATE AFTER LOAD_ONE ACTION:", newState);
             return newState;
         case ADD_SPOT:
-            newState = { ...state, allSpots: { ...state.allSpots } };
+            newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot } };
             const newSpot = { ...action.payload };
             newState.allSpots[action.payload.id] = newSpot;
             // console.log("NEWSTATE AFTER ADD_SPOT ACTION:", newState);
             return newState;
         case ADD_IMG:
-            newState = { ...state };
+            newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot } };
             newState.singleSpot = action.payload.spotData;
             newState.singleSpot.spotImages.push(action.payload.imgData);
             // console.log("NEWSTATE AFTER ADD_SPOT ACTION:", newState);
             return newState;
         case EDIT_SPOT:
-            newState = { ...state };
+            newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot } };
             const updatedSpot = { ...action.payload };
             newState.allSpots[action.payload.id] = updatedSpot;
             // console.log("NEWSTATE AFTER ADD_SPOT ACTION:", newState);
             return newState;
         case REMOVE_SPOT:
-            newState = { ...state, allSpots: { ...state.allSpots } };
+            newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot } };
             delete newState.allSpots[action.payload];
             newState = { ...newState };
             // console.log("NEWSTATE AFTER REMOVE_SPOT ACTION:", newState);
