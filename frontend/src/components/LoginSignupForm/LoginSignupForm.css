@@ -33,12 +33,19 @@
 
 .container--login-signup-fields,
 .container--login-signup-field,
-.login-field {
+.login-signup-field {
     border-radius: 7px;
 }
 
-#container--login-field-credenital {
+#container--login-field-credential,
+#container--signup-field-first-name,
+#container--signup-field-last-name,
+#container--signup-field-email,
+#container--signup-field-username,
+#container--signup-field-password {
     border-bottom: 1px solid #DDD;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .login-signup-field {
