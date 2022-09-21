@@ -19,7 +19,7 @@ const loadSpotBookings = (bookings) => ({
     payload: bookings
 });
 
-const addOne = (bookingData) => ({
+const add = (bookingData) => ({
     type: ADD_BOOKING,
     payload: bookingData
 });
@@ -52,7 +52,7 @@ export const getSpotBookings = (spotId) => async dispatch => {
 
     if (response.ok) {
         const spotBookings = await response.json();
-        console.log("JSONIFIED SPOT BOOKINGS DATA AFTER THUNK:", spotBookings);
+        // console.log("JSONIFIED SPOT BOOKINGS DATA AFTER THUNK:", spotBookings);
         dispatch(loadSpotBookings(spotBookings));
         return spotBookings;
     }
@@ -68,7 +68,7 @@ export const createBooking = (spotId, bookingData) => async dispatch => {
     if (response.ok) {
         const newBooking = await response.json();
         // console.log("JSONIFIED NEW-SPOT DATA AFTER THUNK:", newBooking);
-        dispatch(addOne(newBooking));
+        dispatch(add(newBooking));
         return newBooking;
     }
 }
@@ -118,16 +118,16 @@ const bookingsReducer = (state = initialState, action) => {
             return newState;
         case LOAD_SPOT_BOOKINGS:
             newState = { ...state, user: { ...state.user }, spot: { ...state.spot } };
-            console.log("LOAD_SPOT_BOOKINGS ACTION.PAYLOAD IS:", action.payload);
+            // console.log("LOAD_SPOT_BOOKINGS ACTION.PAYLOAD IS:", action.payload);
             const newSpotBookings = {};
             action.payload.Bookings.forEach(booking => newSpotBookings[booking.id] = booking);
             newState.spot = newSpotBookings;
-            console.log("NEWSTATE AFTER LOAD_SPOT_BOOKINGS ACTION:", newState);
+            // console.log("NEWSTATE AFTER LOAD_SPOT_BOOKINGS ACTION:", newState);
             return newState;
         case ADD_BOOKING:
-            newState = { ...state };
+            newState = { ...state, user: { ...state.user }, spot: { ...state.spot } };
             const newBooking = { ...action.payload };
-            newState.allbookings[action.payload.id] = newBooking;
+            newState.user[action.payload.id] = newBooking;
             // console.log("NEWSTATE AFTER ADD_BOOKING ACTION:", newState);
             return newState;
         // case EDIT_BOOKING:
@@ -137,8 +137,8 @@ const bookingsReducer = (state = initialState, action) => {
         //     // console.log("NEWSTATE AFTER ADD_BOOKING ACTION:", newState);
         //     return newState;
         case REMOVE_BOOKING:
-            newState = { ...state, allbookings: { ...state.allbookings } };
-            delete newState.allbookings[action.payload];
+            newState = { ...state, user: { ...state.user }, spot: { ...state.spot } };
+            delete newState.user[action.payload];
             newState = { ...newState };
             // console.log("NEWSTATE AFTER REMOVE_BOOKING ACTION:", newState);
             return newState;

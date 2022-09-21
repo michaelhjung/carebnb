@@ -166,8 +166,9 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
         const spot = await Spot.findByPk(booking.spotId);
         if (booking.userId === req.user.id || spot.ownerId === req.user.id) {
             const today = new Date(Date.now());
-            const parsedStartDate = new Date(Date.parse(booking.startDate));
-            if (today < parsedStartDate) {
+            const parsedStartDate = new Date(booking.startDate + "T00:00:00");
+            const parsedEndDate = new Date(booking.endDate + "T00:00:00");
+            if (today < parsedStartDate || today > parsedEndDate) {
                 await booking.destroy();
 
                 res.json({

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CreateBookingForm from '../CreateBookingForm';
 
 // THIS COMPONENT IS NESTED IN SPOT DETAILS //
 
@@ -24,6 +25,10 @@ export default function SpotBookings({ spot, user, bookings }) {
 
     return (
         <div className='container--spot-bookings'>
+            {user && (
+                <CreateBookingForm spot={spot} user={user} />
+            )}
+
             <button
                 onClick={handleClick}
                 className='button--show-bookings'>
