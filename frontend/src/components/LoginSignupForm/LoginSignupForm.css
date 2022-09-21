@@ -1,50 +1,53 @@
-.container--login-form {
+.container--login-signup-forms {
     padding: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 570px;
+    height: 680px;
+    border-radius: 15px;
 }
 
-.login-title {
+.title-login-signup {
     align-self: center;
     font-weight: 600;
     border-bottom: 1px solid #DDD;
 }
 
-.login-welcome {
+.welcome-login-signup {
     align-self: flex-start;
     font-size: 1.3rem;
     font-weight: 500;
 }
 
-.form--login {
+.form--login-signup {
     display: flex;
     flex-direction: column;
 }
 
-.container--login-fields {
+.container--login-signup-fields {
     border: 1.5px solid #DDD;
     overflow: hidden;
     margin-bottom: 55px;
 }
 
-.container--login-fields,
-.container--login-field,
+.container--login-signup-fields,
+.container--login-signup-field,
 .login-field {
     border-radius: 7px;
 }
 
-.container--login-field-credenital {
+#container--login-field-credenital {
     border-bottom: 1px solid #DDD;
 }
 
-.login-field {
+.login-signup-field {
     width: 500px;
     padding: 18px;
     border: none;
 }
 
-#login-submit-button {
+.login-signup-submit-button {
     background-color: #e31c5f;
     color: #FFF;
     font-weight: 500;

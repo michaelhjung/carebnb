@@ -27,41 +27,44 @@ function LoginForm({ setShowMenu, closeMenu }) {
     };
 
     return (
-        <div className='container--login-form'>
-            <div className='login-title'>
+        <div className='container--login-signup-forms container--login-form'>
+            <div className='title-login-signup title-login'>
                 Log in
             </div>
 
-            <h1 className='login-welcome'>Welcome to Carebnb</h1>
-            <form onSubmit={handleSubmit} className="form--login">
+            <h1 className='welcome-login-signup welcome-login'>Welcome to Carebnb</h1>
+
+            <form onSubmit={handleSubmit} className="form--login-signup form--login">
                 <ul className="list--errors">
                     {validationErrors.map((error, idx) => (
                         <li key={idx} className='error-li'>{error}</li>
                     ))}
                 </ul>
-                <div className="container--login-fields">
-                    <div className="container--login-field container--login-field-credenital">
+                <div className="container--login-signup-fields container--login-fields">
+                    <div id="container--login-field-credenital" className="container--login-signup-field container--login-field" >
                         <input
                             type="text"
                             value={credential}
                             onChange={(e) => setCredential(e.target.value)}
                             placeholder="Username or Email"
                             required
-                            className="login-field login-field--credential"
+                            className="login-signup-field login-field"
+                            id="login-field--credential"
                         />
                     </div>
-                    <div className="container--login-field container--login-field-password">
+                    <div id="container--login-field-password" className="container--login-signup-field container--login-field">
                         <input
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder="Password"
                             required
-                            className="login-field login-field--password"
+                            className="login-signup-field login-field"
+                            id="login-field--password"
                         />
                     </div>
                 </div>
-                <button type="submit" id='login-submit-button'>Log In</button>
+                <button type="submit" id='login-submit-button' className='login-signup-submit-button'>Log In</button>
             </form>
         </div>
     );
