@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginFormModal from '../LoginFormModal';
 import SignUpButton from "./SignUpButton";
@@ -10,6 +10,7 @@ function ProfileButton() {
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
     const sessionUser = useSelector(state => state.session.user);
+    const history = useHistory();
 
     const openMenu = () => {
         if (showMenu) return;
@@ -28,6 +29,7 @@ function ProfileButton() {
         document.removeEventListener('click', closeMenu);
         dispatch(sessionActions.logout());
         document.addEventListener('click', closeMenu);
+        history.push("/");
     };
 
     return (

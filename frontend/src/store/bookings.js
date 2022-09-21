@@ -1,15 +1,21 @@
 import { csrfFetch } from './csrf';
 
 /* ----------------------------- ACTION TYPES: ----------------------------- */
-const LOAD_ALL = '/bookings/LOAD_ALL';
+const LOAD_USER_BOOKINGS = '/bookings/LOAD_USER_BOOKINGS';
+const LOAD_SPOT_BOOKINGS = '/bookings/LOAD_SPOT_BOOKINGS';
 const ADD_BOOKING = '/bookings/ADD_BOOKING';
 // const EDIT_BOOKING = '/bookings/EDIT_BOOKING';
 const REMOVE_BOOKING = '/bookings/REMOVE_BOOKING';
 
 
 /* ---------------------------- ACTION CREATORS: ---------------------------- */
-const loadAll = (bookings) => ({
-    type: LOAD_ALL,
+const loadUserBookings = (bookings) => ({
+    type: LOAD_USER_BOOKINGS,
+    payload: bookings
+});
+
+const loadSpotBookings = (bookings) => ({
+    type: LOAD_SPOT_BOOKINGS,
     payload: bookings
 });
 
@@ -30,25 +36,25 @@ const removeBooking = (bookingId) => ({
 
 
 /* ------------------------- THUNK ACTION CREATORS: ------------------------- */
-export const getBookings = (spotId) => async dispatch => {
-    const response = await csrfFetch(`/api/spots/${spotId}/bookings`);
-
-    if (response.ok) {
-        const bookings = await response.json();
-        // console.log("JSONIFIED bookings DATA AFTER THUNK:", bookings);
-        dispatch(loadAll(bookings));
-        return bookings;
-    }
-}
-
 export const getUserBookings = () => async dispatch => {
     const response = await csrfFetch(`/api/bookings/current`);
 
     if (response.ok) {
         const userBookings = await response.json();
         // console.log("JSONIFIED bookings DATA AFTER THUNK:", userBookings);
-        dispatch(loadAll(userBookings));
+        dispatch(loadUserBookings(userBookings));
         return userBookings;
+    }
+}
+
+export const getSpotBookings = (spotId) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}/bookings`);
+
+    if (response.ok) {
+        const spotBookings = await response.json();
+        console.log("JSONIFIED SPOT BOOKINGS DATA AFTER THUNK:", spotBookings);
+        dispatch(loadSpotBookings(spotBookings));
+        return spotBookings;
     }
 }
 
@@ -102,13 +108,21 @@ const initialState = { user: null, spot: null };
 const bookingsReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
-        case LOAD_ALL:
+        case LOAD_USER_BOOKINGS:
             newState = { ...state, user: { ...state.user }, spot: { ...state.spot } };
-            // console.log("LOAD_ALL ACTION.PAYLOAD IS:", action.payload);
-            const newAllbookings = {};
-            action.payload.Bookings.forEach(booking => newAllbookings[booking.id] = booking);
-            newState.user = newAllbookings;
-            // console.log("NEWSTATE AFTER LOAD_ALL ACTION:", newState);
+            // console.log("LOAD_USER_BOOKINGS ACTION.PAYLOAD IS:", action.payload);
+            const newUserBookings = {};
+            action.payload.Bookings.forEach(booking => newUserBookings[booking.id] = booking);
+            newState.user = newUserBookings;
+            // console.log("NEWSTATE AFTER LOAD_USER_BOOKINGS ACTION:", newState);
+            return newState;
+        case LOAD_SPOT_BOOKINGS:
+            newState = { ...state, user: { ...state.user }, spot: { ...state.spot } };
+            console.log("LOAD_SPOT_BOOKINGS ACTION.PAYLOAD IS:", action.payload);
+            const newSpotBookings = {};
+            action.payload.Bookings.forEach(booking => newSpotBookings[booking.id] = booking);
+            newState.spot = newSpotBookings;
+            console.log("NEWSTATE AFTER LOAD_SPOT_BOOKINGS ACTION:", newState);
             return newState;
         case ADD_BOOKING:
             newState = { ...state };
