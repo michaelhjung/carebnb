@@ -9,18 +9,15 @@ import './SpotDetails.css';
 export default function SpotDetails() {
     const dispatch = useDispatch();
     const { spotId } = useParams();
-    console.log("SPOT ID", spotId);
     const sessionUser = useSelector(state => state.session.user);
     const spot = useSelector(state => state.spots.singleSpot);
     const spotBookings = useSelector(state => state.bookings.spot);
     useEffect(() => {
         dispatch(spotsActions.getSingleSpot(spotId));
         dispatch(bookingsActions.getSpotBookings(spotId));
-        console.log("USE EFFECT RUNNING");
     }, [dispatch, spotId, sessionUser]);
 
-    console.log("SPOTTTTTT", spot);
-    if (!spot) return null;
+    if (Object.entries(spot).length === 0) return null;
 
     return (
         <div className='spot-details--container'>
