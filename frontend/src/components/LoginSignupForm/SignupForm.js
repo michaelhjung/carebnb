@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 
-function SignupForm() {
+function SignupForm({ setShowMenu, closeMenu }) {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
     const [firstName, setFirstName] = useState("");
@@ -12,21 +12,29 @@ function SignupForm() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [errors, setErrors] = useState([]);
+    const [validationErrors, setValidationErrors] = useState([]);
 
     if (sessionUser) return <Redirect to="/" />;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (password === confirmPassword) {
-            setErrors([]);
-            return dispatch(sessionActions.signup({ firstName, lastName, email, username, password }))
-                .catch(async (res) => {
-                    const data = await res.json();
-                    if (data && data.errors) setErrors(data.errors);
-                });
+
+            try {
+                const response = await dispatch(sessionActions.signup({ firstName, lastName, email, username, password }));
+                if (response) {
+                    setShowMenu(false);
+                    setValidationErrors([]);
+                }
+            } catch (res) {
+                const data = await res.json();
+                const errors = [];
+                if (data) errors.push(data.message);
+
+                return setValidationErrors(errors);
+            }
         }
-        return setErrors(['Confirm Password field must be the same as the Password field']);
+        return setValidationErrors(['Confirm Password field must be the same as the Password field']);
     };
 
     return (
@@ -39,7 +47,7 @@ function SignupForm() {
 
             <form onSubmit={handleSubmit} className="form--login-signup form--signup">
                 <ul className="list--errors">
-                    {errors.map((error, idx) => <li key={idx} className="error-li">{error}</li>)}
+                    {validationErrors.map((error, idx) => <li key={idx} className="error-li">{error}</li>)}
                 </ul>
                 <div className="container--login-signup-fields container--signup-fields">
                 <div id="container--signup-field-first-name" className="container--login-signup-field container--signup-field" >
