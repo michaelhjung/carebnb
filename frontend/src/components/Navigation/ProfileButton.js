@@ -40,19 +40,38 @@ function ProfileButton() {
             </button>
             {sessionUser && showMenu && (
                 <ul className="list--profile-dropdown">
-                    <li className="button--dropdown-item button--dropdown-item-user-data">Welcome, {sessionUser.username}</li>
+                    <li
+                        className="button--dropdown-item button--dropdown-item-user-data"
+                    >
+                        logged in as: <span id='session-username'>{sessionUser.username}</span>
+                    </li>
                     <li>
                         <NavLink to={`/user/${sessionUser.id}/spots`}>
-                            <button id="button--user-spots" className="button--dropdown-item button--dropdown-item-link">My Spots</button>
+                            <button
+                                id="button--user-spots"
+                                className="button--dropdown-item button--dropdown-item-link"
+                            >
+                                My Spots
+                            </button>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to={`/user/${sessionUser.id}/bookings`}>
-                            <button id="button--user-bookings" className="button--dropdown-item button--dropdown-item-link">My Bookings</button>
+                            <button
+                                id="button--user-bookings"
+                                className="button--dropdown-item button--dropdown-item-link"
+                            >
+                                My Bookings
+                            </button>
                         </NavLink>
                     </li>
                     <li>
-                        <button onClick={logout} className="button--dropdown-item button--dropdown-item-link">Log Out</button>
+                        <button
+                            onClick={logout}
+                            className="button--dropdown-item button--dropdown-item-link"
+                        >
+                            Log Out
+                        </button>
                     </li>
                 </ul>
             )}

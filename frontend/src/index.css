@@ -8,10 +8,89 @@
 }
 
 #container--page {
-    padding: 0px 180px;
+    padding: 20px 235px;
 }
+
+/*****************************************************************************/
+/* STYLES FOR ALL FORMS */
 
 .error-li {
     color: #FF385C;
     font-weight: 600;
+}
+
+.container--form {
+    margin-top: 50px;
+}
+
+.container--form,
+.form,
+.container--form-fields-only {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container--form-fields-only {
+    margin: 20px 0px 30px;
+    width: 700px;
+}
+
+.container--form-field,
+.form-field {
+    /* border-radius: 7px; */
+    border-right: 1.5px solid #DDD;
+    border-left: 1.5px solid #DDD;
+}
+
+#container--form-field-spot--name,
+#container--form-field-spot--address,
+#container--form-field-spot--city,
+#container--form-field-spot--state,
+#container--form-field-spot--country,
+#container--form-field-spot--lat,
+#container--form-field-spot--lng,
+#container--form-field-spot--desc,
+#container--form-field-spot--price {
+    border-bottom: 1px solid #DDD;
+}
+
+#container--form-field-spot--name,
+#form-field--name {
+    border-top: 1px solid #DDD;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+#container--form-field-spot--image,
+#form-field--image {
+    border-bottom: 1px solid #DDD;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+#form-field--desc {
+    overflow-y: scroll;
+    resize: none;
+}
+
+.form-field {
+    width: 500px;
+    padding: 18px;
+    border: none;
+}
+
+.submit-button {
+    background-color: #e31c5f;
+    color: #FFF;
+    font-weight: 500;
+    padding: 15px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #D31c5f;
+    opacity: 0.9;
 }
