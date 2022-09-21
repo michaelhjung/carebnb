@@ -17,7 +17,7 @@ export default function SpotDetails() {
         dispatch(bookingsActions.getSpotBookings(spotId));
     }, [dispatch, spotId, sessionUser]);
 
-    if (!spot) return null;
+    if (Object.entries(spot).length === 0) return null;
 
     return (
         <div className='spot-details--container'>

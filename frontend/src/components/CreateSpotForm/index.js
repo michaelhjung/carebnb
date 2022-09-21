@@ -21,7 +21,7 @@ export default function CreateSpotForm() {
 
     if (!sessionUser) {
         alert("You must be logged in to create a spot!");
-        history.replace("/");
+        history.push("/");
     }
 
     useEffect(() => {

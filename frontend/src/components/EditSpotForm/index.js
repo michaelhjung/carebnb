@@ -40,6 +40,25 @@ export default function EditSpotForm() {
     const [price, setPrice] = useState("");
     const [validationErrors, setValidationErrors] = useState([]);
 
+    useEffect(() => {
+        const errors = [];
+
+        if (Number.isNaN(Number(lat)) ||
+            (Number(lat)) > 90 ||
+            (Number(lat)) < -90)
+            errors.push("Latitude must be a number between -90.0 and 90.0");
+
+        if (Number.isNaN(Number(lng)) ||
+            (Number(lng)) > 180 ||
+            (Number(lng)) < -180)
+            errors.push("Longitude must be a number between -180.0 and 180.0");
+
+        if (Number.isNaN(Number(price)) && Number(price) !== 0 && price.length !== 0) errors.push("Please enter a valid price");
+        if ((Number(price)) < 0 && price.length !== 0) errors.push("The price cannot be negative... but if you're feeling generous, you can make it free :)");
+
+        setValidationErrors(errors);
+    }, [lat, lng, price]);
+
     if (!sessionUser) return <Redirect to="/" />;
 
     const handleSubmit = async (e) => {
