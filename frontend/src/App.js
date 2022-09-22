@@ -59,6 +59,19 @@ function App() {
                     </Switch>
                 </main>
             )}
+            <footer>
+                <div id='footer-left'>An Airbnb clone by Michael Jung</div>
+                <div id='footer-right'>
+                    <div id='footer-imgs'>
+                        <a id='linked-in' className='footer-links' href='https://www.linkedin.com/in/michael-h-jung/' target='_blank' rel='noreferrer'>
+                            <i className="fa-brands fa-linkedin fa-xl" />
+                        </a>
+                        <a id='github' className='footer-links' href='https://github.com/michaelhjung' target='_blank' rel='noreferrer'>
+                            <i className="fa-brands fa-github fa-xl" />
+                        </a>
+                    </div>
+                </div>
+            </footer>
         </div>
     );
 }
