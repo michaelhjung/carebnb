@@ -6,6 +6,8 @@ import SpotCard from '../SpotsBrowser/SpotCard';
 import AddSpotImageButton from './AddSpotImageButton';
 import EditSpotButton from './EditSpotButton';
 import DeleteSpotButton from './DeleteSpotButton';
+import './UserSpots.css';
+// NOTE: CSS also being inherited from SpotsBrowser.css
 
 export default function UserSpots() {
     const dispatch = useDispatch();
@@ -21,13 +23,11 @@ export default function UserSpots() {
     return (
         <>
             <h1>Welcome, {sessionUser.firstName}. Here are your spots:</h1>
-            <main className='container--spots'>
+            <main id='container--user-spots' className='container--spots'>
                 {Object.values(userSpots).map(spot => (
-                    <div key={spot.id} className="spot-card">
-                        <NavLink to={`/spots/${spot.id}`} className="link--spot">
-                            <SpotCard spot={spot} />
-                        </NavLink>
-                        <div className='spot-card--buttons'>
+                    <div key={spot.id} className="spot-card user-spot-card">
+                        <SpotCard spot={spot} />
+                        <div className='user-spot-card--buttons-container'>
                             <NavLink to={`/user/${sessionUser.id}/spots/${spot.id}/add-image`}>
                                 <AddSpotImageButton />
                             </NavLink>

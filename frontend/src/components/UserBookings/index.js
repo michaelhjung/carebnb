@@ -23,22 +23,26 @@ export default function UserBookings() {
             <main className='container--bookings'>
                 {Object.values(userBookings).map(booking => booking.Spot && (
                     <div key={booking.id} className='booking-card'>
-                        <div className='booking-card--spot-card'>
-                            <div className='booking-card--info-name'>{booking.Spot.name}</div>
-                            <div className='booking-card--info-address'>{booking.Spot.address}, {booking.Spot.city}, {booking.Spot.country}</div>
-                            <div className='booking-card--info-price'>${booking.Spot.price}/night</div>
-
-                            <NavLink to={`/spots/${booking.spotId}`}>
-                                <img src={booking.Spot.previewImage} alt={booking.Spot.name} className='booking-card--spot-card-img' />
-                            </NavLink>
-
+                        <NavLink to={`/spots/${booking.spotId}`}>
+                            <img src={booking.Spot.previewImage} alt={booking.Spot.name} className='booking-card--spot-card-img' />
+                        </NavLink>
+                        <div id='booking-card--info-container'>
+                            <div id='booking-card--info-name' className='booking-card--info'>{booking.Spot.name}</div>
+                            <div id='booking-card--info-address' className='booking-card--info'>{booking.Spot.address}, {booking.Spot.city}, {booking.Spot.country}</div>
+                            <div id='booking-card--info-price-container' className='booking-card--info'>
+                                <span id='booking-card--info-price'>
+                                ${booking.Spot.price}
+                                </span>
+                                {" "}
+                                night
+                            </div>
+                            <div className='booking-card--booking-info'>
+                                <div>Check In: <span className='booking-dates'>{booking.startDate}</span></div>
+                                <div>Check Out: <span className='booking-dates'>{booking.endDate}</span></div>
+                            </div>
                         </div>
-                        <div className='booking-card--booking-info'>
-                            <div>START DATE: {booking.startDate}</div>
-                            <div>END DATE: {booking.endDate}</div>
-                        </div>
+
                         <div className='booking-card--buttons-container'>
-
 
                             <DeleteBookingButton bookingId={booking.id} />
                         </div>

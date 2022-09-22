@@ -12,7 +12,7 @@ export default function DeleteSpotButton({ user, spot }) {
     return (
         <button onClick={() => handleClick()}
             id='spot-card--button-delete'
-            className='spot-card--button'>
+            className='user-spot-card--button'>
                 Delete Spot
         </button>
     )

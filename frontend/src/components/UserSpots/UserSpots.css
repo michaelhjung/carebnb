@@ -1,0 +1,48 @@
+
+
+#container--user-spots {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 50px;
+    font-size: .9rem;
+}
+
+.user-spot-card {
+    width: 300px;
+}
+
+.user-spot-card--button {
+    background-color: #e31c5f;
+    color: #FFF;
+    font-weight: 600;
+    border-radius: 7px;
+    border: 1px solid #DDD;
+    padding: 10px;
+}
+
+.user-spot-card--button:hover {
+    background-color: #D31c5f;
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+.user-spot-card--info {
+    margin: 8px 0px 20px;
+    padding: 3px;
+}
+
+.spot-card--info-row-1 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+#spot-card--info-price {
+    font-weight: 500;
+}
+
+.user-spot-card--buttons-container {
+    display: flex;
+    justify-content: space-around;
+}
