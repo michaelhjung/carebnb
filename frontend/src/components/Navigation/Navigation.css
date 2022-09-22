@@ -78,6 +78,23 @@ footer {
     background-color: #FFF;
     border: 1px solid #DDD;
     border-radius: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#profile-icon-user,
+#profile-icon-hamburger {
+    position: absolute;
+    top: 15px
+}
+
+#profile-icon-hamburger {
+    left: 8px;
+}
+#profile-icon-user {
+    left: 35px;
 }
 
 .button--profile:hover {

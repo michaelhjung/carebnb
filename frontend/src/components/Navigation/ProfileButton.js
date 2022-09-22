@@ -35,8 +35,8 @@ function ProfileButton() {
     return (
         <div className='container--profile'>
             <button onClick={openMenu} className="button button--profile">
-                <i className="fa-solid fa-bars icon--profile" />
-                <i className="fas fa-user-circle icon--profile" />
+                <i id='profile-icon-hamburger' className="fa-solid fa-bars icon--profile fa-lg" />
+                <i id='profile-icon-user' className="fas fa-user-circle icon--profile fa-2xl" />
             </button>
             {sessionUser && showMenu && (
                 <ul className="list--profile-dropdown">
