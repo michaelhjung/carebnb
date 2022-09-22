@@ -5,6 +5,9 @@
 
 header {
     border-bottom: 1px solid #DDD;
+    position: sticky;
+    top: 0;
+    background-color: #FFF;
 }
 
 nav {
@@ -24,6 +27,31 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+footer {
+    border-top: 1px solid #DDD;
+    background-color: #FFF;
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13.5px 80px;
+    width: 100%;
+    font-size: .85rem;
+}
+
+.footer-links {
+    margin: 0px 20px;
+}
+
+.fa-linkedin {
+    color: #0077B5;
+}
+
+.fa-github {
+    color: #171515;
 }
 
 .navbar--right {
