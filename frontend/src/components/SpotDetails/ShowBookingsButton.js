@@ -25,18 +25,24 @@ export default function ShowBookingsButton({ spot, user, bookings }) {
         <section>
             <button
                 onClick={handleClick}
-                className='button--show-bookings'>
-                    {bookingsButtonText}
+                id='button--show-bookings'
+                className='submit-button'
+            >
+                {bookingsButtonText}
             </button>
 
             {user && showBookings && (
                 <div className='spot-bookings--details'>
-                    <div>The following dates are booked for this spot:</div>
+                    <div id='booked-dates-title'>The following dates are booked for this spot:</div>
                     {Object.values(bookings).map(booking => (
                         <div key={booking.id} className='container--booking-card'>
-                            {booking.startDate} to {booking.endDate}
+                            <span className='booked-date'>{booking.startDate}</span> to <span className='booked-date'>{booking.endDate}</span>
                             {isUserOwner() && (
-                                <span> · booked by: {`${booking.User.firstName} ${booking.User.lastName}`}</span>
+                                <span>
+                                    {" "}
+                                     · booked by
+                                     <span className='booker-name'>{`${booking.User.firstName} ${booking.User.lastName}`}</span>
+                                </span>
                             )}
                         </div>
                     ))}

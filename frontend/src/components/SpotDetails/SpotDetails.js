@@ -52,6 +52,13 @@ export default function SpotDetails() {
                             <h2 id='host-info'>Home hosted by {spot.Owner.firstName}</h2>
                         </div>
 
+                        <div id='air-cover'>
+                            <h2>
+                                <span id='text-air'>air</span><span id='text-cover'>cover</span>
+                            </h2>
+                            <p>Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.</p>
+                        </div>
+
                         <div className='spot-details--description-container'>
                             <p className='spot-details--description'>{spot.description}</p>
                         </div>
