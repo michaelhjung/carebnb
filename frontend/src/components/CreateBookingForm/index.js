@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import * as bookingsActions from '../../store/bookings';
+import './CreateBookingForm.css';
 
 // THIS COMPONENT IS NESTED IN SPOT BOOKINGS //
 
@@ -87,7 +88,7 @@ export default function CreateBookingForm({ spot, user }) {
                     required
                 />
             </label>
-            <button type="submit" disabled={validationErrors.length}>Submit</button>
+            <button type="submit" disabled={validationErrors.length}>Reserve</button>
         </form>
     );
 }

@@ -5,7 +5,6 @@
 
 header {
     border-bottom: 1px solid #DDD;
-    width: 100%;
 }
 
 nav {
@@ -14,12 +13,17 @@ nav {
     align-items: center;
     list-style: none;
     padding: 20px 80px 18px;
+    width: 100vw;
     max-width: 1600px;
 }
 
 #page-content {
     padding: 5px 80px 20px;
+    width: 100vw;
     max-width: 1600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .navbar--right {
@@ -74,14 +78,18 @@ nav {
     width: 16px;
 }
 
+.container--profile {
+    position: relative;
+}
+
 .list--profile-dropdown {
     display: flex;
     flex-direction: column;
     position: absolute;
     align-items: flex-start;
     background-color: #FFF;
-    top: 58px;
-    right: 80px;
+    top: 38px;
+    right: 0px;
     box-shadow: 2px -2px 2px 0.5px #DDD;
     border-radius: 15px;
     padding: 10px 0px;

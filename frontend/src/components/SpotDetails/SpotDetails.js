@@ -17,24 +17,25 @@ export default function SpotDetails() {
         dispatch(bookingsActions.getSpotBookings(spotId));
     }, [dispatch, spotId, sessionUser]);
 
-    console.log("SPOT", spot);
-
     if (!spot || !Object.entries(spot).length) return null;
 
     return (
         <main id='spot-details--page-container'>
-            <div className='spot-details--container'>
+            <div id='spot-details--container'>
                 <h1 id='spot-details--title-main'>{spot.name}</h1>
 
                 <div className='spot-details--sub-title-reviews'>
-                    <span className='spot-details--sub-title-rating'>
+                    <span id='spot-details--sub-title-rating'>
                         <i className="fa-solid fa-star icon--star" />
-                        {spot.avgStarRating}
+                        {" "}
+                        {spot.avgStarRating.toFixed(2)}
                     </span>
                     <span className='spot-details--sub-title-dot'> · </span>
-                    <span className='spot-details--sub-title-numReviews'>{spot.numReviews} reviews</span>
+                    <span id='spot-details--sub-title-numReviews'>{spot.numReviews} reviews</span>
                     <span className='spot-details--sub-title-dot'> · </span>
-                    <span className='spot-details--sub-title-owner'>{spot.city}, {spot.state}, {spot.country}</span>
+                    {/* <span id='spot-details--sub-title-owner'>{spot.Owner.firstName}</span>
+                    <span className='spot-details--sub-title-dot'> · </span> */}
+                    <span id='spot-details--sub-title-location'>{spot.city}, {spot.state}, {spot.country}</span>
                 </div>
 
                 <div className='spot-details--imgs-container'>
@@ -43,20 +44,25 @@ export default function SpotDetails() {
                     ))}
                 </div>
 
-                <div className='spot-details--title-host-info'>
-                    <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
-                </div>
 
-                <div className='spot-details--description-container'>
-                    <p className='spot-details--description'>{spot.description}</p>
-                </div>
+                <div id='container--spot-details-booking'>
+                    <div id='spot-details--info-left'>
+                        <div className='spot-details--title-host-info'>
+                            <h2 id='host-info'>Home hosted by {spot.Owner.firstName}</h2>
+                        </div>
 
-                <div className='spot-bookings--container'>
-                        <SpotBookings
-                            spot={spot}
-                            user={sessionUser}
-                            bookings={spotBookings}
-                        />
+                        <div className='spot-details--description-container'>
+                            <p className='spot-details--description'>{spot.description}</p>
+                        </div>
+                    </div>
+
+                    <div id='spot-details--info-right' className='spot-bookings--container'>
+                            <SpotBookings
+                                spot={spot}
+                                user={sessionUser}
+                                bookings={spotBookings}
+                            />
+                    </div>
                 </div>
             </div>
         </main>
