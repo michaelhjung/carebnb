@@ -11,6 +11,10 @@
     padding: 20px 235px;
 }
 
+h1 {
+    text-align: center;
+}
+
 /*****************************************************************************/
 /* STYLES FOR ALL FORMS */
 
@@ -74,6 +78,13 @@
     resize: none;
 }
 
+#container--form-field-add-img--name,
+#form-field--add-img-url {
+    border-top: 1px solid #DDD;
+    border-bottom: 1px solid #DDD;
+    border-radius: 7px;
+}
+
 .form-field {
     width: 500px;
     padding: 18px;
@@ -93,4 +104,13 @@
 .submit-button:hover {
     background-color: #D31c5f;
     opacity: 0.9;
+}
+
+
+
+#add-img-spot-thumbnail {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 15px;
 }

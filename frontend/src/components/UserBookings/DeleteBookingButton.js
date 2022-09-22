@@ -16,6 +16,6 @@ export default function DeleteBookingButton({ bookingId }) {
     }
 
     return (
-        <button onClick={handleDeleteClick}>DELETE Booking</button>
+        <button onClick={handleDeleteClick} id="button--delete-booking">DELETE Booking</button>
     )
 }
