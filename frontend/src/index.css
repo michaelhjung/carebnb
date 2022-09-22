@@ -7,8 +7,10 @@
     font-weight: 300;
 }
 
-#container--page {
-    padding: 20px 235px;
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
 }
 
 h1 {

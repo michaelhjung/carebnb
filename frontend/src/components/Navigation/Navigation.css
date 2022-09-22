@@ -4,12 +4,22 @@
 }
 
 header {
+    border-bottom: 1px solid #DDD;
+    width: 100%;
+}
+
+nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     list-style: none;
-    border-bottom: 1px solid #DDD;
-    padding: 10px 0px 20px;
+    padding: 20px 80px 18px;
+    max-width: 1600px;
+}
+
+#page-content {
+    padding: 5px 80px 20px;
+    max-width: 1600px;
 }
 
 .navbar--right {
@@ -70,8 +80,8 @@ header {
     position: absolute;
     align-items: flex-start;
     background-color: #FFF;
-    top: 75px;
-    right: 242px;
+    top: 58px;
+    right: 80px;
     box-shadow: 2px -2px 2px 0.5px #DDD;
     border-radius: 15px;
     padding: 10px 0px;

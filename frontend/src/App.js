@@ -23,39 +23,41 @@ function App() {
         <div id="container--page">
             <Navigation isLoaded={isLoaded} />
             {isLoaded && (
-                <Switch>
-                    <Route exact path="/">
-                        <SpotsBrowser />
-                    </Route>
+                <main id='page-content'>
+                    <Switch>
+                        <Route exact path="/">
+                            <SpotsBrowser />
+                        </Route>
 
-                    <Route exact path="/spots/:spotId">
-                        <SpotDetails />
-                    </Route>
+                        <Route exact path="/spots/:spotId">
+                            <SpotDetails />
+                        </Route>
 
-                    <Route path="/create-spot">
-                        <CreateSpotForm />
-                    </Route>
+                        <Route path="/create-spot">
+                            <CreateSpotForm />
+                        </Route>
 
-                    <Route exact path="/user/:userId/spots/:spotId/add-image">
-                        <AddSpotImageForm />
-                    </Route>
+                        <Route exact path="/user/:userId/spots/:spotId/add-image">
+                            <AddSpotImageForm />
+                        </Route>
 
-                    <Route exact path='/user/:userId/spots/:spotId/edit'>
-                        <EditSpotForm />
-                    </Route>
+                        <Route exact path='/user/:userId/spots/:spotId/edit'>
+                            <EditSpotForm />
+                        </Route>
 
-                    <Route exact path="/user/:userId/spots">
-                        <UserSpots />
-                    </Route>
+                        <Route exact path="/user/:userId/spots">
+                            <UserSpots />
+                        </Route>
 
-                    <Route exact path="/user/:userId/bookings">
-                        <UserBookings />
-                    </Route>
+                        <Route exact path="/user/:userId/bookings">
+                            <UserBookings />
+                        </Route>
 
-                    <Route>
-                        <PageNotFound />
-                    </Route>
-                </Switch>
+                        <Route>
+                            <PageNotFound />
+                        </Route>
+                    </Switch>
+                </main>
             )}
         </div>
     );
