@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as spotsActions from '../../store/spots';
 import * as bookingsActions from '../../store/bookings';
-import SpotBookings from '../SpotBookings';
+import CreateBookingForm from '../CreateBookingForm';
+import ShowBookingsButton from './ShowBookingsButton';
 import './SpotDetails.css';
 
 export default function SpotDetails() {
@@ -28,7 +29,7 @@ export default function SpotDetails() {
                     <span id='spot-details--sub-title-rating'>
                         <i className="fa-solid fa-star icon--star" />
                         {" "}
-                        {(spot.avgStarRating) ? Number(spot.avgStarRating).toFixed(2) : 'New'}
+                        {(spot.avgStarRating) ? Number(spot.avgStarRating).toFixed(1) : 'New'}
                     </span>
                     <span className='spot-details--sub-title-dot'> · </span>
                     <span id='spot-details--sub-title-numReviews'>{spot.numReviews} reviews</span>
@@ -54,10 +55,17 @@ export default function SpotDetails() {
                         <div className='spot-details--description-container'>
                             <p className='spot-details--description'>{spot.description}</p>
                         </div>
+                        <div>
+                            <ShowBookingsButton
+                                spot={spot}
+                                user={sessionUser}
+                                bookings={spotBookings}
+                            />
+                        </div>
                     </div>
 
                     <div id='spot-details--info-right' className='spot-bookings--container'>
-                            <SpotBookings
+                            <CreateBookingForm
                                 spot={spot}
                                 user={sessionUser}
                                 bookings={spotBookings}

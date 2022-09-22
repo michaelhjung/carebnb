@@ -1,1 +1,70 @@
 /* STYLING FOR BOOKING FORM */
+/* NOTE: SOME STYLES ARE INHERITED FROM index.css */
+#container--spot-bookings {
+    border-radius: 15px;
+    box-shadow: 0px 0px 7px 0px #CCC;
+    padding: 25px 20px;
+}
+
+#form--create-booking {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    font-size: .9rem;
+}
+
+#booking-form-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#booking-form-price {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-right: 2px;
+}
+
+#check-in-out-container {
+    width: 100%;
+    border: 1px solid #CCC;
+    border-radius: 15px;
+    display: flex;
+    margin: 20px 0px 15px;
+}
+
+#check-in-container,
+#check-out-container {
+    width: 50%;
+    padding: 10px;
+}
+
+#check-in-container {
+    background-color: #FFF;
+    border-right: 1px solid #CCC;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+#check-out-container {
+    background-color: #FFF;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+#form-field--check-in {
+    width: 100%;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+#form-field--check-out {
+    width: 100%;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+
+#booking-button {
+    width: 100%;
+}

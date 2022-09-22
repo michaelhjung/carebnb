@@ -63,32 +63,58 @@ export default function CreateBookingForm({ spot, user }) {
         }
     };
 
+
     return (
-        <form onSubmit={handleSubmit} className="form--create-booking">
-            {validationErrors.length > 0 && (
-                <ul className="list--errors">
-                    {validationErrors.map((error) => <li key={error} className="error-li">{error}</li>)}
-                </ul>
-            )}
-            <label>
-                Check In:
-                <input
-                    type="date"
-                    value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Check Out:
-                <input
-                    type="date"
-                    value={endDate}
-                    onChange={(e) => setEndDate(e.target.value)}
-                    required
-                />
-            </label>
-            <button type="submit" disabled={validationErrors.length}>Reserve</button>
-        </form>
+        <div id='container--spot-bookings'>
+            <form onSubmit={handleSubmit} className="form" id="form--create-booking">
+                {validationErrors.length > 0 && (
+                    <ul className="list--errors">
+                        {validationErrors.map((error) => <li key={error} className="error-li">{error}</li>)}
+                    </ul>
+                )}
+                <div id='booking-form-top'>
+                    <div id='booking-form-top-left'>
+                        <span id='booking-form-price'>${spot.price}</span>
+                        {" "}
+                        <span>night</span>
+                    </div>
+                    <div id='booking-form-top-right'>
+                        <span id='booking-form-stars'>
+                            <i className="fa-solid fa-star icon--star fa-xs" />
+                            {" "}
+                            {(spot.avgStarRating) ? Number(spot.avgStarRating).toFixed(1) : 'New'}
+                        </span>
+                        <span className='booking-form-dot'> · </span>
+                        <span id='booking-form-reviews'>{spot.numReviews} reviews</span>
+
+                    </div>
+                </div>
+                <div id='check-in-out-container'>
+                    <div id='check-in-container'>
+                        Check In:
+                        <input
+                            type="date"
+                            value={startDate}
+                            onChange={(e) => setStartDate(e.target.value)}
+                            required
+                            className='form-field'
+                            id='form-field--check-in'
+                        />
+                    </div>
+                    <div id='check-out-container'>
+                        Check Out:
+                        <input
+                            type="date"
+                            value={endDate}
+                            onChange={(e) => setEndDate(e.target.value)}
+                            required
+                            className='form-field'
+                            id='form-field--check-out'
+                        />
+                    </div>
+                </div>
+                <button type="submit" id='booking-button' className='submit-button' disabled={validationErrors.length}>Reserve</button>
+            </form>
+        </div>
     );
 }

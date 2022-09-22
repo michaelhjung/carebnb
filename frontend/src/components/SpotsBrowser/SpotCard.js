@@ -17,7 +17,7 @@ export default function SpotCard({ spot }) {
                     <div className='spot-card--info-avgRating'>
                         <i className="fa-solid fa-star icon--star" />
                         {" "}
-                        {spot.avgRating && (spot.avgRating) ? Number(spot.avgRating).toFixed(2) : 'New'}
+                        {spot.avgRating && (spot.avgRating) ? Number(spot.avgRating).toFixed(1) : 'New'}
                     </div>
                 </div>
                 <div className='spot-card--info-row-2 spot-card--info-price-container'>

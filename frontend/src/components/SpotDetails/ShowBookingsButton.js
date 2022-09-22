@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import CreateBookingForm from '../CreateBookingForm';
 
 // THIS COMPONENT IS NESTED IN SPOT DETAILS //
 
-export default function SpotBookings({ spot, user, bookings }) {
-
+export default function ShowBookingsButton({ spot, user, bookings }) {
     const [showBookings, setShowBookings] = useState(false);
     const [bookingsButtonText, setBookingsButtonText] = useState("See Bookings for This Spot!");
 
@@ -24,11 +22,7 @@ export default function SpotBookings({ spot, user, bookings }) {
     const isUserOwner = () => (user.id === spot.ownerId) ? true : false;
 
     return (
-        <div className='container--spot-bookings'>
-            {user && (
-                <CreateBookingForm spot={spot} user={user} />
-            )}
-
+        <section>
             <button
                 onClick={handleClick}
                 className='button--show-bookings'>
@@ -48,6 +42,6 @@ export default function SpotBookings({ spot, user, bookings }) {
                     ))}
                 </div>
             )}
-        </div>
+        </section>
     )
 }
