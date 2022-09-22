@@ -34,8 +34,6 @@ export default function SpotDetails() {
                     <span className='spot-details--sub-title-dot'> · </span>
                     <span id='spot-details--sub-title-numReviews'>{spot.numReviews} reviews</span>
                     <span className='spot-details--sub-title-dot'> · </span>
-                    {/* <span id='spot-details--sub-title-owner'>{spot.Owner.firstName}</span>
-                    <span className='spot-details--sub-title-dot'> · </span> */}
                     <span id='spot-details--sub-title-location'>{spot.city}, {spot.state}, {spot.country}</span>
                 </div>
 
