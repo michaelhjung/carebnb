@@ -9,8 +9,13 @@
 
 body {
     margin: 0;
+    padding: 0;
+}
+
+#root {
     display: flex;
     justify-content: center;
+    width: 100%;
 }
 
 h1 {
@@ -20,13 +25,19 @@ h1 {
 /*****************************************************************************/
 /* STYLES FOR ALL FORMS */
 
+.list--errors {
+    padding: 0;
+}
+
 .error-li {
     color: #FF385C;
     font-weight: 600;
+    list-style: none;
+    margin: 5px 0px;
 }
 
 .container--form {
-    margin-top: 50px;
+    margin-top: 0px;
 }
 
 .container--form,
