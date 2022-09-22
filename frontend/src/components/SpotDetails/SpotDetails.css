@@ -1,6 +1,10 @@
 /*****************************************************************************/
 /* STYLES FOR IMAGES */
 
+#spot-details--page-container {
+    margin-bottom: 200px;
+}
+
 #spot-details--title-main {
     text-align: left;
     font-size: 1.7rem;

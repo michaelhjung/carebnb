@@ -21,7 +21,7 @@ export default function UserBookings() {
 
     return (
         <>
-            <h1>Welcome, {sessionUser.firstName}. Here are your bookings:</h1>
+            <h1>Hello, {sessionUser.firstName}. Here are your bookings:</h1>
             <main className='container--bookings'>
                 {Object.values(userBookings).map(booking => booking.Spot && (
                     <div key={booking.id} className='booking-card'>

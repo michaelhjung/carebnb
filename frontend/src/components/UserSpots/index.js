@@ -24,7 +24,7 @@ export default function UserSpots() {
 
     return (
         <>
-            <h1>Welcome, {sessionUser.firstName}. Here are your spots:</h1>
+            <h1>Hello, {sessionUser.firstName}. Here are your spots:</h1>
             <main id='container--user-spots' className='container--spots'>
                 {Object.values(userSpots).map(spot => (
                     <div key={spot.id} className="spot-card user-spot-card">
