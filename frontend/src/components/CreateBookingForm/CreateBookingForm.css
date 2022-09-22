@@ -3,7 +3,7 @@
 #container--spot-bookings {
     border-radius: 15px;
     box-shadow: 0px 0px 7px 0px #CCC;
-    padding: 25px 20px;
+    padding: 25px;
 }
 
 #form--create-booking {
@@ -39,27 +39,35 @@
 #check-out-container {
     width: 50%;
     padding: 10px;
+    background-color: #FFF;
 }
 
 #check-in-container {
-    background-color: #FFF;
     border-right: 1px solid #CCC;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
 }
 #check-out-container {
-    background-color: #FFF;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
 }
 
-#form-field--check-in {
+#check-in-text,
+#check-out-text {
+    font-size: .6rem;
+    font-weight: 700;
+}
+
+#form-field--check-in,
+#form-field--check-out {
     width: 100%;
+}
+
+#form-field--check-in {
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
 }
 #form-field--check-out {
-    width: 100%;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
 }
