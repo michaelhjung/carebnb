@@ -103,10 +103,40 @@ To get a local copy up and running follow these simple example steps.
 <!-- ROADMAP -->
 ## Roadmap
 
-<!-- - [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature -->
+- [x] Spots
+    - [x] Create a spot
+    - [x] Load all spots
+    - [x] Load a spot by detail
+    - [x] See list of current user's spots
+    - [x] Update a current user's spot
+    - [x] Delete a current user's spot
+- [ ] Bookings
+    - [x] Create a booking
+    - [x] See list of current user's bookings
+    - [x] See list of bookings by spot
+    - [ ] Update a current user's booking
+    - [x] Delete a current user's booking
+- [ ] Reviews
+    - [ ] Create a review
+    - [ ] See all reviews of a spot
+    - [ ] See all reviews of current user
+    - [ ] Update a review
+    - [ ] Delete a review
+- [ ] Images
+    - [x] Add an image to a spot
+    - [ ] Delete a spot image
+    - [ ] Add an image to a review
+    - [ ] Delete a review image
+- [ ] Search
+    - [ ] Filter spot search by:
+        - [ ] page
+        - [ ] size
+        - [ ] minimum latitude
+        - [ ] maximum latitude
+        - [ ] minimum longitude
+        - [ ] maximum longitude
+        - [ ] minimum price
+        - [ ] maximum price
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
