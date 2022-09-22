@@ -48,7 +48,7 @@ module.exports = {
                 country: 'United Kingdom',
                 lat: 56.05,
                 lng: -3.74,
-                name: 'Hogwarts School of Witchcraft and Wizardry',
+                name: 'Hogwarts',
                 description: 'Magical!',
                 price: 599
             },
