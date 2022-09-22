@@ -14,18 +14,20 @@ function Navigation() {
 
     return (
         <header>
-            <div className='navbar--left'>
-                <NavLink exact to="/" className='link--home'>
-                    <img src={logo} className='logo' alt="carebnb-logo" />
-                </NavLink>
-            </div>
-            <div className='navbar--middle'>{welcomeBanner}</div>
-            <div className='navbar--right'>
-                <NavLink to="/create-spot" className='link--create-spot'>
-                    <button className='button button--create-spot'>Create a Spot</button>
-                </NavLink>
-                <ProfileButton />
-            </div>
+            <nav>
+                <div className='navbar--left'>
+                    <NavLink exact to="/" className='link--home'>
+                        <img src={logo} className='logo' alt="carebnb-logo" />
+                    </NavLink>
+                </div>
+                <div className='navbar--middle'>{welcomeBanner}</div>
+                <div className='navbar--right'>
+                    <NavLink to="/create-spot" className='link--create-spot'>
+                        <button className='button button--create-spot'>Create a Spot</button>
+                    </NavLink>
+                    <ProfileButton />
+                </div>
+            </nav>
         </header>
     );
 }

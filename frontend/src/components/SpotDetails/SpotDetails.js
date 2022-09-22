@@ -24,7 +24,7 @@ export default function SpotDetails() {
     return (
         <main id='spot-details--page-container'>
             <div className='spot-details--container'>
-                <h1 className='spot-details--title-main'>{spot.name}</h1>
+                <h1 id='spot-details--title-main'>{spot.name}</h1>
 
                 <div className='spot-details--sub-title-reviews'>
                     <span className='spot-details--sub-title-rating'>

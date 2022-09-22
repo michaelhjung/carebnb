@@ -1,6 +1,8 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 
+// NOTE: THIS COMPONENT IS NESTED UNDER SPOTS BROWSER
+
 export default function SpotCard({ spot }) {
     return (
         <>
