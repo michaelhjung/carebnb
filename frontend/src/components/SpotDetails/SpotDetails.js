@@ -27,7 +27,7 @@ export default function SpotDetails() {
 
                 <div className='spot-details--sub-title-reviews'>
                     <span id='spot-details--sub-title-rating'>
-                        <i className="fa-solid fa-star icon--star" />
+                        <i className="fa-solid fa-star icon--star fa-sm" />
                         {" "}
                         {(spot.avgStarRating) ? Number(spot.avgStarRating).toFixed(1) : 'New'}
                     </span>
@@ -46,32 +46,34 @@ export default function SpotDetails() {
                 </div>
 
 
-                <div id='container--spot-details-booking'>
-                    <div id='spot-details--info-left'>
-                        <div className='spot-details--title-host-info'>
-                            <h2 id='host-info'>Home hosted by {spot.Owner.firstName}</h2>
-                        </div>
+                <div id='container--details-booking'>
+                    <div id='container--spot-details-booking'>
+                        <div id='spot-details--info-left'>
+                            <div className='spot-details--title-host-info'>
+                                <h2 id='host-info'>Home hosted by {spot.Owner.firstName}</h2>
+                            </div>
 
-                        <div id='air-cover'>
-                            <h2>
-                                <span id='text-air'>air</span><span id='text-cover'>cover</span>
-                            </h2>
-                            <p>Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.</p>
-                        </div>
+                            <div id='air-cover'>
+                                <h2>
+                                    <span id='text-air'>air</span><span id='text-cover'>cover</span>
+                                </h2>
+                                <p>Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.</p>
+                            </div>
 
-                        <div className='spot-details--description-container'>
-                            <p className='spot-details--description'>{spot.description}</p>
-                        </div>
-                        <div>
-                            <ShowBookingsButton
-                                spot={spot}
-                                user={sessionUser}
-                                bookings={spotBookings}
-                            />
+                            <div className='spot-details--description-container'>
+                                <p className='spot-details--description'>{spot.description}</p>
+                            </div>
+                            <div>
+                                <ShowBookingsButton
+                                    spot={spot}
+                                    user={sessionUser}
+                                    bookings={spotBookings}
+                                />
+                            </div>
                         </div>
                     </div>
 
-                    <div id='spot-details--info-right' className='spot-bookings--container'>
+                    <div id='spot-details--booking-menu' className='spot-bookings--container'>
                             <CreateBookingForm
                                 spot={spot}
                                 user={sessionUser}

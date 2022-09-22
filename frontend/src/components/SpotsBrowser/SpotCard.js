@@ -15,7 +15,7 @@ export default function SpotCard({ spot }) {
                 <div className='spot-card--info-row-1'>
                     <div className='spot-card--info-location'>{`${spot.city}, ${spot.state}`}</div>
                     <div className='spot-card--info-avgRating'>
-                        <i className="fa-solid fa-star icon--star" />
+                        <i className="fa-solid fa-star icon--star fa-xs" />
                         {" "}
                         {spot.avgRating && (spot.avgRating) ? Number(spot.avgRating).toFixed(1) : 'New'}
                     </div>

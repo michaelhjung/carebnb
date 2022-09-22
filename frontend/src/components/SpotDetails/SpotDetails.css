@@ -96,6 +96,7 @@
 #host-info {
     font-size: 1.4rem;
     font-weight: 500;
+    margin-top: 0px;
 }
 
 
@@ -156,12 +157,17 @@
     margin-left: 2px;
 }
 
-/*
-#container--spot-details-booking {
 
+
+
+#container--details-booking {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: row;
 }
 
-.spot-details--title-host-info {
-
+#spot-details--booking-menu {
+    margin-left: 80px;
+    position: sticky;
+    top: 30px;
 }
-*/

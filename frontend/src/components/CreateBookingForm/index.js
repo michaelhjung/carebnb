@@ -91,7 +91,7 @@ export default function CreateBookingForm({ spot, user }) {
                 </div>
                 <div id='check-in-out-container'>
                     <div id='check-in-container'>
-                        Check In:
+                        <span id='check-in-text'>CHECK-IN:</span>
                         <input
                             type="date"
                             value={startDate}
@@ -102,7 +102,7 @@ export default function CreateBookingForm({ spot, user }) {
                         />
                     </div>
                     <div id='check-out-container'>
-                        Check Out:
+                        <span id='check-out-text'>CHECKOUT:</span>
                         <input
                             type="date"
                             value={endDate}
