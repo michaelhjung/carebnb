@@ -7,6 +7,7 @@ const ADD_SPOT = '/spots/ADD_SPOT';
 const ADD_IMG = '/spots/ADD_IMG';
 const EDIT_SPOT = '/spots/EDIT_SPOT';
 const REMOVE_SPOT = '/spots/REMOVE_SPOT';
+const CLEAR_DATA = '/spots/CLEAR_DATA';
 
 
 /* ---------------------------- ACTION CREATORS: ---------------------------- */
@@ -42,6 +43,11 @@ const removeSpot = (spotId) => ({
     type: REMOVE_SPOT,
     payload: spotId
 });
+
+export const clearData = () => ({
+    type: CLEAR_DATA
+});
+
 
 
 /* ------------------------- THUNK ACTION CREATORS: ------------------------- */
@@ -183,6 +189,8 @@ const spotsReducer = (state = initialState, action) => {
             newState = { ...newState };
             // console.log("NEWSTATE AFTER REMOVE_SPOT ACTION:", newState);
             return newState;
+        case CLEAR_DATA:
+            return initialState;
         default:
             return state;
     }

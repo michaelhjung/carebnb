@@ -15,6 +15,8 @@ export default function UserSpots() {
     const userSpots = useSelector(state => state.spots.allSpots);
     useEffect(() => {
         dispatch(spotsActions.getUserSpots());
+
+        return () => dispatch(spotsActions.clearData());
     }, [dispatch]);
 
     if (!sessionUser) return <Redirect to="/" />

@@ -10,6 +10,7 @@ export default function SpotsBrowser() {
     const spots = useSelector(state => state.spots.allSpots);
     useEffect(() => {
         dispatch(spotsActions.getSpots());
+        return () => dispatch(spotsActions.clearData());
     }, [dispatch]);
 
     if (!spots) return null;

@@ -6,6 +6,7 @@ const LOAD_SPOT_BOOKINGS = '/bookings/LOAD_SPOT_BOOKINGS';
 const ADD_BOOKING = '/bookings/ADD_BOOKING';
 // const EDIT_BOOKING = '/bookings/EDIT_BOOKING';
 const REMOVE_BOOKING = '/bookings/REMOVE_BOOKING';
+const CLEAR_DATA = '/spots/CLEAR_DATA';
 
 
 /* ---------------------------- ACTION CREATORS: ---------------------------- */
@@ -33,6 +34,11 @@ const removeBooking = (bookingId) => ({
     type: REMOVE_BOOKING,
     payload: bookingId
 });
+
+export const clearData = () => ({
+    type: CLEAR_DATA
+});
+
 
 
 /* ------------------------- THUNK ACTION CREATORS: ------------------------- */
@@ -142,6 +148,8 @@ const bookingsReducer = (state = initialState, action) => {
             newState = { ...newState };
             // console.log("NEWSTATE AFTER REMOVE_BOOKING ACTION:", newState);
             return newState;
+        case CLEAR_DATA:
+                return initialState;
         default:
             return state;
     }

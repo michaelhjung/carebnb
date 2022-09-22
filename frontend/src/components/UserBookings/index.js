@@ -12,6 +12,8 @@ export default function UserBookings() {
 
     useEffect(() => {
         dispatch(bookingsActions.getUserBookings());
+
+        return () => dispatch(bookingsActions.clearData());
     }, [dispatch]);
 
     if (!sessionUser) return <Redirect to="/" />

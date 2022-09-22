@@ -16,6 +16,8 @@ export default function SpotDetails() {
     useEffect(() => {
         dispatch(spotsActions.getSingleSpot(spotId));
         dispatch(bookingsActions.getSpotBookings(spotId));
+
+        return () => dispatch(spotsActions.clearData());
     }, [dispatch, spotId, sessionUser]);
 
     if (!spot || !Object.entries(spot).length) return null;
