@@ -20,6 +20,10 @@
     object-fit: cover;
 }
 
+#booking-card--info-container {
+    width: 300px;
+}
+
 .booking-card--info {
     margin: 8px;
 }
