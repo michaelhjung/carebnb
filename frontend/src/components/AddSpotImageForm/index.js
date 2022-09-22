@@ -39,7 +39,7 @@ export default function AddSpotImageForm() {
         }
     };
 
-    if (!Object.entries(spot).length) return null;
+    if (!spot || !Object.entries(spot).length) return null;
 
     return (
         <div className='container--form'>
