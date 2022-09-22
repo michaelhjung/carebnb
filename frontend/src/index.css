@@ -12,10 +12,9 @@ body {
     padding: 0;
 }
 
-#root {
-    display: flex;
-    justify-content: center;
-    width: 100%;
+nav,
+#page-content {
+    margin: 0 auto;
 }
 
 h1 {
