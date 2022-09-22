@@ -28,7 +28,7 @@ export default function SpotDetails() {
                     <span id='spot-details--sub-title-rating'>
                         <i className="fa-solid fa-star icon--star" />
                         {" "}
-                        {spot.avgRating && (spot.avgRating) ? Number(spot.avgRating).toFixed(2) : 'New'}
+                        {(spot.avgStarRating) ? Number(spot.avgStarRating).toFixed(2) : 'New'}
                     </span>
                     <span className='spot-details--sub-title-dot'> · </span>
                     <span id='spot-details--sub-title-numReviews'>{spot.numReviews} reviews</span>
