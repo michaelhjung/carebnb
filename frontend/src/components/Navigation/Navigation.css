@@ -15,13 +15,11 @@ nav {
     justify-content: space-between;
     align-items: center;
     list-style: none;
-    padding: 20px 80px 18px;
-    width: 100vw;
+    padding: 20px 0px 18px;
     max-width: 1600px;
 }
 
 #page-content {
-    padding: 5px 80px 20px;
     width: 100vw;
     max-width: 1600px;
     display: flex;

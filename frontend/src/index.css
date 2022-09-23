@@ -118,7 +118,10 @@ h1 {
     opacity: 0.9;
 }
 
-
+#button--create-spot-submit {
+    width: 500px;
+    margin-bottom: 150px;
+}
 
 #add-img-spot-thumbnail {
     width: 180px;

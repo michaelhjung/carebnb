@@ -29,13 +29,26 @@
 
 .user-spot-card--info {
     margin: 8px 0px 20px;
-    padding: 3px;
+    padding: 2px;
 }
 
 .spot-card--info-row-1 {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 8px;
+    margin-bottom: 2px;
+}
+
+#spot-card--info-country,
+#spot-card--info-name {
+    color: #6f7174;
+}
+
+.spot-card--info-row-2 {
+    margin-bottom: 2px;
+}
+
+.spot-card--info-row-4 {
+    margin-top: 9px;
 }
 
 #spot-card--info-price {
