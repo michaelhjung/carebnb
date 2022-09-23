@@ -11,7 +11,7 @@
       </ul>
     </li>
     <li>
-      <a href="sample-features">Sample Features</a>
+      <a href="#sample-features">Sample Features</a>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -57,7 +57,7 @@ users to offer or find vacation rentals around the world.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- GETTING STARTED -->
+<!-- SAMPLE FEATURES -->
 ## Sample Features
 
   - ### Log in as a Demo User:
