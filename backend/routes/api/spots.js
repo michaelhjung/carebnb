@@ -409,7 +409,6 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, ne
     if (spot) {
         // check if review from current user already exists
         const spotReviews = await Review.findAll({ where: { spotId: req.params.spotId }, raw: true });
-        console.log(spotReviews)
         for (let i = 0; i < spotReviews.length; i++) {
             const review = spotReviews[i];
             if (review.userId === req.user.id) {
