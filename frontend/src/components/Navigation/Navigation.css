@@ -19,9 +19,14 @@ nav {
     max-width: 1600px;
 }
 
+/* FOR CHANGING MAX WIDTH OF NAV WHEN GOING TO SPOT DETAILS PAGE!!! */
+.max-width-1100 {
+    max-width: 1100px;
+}
+
 #page-content {
     width: 100vw;
-    max-width: 1600px;
+    max-width: 1760px;
     display: flex;
     flex-direction: column;
     justify-content: center;
