@@ -19,7 +19,7 @@ function SignupForm({ setShowMenu, closeMenu }) {
         if (email.length && (!email.includes("@") || !email.includes("."))) errors.push("Please provide a valid email.");
         if (firstName.length && firstName.length < 2) errors.push("Please provide a first name with at least 2 characters.");
         if (lastName.length && lastName.length < 2) errors.push("Please provide a last name with at least 2 characters.");
-        if (username.length && password.length < 4) errors.push("Please provide a username with at least 4 characters.");
+        if (username.length && username.length < 4) errors.push("Please provide a username with at least 4 characters.");
         if (password.length && password.length < 6) errors.push("Password must be 6 characters or more.");
         if (password && confirmPassword && password !== confirmPassword) errors.push("Confirm Password field must be the same as the Password field.");
 
