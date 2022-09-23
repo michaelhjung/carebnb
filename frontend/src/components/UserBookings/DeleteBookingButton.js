@@ -11,7 +11,7 @@ export default function DeleteBookingButton({ bookingId }) {
 
         catch (res) {
             const data = await res.json();
-            if (data) console.log("ANY ISSUES ON DELETE BOOKING:", data);
+            if (data.message) return alert(data.message);
         }
     }
 

@@ -56,7 +56,6 @@ export default function CreateBookingForm({ spot, user }) {
             const data = await res.json();
             const errors = [];
             if (data && data.message) {
-                console.log("ANY ERRORS ON CREATE BOOKING:", data);
                 errors.push(data.message);
             }
             setValidationErrors(errors);
