@@ -83,10 +83,33 @@
     bottom: 20px;
 }
 
-#container--signup-form {
+.container--signup-form {
     height: 610px;
 }
 
 #container--login-form {
     height: 390px;
+}
+
+/* DYNAMIC RESIZING OF SIGN UP FORM WHEN ERRORS ADDED! */
+#error-length-0 {
+    height: 610px;
+}
+#error-length-1 {
+    height: 630px;
+}
+#error-length-2 {
+    height: 650px;
+}
+#error-length-3 {
+    height: 670px;
+}
+#error-length-4 {
+    height: 690px;
+}
+#error-length-5 {
+    height: 710px;
+}
+#error-length-6 {
+    height: 730px;
 }

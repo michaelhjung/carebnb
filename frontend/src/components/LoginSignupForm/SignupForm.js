@@ -26,6 +26,22 @@ function SignupForm({ setShowMenu, closeMenu }) {
         setValidationErrors(errors);
     }, [email, firstName, lastName, username, password, confirmPassword]);
 
+    useEffect(() => {
+        let signupFormDiv = document.querySelector('.container--signup-form')
+
+        if (validationErrors.length === 0) signupFormDiv.setAttribute('id', 'error-length-0');
+        if (validationErrors.length === 1) signupFormDiv.setAttribute('id', 'error-length-1');
+        if (validationErrors.length === 2) signupFormDiv.setAttribute('id', 'error-length-2');
+        if (validationErrors.length === 3) signupFormDiv.setAttribute('id', 'error-length-3');
+        if (validationErrors.length === 4) signupFormDiv.setAttribute('id', 'error-length-4');
+        if (validationErrors.length === 5) signupFormDiv.setAttribute('id', 'error-length-5');
+        if (validationErrors.length === 6) signupFormDiv.setAttribute('id', 'error-length-6');
+
+        return () => signupFormDiv.setAttribute('id', 'error-length-0');
+
+    }, [validationErrors]);
+
+
     if (sessionUser) return <Redirect to="/" />;
 
     const handleSubmit = async (e) => {
@@ -50,7 +66,7 @@ function SignupForm({ setShowMenu, closeMenu }) {
     };
 
     return (
-        <div className="container--login-signup-forms" id="container--signup-form">
+        <div className="container--login-signup-forms container--signup-form">
             <div className='title-login-signup title-signup container--login-signup-top'>
                 Sign Up
             </div>
