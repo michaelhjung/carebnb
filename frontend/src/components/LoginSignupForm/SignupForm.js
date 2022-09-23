@@ -18,6 +18,7 @@ function SignupForm({ setShowMenu, closeMenu }) {
 
         if (email.length && (!email.includes("@") || !email.includes("."))) errors.push("Invalid email");
         if (password && confirmPassword && password !== confirmPassword) errors.push("Confirm Password field must be the same as the Password field");
+        if (password.length && password.length < 6) errors.push("Password length must be at least 6 characters");
 
         setValidationErrors(errors);
     }, [email, password, confirmPassword]);
@@ -39,8 +40,8 @@ function SignupForm({ setShowMenu, closeMenu }) {
             } catch (res) {
                 const data = await res.json();
                 const errors = [];
-                if (data) errors.push(data.message);
-
+                if (data.message === 'User already exists') errors.push(data.message);
+                else if (data.message === 'Validation error') alert('Please double check that your password length is at least 6 characters!');
                 return setValidationErrors(errors);
             }
         }
