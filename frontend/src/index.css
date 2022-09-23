@@ -26,10 +26,12 @@ h1 {
 
 .list--errors {
     padding: 0;
+    margin: 20px 0px;
 }
 
 .error-li {
     color: #FF385C;
+    font-size: .85rem;
     font-weight: 600;
     list-style: none;
     margin: 5px 0px;

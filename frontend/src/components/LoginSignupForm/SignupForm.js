@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
@@ -13,11 +13,21 @@ function SignupForm({ setShowMenu, closeMenu }) {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [validationErrors, setValidationErrors] = useState([]);
+    useEffect(() => {
+        const errors = [];
+
+        if (email.length && (!email.includes("@") || !email.includes("."))) errors.push("Inavlid email");
+        if (password && confirmPassword && password !== confirmPassword) errors.push("Confirm Password field must be the same as the Password field");
+
+        setValidationErrors(errors);
+    }, [email, password]);
 
     if (sessionUser) return <Redirect to="/" />;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+
         if (password === confirmPassword) {
 
             try {
@@ -38,10 +48,12 @@ function SignupForm({ setShowMenu, closeMenu }) {
     };
 
     return (
-        <div className="container--login-signup-forms container--signup-form">
+        <div className="container--login-signup-forms" id="container--signup-form">
             <div className='title-login-signup title-signup'>
                 Sign Up
             </div>
+
+            <div className="border-div"></div>
 
             <h1 className='welcome-login-signup welcome-signup'>Welcome to Carebnb</h1>
 
@@ -49,6 +61,7 @@ function SignupForm({ setShowMenu, closeMenu }) {
                 <ul className="list--errors">
                     {validationErrors.map((error, idx) => <li key={idx} className="error-li">{error}</li>)}
                 </ul>
+
                 <div className="container--login-signup-fields container--signup-fields">
                     <div id="container--signup-field-first-name" className="container--login-signup-field container--signup-field" >
                         <input
@@ -117,7 +130,15 @@ function SignupForm({ setShowMenu, closeMenu }) {
                         />
                     </div>
                 </div>
-                <button type="submit" id='signup-submit-button' className='login-signup-submit-button'>Sign Up</button>
+
+                <button
+                    type="submit"
+                    id='signup-submit-button'
+                    className='login-signup-submit-button'
+                    disabled={validationErrors.length}
+                >
+                    Sign Up
+                </button>
             </form>
         </div>
     );
