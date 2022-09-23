@@ -11,6 +11,9 @@
       </ul>
     </li>
     <li>
+      <a href="sample-features">Sample Features</a>
+    </li>
+    <li>
       <a href="#getting-started">Getting Started</a>
     </li>
     <li><a href="#roadmap">Roadmap</a></li>
@@ -51,8 +54,26 @@ users to offer or find vacation rentals around the world.
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
 
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- GETTING STARTED -->
+## Sample Features
+
+  - ### Log in as a Demo User:
+    ![demo-user]
+
+  - ### Create a spot:
+    ![demo-create-spot]
+
+  - ### Create and delete bookings:
+    ![demo-create-booking]
+
+  - ### Bookings data depend whether or not you are the spot owner:
+    ![demo-show-bookings]
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -157,3 +178,7 @@ Project Link: [https://github.com/michaelhjung/airBnB-clone](https://github.com/
 [product-screenshot]: images/screenshot.png
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
+[demo-user]: ./demo/demo-demo-user.gif
+[demo-create-spot]: ./demo/demo-create-spot.gif
+[demo-create-booking]: ./demo/demo-create-delete-bookings.gif
+[demo-show-bookings]: ./demo/demo-check-bookings.gif
