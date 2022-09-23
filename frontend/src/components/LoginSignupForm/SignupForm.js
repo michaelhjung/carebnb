@@ -137,7 +137,6 @@ function SignupForm({ setShowMenu, closeMenu }) {
                         type="submit"
                         id='signup-submit-button'
                         className='login-signup-submit-button'
-                        disabled={validationErrors.length}
                     >
                         Sign Up
                     </button>
