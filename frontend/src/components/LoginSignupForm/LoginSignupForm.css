@@ -1,8 +1,4 @@
 .container--login-signup-forms {
-    /* padding: 25px 20px; */
-    /* display: flex;
-    flex-direction: column;
-    align-items: center; */
     width: 570px;
     height: 680px;
     border-radius: 15px;
@@ -46,6 +42,11 @@
     position: relative;
 }
 
+/* #container--signup-fields {
+    width: 530px;
+    position: absolute;
+} */
+
 .container--login-signup-fields,
 .container--login-signup-field,
 .login-signup-field {
@@ -79,7 +80,7 @@
     cursor: pointer;
     position: absolute;
     width: 530px;
-    bottom: 25px;
+    bottom: 20px;
 }
 
 #container--signup-form {

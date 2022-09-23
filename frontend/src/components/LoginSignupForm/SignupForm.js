@@ -16,18 +16,20 @@ function SignupForm({ setShowMenu, closeMenu }) {
     useEffect(() => {
         const errors = [];
 
-        if (email.length && (!email.includes("@") || !email.includes("."))) errors.push("Invalid email");
-        if (password && confirmPassword && password !== confirmPassword) errors.push("Confirm Password field must be the same as the Password field");
-        if (password.length && password.length < 6) errors.push("Password length must be at least 6 characters");
+        if (email.length && (!email.includes("@") || !email.includes("."))) errors.push("Please provide a valid email.");
+        if (firstName.length && firstName.length < 2) errors.push("Please provide a first name with at least 2 characters.");
+        if (lastName.length && lastName.length < 2) errors.push("Please provide a last name with at least 2 characters.");
+        if (username.length && password.length < 4) errors.push("Please provide a username with at least 4 characters.");
+        if (password.length && password.length < 6) errors.push("Password must be 6 characters or more.");
+        if (password && confirmPassword && password !== confirmPassword) errors.push("Confirm Password field must be the same as the Password field.");
 
         setValidationErrors(errors);
-    }, [email, password, confirmPassword]);
+    }, [email, firstName, lastName, username, password, confirmPassword]);
 
     if (sessionUser) return <Redirect to="/" />;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
 
         if (password === confirmPassword) {
 
@@ -40,8 +42,9 @@ function SignupForm({ setShowMenu, closeMenu }) {
             } catch (res) {
                 const data = await res.json();
                 const errors = [];
-                if (data.message === 'User already exists') errors.push(data.message);
-                else if (data.message === 'Validation error') alert('Please double check that your password length is at least 6 characters!');
+                if (data.errors) data.errors.forEach(error => errors.push(error));
+
+                console.log("DATA ERRORS?", data);
                 return setValidationErrors(errors);
             }
         }
@@ -65,7 +68,7 @@ function SignupForm({ setShowMenu, closeMenu }) {
                         {validationErrors.map((error, idx) => <li key={idx} className="error-li">{error}</li>)}
                     </ul>
 
-                    <div className="container--login-signup-fields container--signup-fields">
+                    <div className="container--login-signup-fields" id="container--signup-fields">
                         <div id="container--signup-field-first-name" className="container--login-signup-field container--signup-field" >
                             <input
                                 type="text"
