@@ -17,6 +17,15 @@ nav,
     margin: 0 auto;
 }
 
+header {
+    padding: 0px 80px;
+}
+
+#page-content {
+    padding: 0px 80px;
+}
+
+
 h1 {
     text-align: center;
 }
@@ -26,10 +35,12 @@ h1 {
 
 .list--errors {
     padding: 0;
+    margin: 20px 0px;
 }
 
 .error-li {
     color: #FF385C;
+    font-size: .85rem;
     font-weight: 600;
     list-style: none;
     margin: 5px 0px;
@@ -118,7 +129,10 @@ h1 {
     opacity: 0.9;
 }
 
-
+#button--create-spot-submit {
+    width: 500px;
+    margin-bottom: 150px;
+}
 
 #add-img-spot-thumbnail {
     width: 180px;

@@ -87,7 +87,7 @@ export default function CreateSpotForm() {
         <div className='container--form'>
             <h1>Create a Spot!</h1>
 
-            <form onSubmit={handleSubmit} className="form form--create-spot">
+            <form onSubmit={handleSubmit} className="form" id="form--create-spot">
                 {validationErrors.length > 0 && (
                     <ul className="list--errors">
                         {validationErrors.map((error) => <li key={error} className="error-li">{error}</li>)}
@@ -210,6 +210,7 @@ export default function CreateSpotForm() {
                     type="submit"
                     disabled={validationErrors.length}
                     className='submit-button'
+                    id='button--create-spot-submit'
                 >
                     Submit
                 </button>

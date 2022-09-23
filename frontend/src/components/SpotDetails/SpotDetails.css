@@ -2,7 +2,8 @@
 /* STYLES FOR IMAGES */
 
 #spot-details--page-container {
-    margin-bottom: 200px;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 #spot-details--title-main {
@@ -84,12 +85,10 @@
 
 #spot-details--sub-title-numReviews {
     font-weight: 500;
-    text-decoration: underline;
 }
 
 #spot-details--sub-title-location {
     font-weight: 500;
-    text-decoration: underline;
 }
 
 #host-info {
@@ -157,10 +156,8 @@
 }
 
 
-
-
 #container--details-booking {
-    margin-top: 60px;
+    margin: 60px 0px 250px;
     display: flex;
     flex-direction: row;
 }

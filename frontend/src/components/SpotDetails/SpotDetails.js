@@ -20,6 +20,13 @@ export default function SpotDetails() {
         return () => dispatch(spotsActions.clearData());
     }, [dispatch, spotId, sessionUser]);
 
+    useEffect(() => {
+        const nav = document.querySelector('nav');
+        nav.classList.toggle('max-width-1100');
+
+        return () => nav.classList.toggle('max-width-1100');
+    }, []);
+
     if (!spot || !Object.entries(spot).length) return null;
 
     return (

@@ -20,7 +20,14 @@ export default function SpotCard({ spot }) {
                         {spot.avgRating && (spot.avgRating) ? Number(spot.avgRating).toFixed(1) : 'New'}
                     </div>
                 </div>
-                <div className='spot-card--info-row-2 spot-card--info-price-container'>
+                {console.log("SPOT", spot)}
+                <div className='spot-card--info-row-2 spot-card--info-country-container'>
+                    <span id='spot-card--info-country'>{spot.country}</span>
+                </div>
+                <div className='spot-card--info-row-3 spot-card--info-name-container'>
+                    <span id='spot-card--info-name'>{spot.name}</span>
+                </div>
+                <div className='spot-card--info-row-4 spot-card--info-price-container'>
                     <span id='spot-card--info-price'>${spot.price}</span> night
                 </div>
             </div>
