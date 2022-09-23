@@ -43,8 +43,6 @@ function SignupForm({ setShowMenu, closeMenu }) {
                 const data = await res.json();
                 const errors = [];
                 if (data.errors) data.errors.forEach(error => errors.push(error));
-
-                console.log("DATA ERRORS?", data);
                 return setValidationErrors(errors);
             }
         }
