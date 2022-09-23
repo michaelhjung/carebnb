@@ -140,3 +140,7 @@ h1 {
     object-fit: cover;
     border-radius: 15px;
 }
+
+#form-field--desc {
+    overflow-y: auto;
+}
