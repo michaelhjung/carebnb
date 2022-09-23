@@ -74,7 +74,6 @@ function LoginForm({ setShowMenu, closeMenu }) {
                         type="submit"
                         id='login-submit-button'
                         className='login-signup-submit-button'
-                        disabled={validationErrors.length}
                     >
                         Log In
                     </button>
