@@ -26,6 +26,7 @@ export default function CreateSpotForm() {
 
     useEffect(() => {
         const errors = [];
+        if (name.length > 50) errors.push("Name must be less than 50 characters");
 
         if (Number.isNaN(Number(lat)) ||
             (Number(lat)) > 90 ||
@@ -41,7 +42,7 @@ export default function CreateSpotForm() {
         if ((Number(price)) < 0 && price.length !== 0) errors.push("The price cannot be negative... but if you're feeling generous, you can make it free :)");
 
         setValidationErrors(errors);
-    }, [lat, lng, price]);
+    }, [name, lat, lng, price]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
