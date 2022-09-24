@@ -26,7 +26,7 @@ export default function CreateSpotForm() {
 
     useEffect(() => {
         const errors = [];
-        if (name.length > 50) errors.push("Name must be less than 50 characters");
+        if (name.length >= 50) errors.push("Name must be less than 50 characters");
 
         if (Number.isNaN(Number(lat)) ||
             (Number(lat)) > 90 ||
