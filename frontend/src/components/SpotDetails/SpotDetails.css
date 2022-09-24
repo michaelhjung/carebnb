@@ -16,8 +16,6 @@
 /* =========>>> START NEW DYNAMIC IMGS CONTAINER <<<========= */
 .spot-details--imgs-container {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
     border-radius: 15px;
     overflow: hidden;
     max-height: 560px;
