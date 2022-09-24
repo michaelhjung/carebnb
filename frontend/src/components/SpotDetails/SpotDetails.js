@@ -34,6 +34,9 @@ export default function SpotDetails() {
             if (spot.spotImages.length === 1) {
                 imgsContainer.setAttribute('id', 'imgs-length-1');
 
+                const img1 = document.querySelector('.spot-details--img:nth-child(1)');
+                if (img1) img1.setAttribute('id', 'length-1-img-1');
+
                 return () => imgsContainer.removeAttribute('id', 'imgs-length-1');
             }
             else if (spot.spotImages.length === 2) {
