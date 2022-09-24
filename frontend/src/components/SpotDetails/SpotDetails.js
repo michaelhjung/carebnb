@@ -34,7 +34,7 @@ export default function SpotDetails() {
             if (spot.spotImages.length === 1) {
                 imgsContainer.setAttribute('id', 'imgs-length-1');
 
-                return () => imgsContainer.removeAttribute('imgs-length-1');
+                return () => imgsContainer.removeAttribute('id', 'imgs-length-1');
             }
             else if (spot.spotImages.length === 2) {
                 imgsContainer.setAttribute('id', 'imgs-length-2');
@@ -46,8 +46,8 @@ export default function SpotDetails() {
                 if (img2) img2.setAttribute('id', 'length-2-img-2');
 
                 return () => {
-                    if (img1) img1.removeAttribute('length-2-img-1');
-                    if (img2) img1.removeAttribute('length-2-img-2');
+                    if (img1) img1.removeAttribute('id', 'length-2-img-1');
+                    if (img2) img1.removeAttribute('id', 'length-2-img-2');
                 }
             }
             else if (spot.spotImages.length === 3) {
@@ -62,9 +62,9 @@ export default function SpotDetails() {
                 if (img3) img3.setAttribute('id', 'length-3-img-3');
 
                 return () => {
-                    if (img1) img1.removeAttribute('length-3-img-1');
-                    if (img2) img2.removeAttribute('length-3-img-2');
-                    if (img3) img3.removeAttribute('length-3-img-3');
+                    if (img1) img1.removeAttribute('id', 'length-3-img-1');
+                    if (img2) img2.removeAttribute('id', 'length-3-img-2');
+                    if (img3) img3.removeAttribute('id', 'length-3-img-3');
                 }
             }
             else if (spot.spotImages.length === 4) {
@@ -81,10 +81,10 @@ export default function SpotDetails() {
                 if (img4) img4.setAttribute('id', 'length-4-img-4');
 
                 return () => {
-                    if (img1) img1.removeAttribute('length-4-img-1');
-                    if (img2) img2.removeAttribute('length-4-img-2');
-                    if (img3) img3.removeAttribute('length-4-img-3');
-                    if (img4) img4.removeAttribute('length-4-img-4');
+                    if (img1) img1.removeAttribute('id', 'length-4-img-1');
+                    if (img2) img2.removeAttribute('id', 'length-4-img-2');
+                    if (img3) img3.removeAttribute('id', 'length-4-img-3');
+                    if (img4) img4.removeAttribute('id', 'length-4-img-4');
                 }
             }
             else if (spot.spotImages.length >= 5) {
@@ -103,11 +103,11 @@ export default function SpotDetails() {
                 if (img5) img5.setAttribute('id', 'length-5-img-5');
 
                 return () => {
-                    if (img1) img1.removeAttribute('length-5-img-1');
-                    if (img2) img2.removeAttribute('length-5-img-2');
-                    if (img3) img3.removeAttribute('length-5-img-3');
-                    if (img4) img4.removeAttribute('length-5-img-4');
-                    if (img5) img5.removeAttribute('length-5-img-5');
+                    if (img1) img1.removeAttribute('id', 'length-5-img-1');
+                    if (img2) img2.removeAttribute('id', 'length-5-img-2');
+                    if (img3) img3.removeAttribute('id', 'length-5-img-3');
+                    if (img4) img4.removeAttribute('id', 'length-5-img-4');
+                    if (img5) img5.removeAttribute('id', 'length-5-img-5');
                 }
             }
         }
