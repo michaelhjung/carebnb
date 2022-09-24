@@ -20,16 +20,14 @@
     overflow: hidden;
 
     /* DEFAULT GRID STYLE (LENGTH 5 IMGS) */
-    /* display: grid;
+    display: grid;
     column-gap: 8px;
     grid-template-columns: 2fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr; */
+    grid-template-rows: 1fr 1fr;
 }
 
 /* FOR 1 PICTURES */
 #imgs-length-1 {
-    display: grid;
-    column-gap: 8px;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
 }
@@ -39,8 +37,6 @@
 
 /* FOR 2 PICTURES */
 #imgs-length-2 {
-    display: grid;
-    column-gap: 8px;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
 }
@@ -55,8 +51,6 @@
 
 /* FOR 3 PICTURES */
 #imgs-length-3 {
-    display: grid;
-    column-gap: 8px;
     grid-template-columns: 2fr 2fr;
     grid-template-rows: 1fr 1fr;
 }
@@ -77,8 +71,6 @@
 
 /* FOR 4 PICTURES */
 #imgs-length-4 {
-    display: grid;
-    column-gap: 8px;
     grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
 }
@@ -104,8 +96,6 @@
 
 /* FOR 5 PICTURES */
 #imgs-length-5 {
-    display: grid;
-    column-gap: 8px;
     grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
 }
