@@ -63,8 +63,8 @@ users to offer or find vacation rentals around the world.
   - ### Log in as a Demo User:
     ![demo-user]
 
-  - ### Create a spot:
-    ![demo-create-spot]
+  - ### Dynamic image layout when creating a spot and adding images:
+    ![demo-dynamic-img-layout]
 
   - ### Create and delete bookings:
     ![demo-create-booking]
@@ -179,6 +179,6 @@ Project Link: [https://github.com/michaelhjung/airBnB-clone](https://github.com/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
 [demo-user]: ./demo/demo-demo-user.gif
-[demo-create-spot]: ./demo/demo-create-spot.gif
+[demo-dynamic-img-layout]: ./demo/demo-dynamic-img-layout.gif
 [demo-create-booking]: ./demo/demo-create-delete-bookings.gif
 [demo-show-bookings]: ./demo/demo-check-bookings.gif
