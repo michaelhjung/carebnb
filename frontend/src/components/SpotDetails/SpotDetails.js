@@ -31,7 +31,11 @@ export default function SpotDetails() {
     useEffect(() => {
         if (spot && spot.spotImages) {
             const imgsContainer = document.querySelector('.spot-details--imgs-container');
-            if (spot.spotImages.length === 1) imgsContainer.setAttribute('id', 'imgs-length-1');
+            if (spot.spotImages.length === 1) {
+                imgsContainer.setAttribute('id', 'imgs-length-1');
+
+                return () => imgsContainer.removeAttribute('imgs-length-1');
+            }
             else if (spot.spotImages.length === 2) {
                 imgsContainer.setAttribute('id', 'imgs-length-2');
 
