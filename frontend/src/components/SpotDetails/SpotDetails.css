@@ -22,8 +22,8 @@
     /* DEFAULT GRID STYLE (LENGTH 5 IMGS) */
     display: grid;
     column-gap: 8px;
-    grid-template-columns: 2fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    /* grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr; */
 }
 
 /* FOR 1 PICTURES */
