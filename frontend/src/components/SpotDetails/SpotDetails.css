@@ -15,11 +15,15 @@
 /* STYLES FOR IMAGES */
 /* =========>>> START NEW DYNAMIC IMGS CONTAINER <<<========= */
 .spot-details--imgs-container {
-    display: grid;
+    max-height: 560px;
     border-radius: 15px;
     overflow: hidden;
-    max-height: 560px;
+
+    /* DEFAULT GRID STYLE (LENGTH 5 IMGS) */
+    display: grid;
     column-gap: 8px;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
 }
 
 /* FOR 1 PICTURES */
