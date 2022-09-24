@@ -31,8 +31,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
 }
-#length-2-img-1 {
-    grid-area: 1 / 1 / 3 / 2;
+#length-1-img-1 {
     aspect-ratio: 1.95 / 1;
 }
 
