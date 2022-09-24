@@ -58,7 +58,7 @@ function SignupForm({ setShowMenu, closeMenu }) {
             } catch (res) {
                 const data = await res.json();
                 const errors = [];
-                if (data.errors) data.errors.forEach(error => errors.push(error));
+                if (data.errors) Object.values(data.errors).forEach(error => errors.push(error));
                 return setValidationErrors(errors);
             }
         }
