@@ -27,6 +27,63 @@ export default function SpotDetails() {
         return () => nav.classList.toggle('max-width-1100');
     }, []);
 
+    // THE FOLLOWING USEEFFECT RENDERS IMAGES CONDITIONALLY BASED ON HOW MANY IMAGES:
+    useEffect(() => {
+        if (spot && spot.spotImages) {
+            const imgsContainer = document.querySelector('.spot-details--imgs-container');
+            if (spot.spotImages.length === 1) imgsContainer.setAttribute('id', 'imgs-length-1');
+            else if (spot.spotImages.length === 2) {
+                imgsContainer.setAttribute('id', 'imgs-length-2');
+
+                const img1 = document.querySelector('.spot-details--img:nth-child(1)');
+                const img2 = document.querySelector('.spot-details--img:nth-child(2)');
+
+                if (img1) img1.setAttribute('id', 'length-2-img-1');
+                if (img2) img2.setAttribute('id', 'length-2-img-2');
+            }
+            else if (spot.spotImages.length === 3) {
+                imgsContainer.setAttribute('id', 'imgs-length-3');
+
+                const img1 = document.querySelector('.spot-details--img:nth-child(1)');
+                const img2 = document.querySelector('.spot-details--img:nth-child(2)');
+                const img3 = document.querySelector('.spot-details--img:nth-child(3)');
+
+                if (img1) img1.setAttribute('id', 'length-3-img-1');
+                if (img2) img2.setAttribute('id', 'length-3-img-2');
+                if (img3) img3.setAttribute('id', 'length-3-img-3');
+            }
+            else if (spot.spotImages.length === 4) {
+                imgsContainer.setAttribute('id', 'imgs-length-4');
+
+                const img1 = document.querySelector('.spot-details--img:nth-child(1)');
+                const img2 = document.querySelector('.spot-details--img:nth-child(2)');
+                const img3 = document.querySelector('.spot-details--img:nth-child(3)');
+                const img4 = document.querySelector('.spot-details--img:nth-child(4)');
+
+                if (img1) img1.setAttribute('id', 'length-4-img-1');
+                if (img2) img2.setAttribute('id', 'length-4-img-2');
+                if (img3) img3.setAttribute('id', 'length-4-img-3');
+                if (img4) img4.setAttribute('id', 'length-4-img-4');
+            }
+            else if (spot.spotImages.length >= 5) {
+                imgsContainer.setAttribute('id', 'imgs-length-5');
+
+                const img1 = document.querySelector('.spot-details--img:nth-child(1)');
+                const img2 = document.querySelector('.spot-details--img:nth-child(2)');
+                const img3 = document.querySelector('.spot-details--img:nth-child(3)');
+                const img4 = document.querySelector('.spot-details--img:nth-child(4)');
+                const img5 = document.querySelector('.spot-details--img:nth-child(5)');
+
+                if (img1) img1.setAttribute('id', 'length-5-img-1');
+                if (img2) img2.setAttribute('id', 'length-5-img-2');
+                if (img3) img3.setAttribute('id', 'length-5-img-3');
+                if (img4) img4.setAttribute('id', 'length-5-img-4');
+                if (img5) img5.setAttribute('id', 'length-5-img-5');
+            }
+        }
+
+    }, [spot]);
+
     if (!spot || !Object.entries(spot).length) return null;
 
     return (
