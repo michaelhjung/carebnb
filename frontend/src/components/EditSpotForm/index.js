@@ -28,6 +28,7 @@ export default function EditSpotForm() {
     useEffect(() => {
         if (spot) {
             const errors = [];
+            if (name.length >= 50) errors.push("Name must be less than 50 characters");
 
             if (Number.isNaN(Number(lat)) ||
                 (Number(lat)) > 90 ||
@@ -44,7 +45,7 @@ export default function EditSpotForm() {
 
             setValidationErrors(errors);
         }
-    }, [lat, lng, price, spot]);
+    }, [name, lat, lng, price, spot]);
 
     useEffect(() => {
         if (spot) {
