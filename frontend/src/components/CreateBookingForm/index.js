@@ -90,7 +90,7 @@ export default function CreateBookingForm({ spot, user }) {
                 </div>
                 <div id='check-in-out-container'>
                     <div id='check-in-container'>
-                        <span id='check-in-text'>CHECK-IN:</span>
+                        <span id='check-in-text'>CHECK-IN</span>
                         <input
                             type="date"
                             value={startDate}
@@ -101,7 +101,7 @@ export default function CreateBookingForm({ spot, user }) {
                         />
                     </div>
                     <div id='check-out-container'>
-                        <span id='check-out-text'>CHECKOUT:</span>
+                        <span id='check-out-text'>CHECKOUT</span>
                         <input
                             type="date"
                             value={endDate}
@@ -112,7 +112,14 @@ export default function CreateBookingForm({ spot, user }) {
                         />
                     </div>
                 </div>
-                <button type="submit" id='booking-button' className='submit-button' disabled={validationErrors.length}>Reserve</button>
+                <button
+                    type="submit"
+                    id='button--booking-submit'
+                    className='submit-button'
+                    disabled={validationErrors.length}
+                >
+                    Reserve
+                </button>
             </form>
         </div>
     );

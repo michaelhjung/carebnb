@@ -94,117 +94,106 @@ export default function CreateSpotForm() {
                         {validationErrors.map((error) => <li key={error} className="error-li">{error}</li>)}
                     </ul>
                 )}
-                <div className='container--form-fields-only'>
-                    <div id='container--form-field-spot--name' className='container--form-field'>
-                        <input
-                            type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            required
-                            placeholder='Spot Name'
-                            className='form-field'
-                            id='form-field--name'
-                        />
-                    </div>
-                    <div id='container--form-field-spot--address' className='container--form-field'>
-                        <input
-                            type="text"
-                            value={address}
-                            onChange={(e) => setAddress(e.target.value)}
-                            required
-                            placeholder='Address'
-                            className='form-field'
-                            id='form-field--address'
-                        />
-                    </div>
-                    <div id='container--form-field-spot--city' className='container--form-field'>
-                        <input
-                            type="text"
-                            value={city}
-                            onChange={(e) => setCity(e.target.value)}
-                            required
-                            placeholder='City'
-                            className='form-field'
-                            id='form-field--city'
-                        />
-                    </div>
-                    <div id='container--form-field-spot--state' className='container--form-field'>
-                        <input
-                            type="text"
-                            value={state}
-                            onChange={(e) => setState(e.target.value)}
-                            required
-                            placeholder='State'
-                            className='form-field'
-                            id='form-field--state'
-                        />
-                    </div>
-                    <div id='container--form-field-spot--country' className='container--form-field'>
-                        <input
-                            type="text"
-                            value={country}
-                            onChange={(e) => setCountry(e.target.value)}
-                            required
-                            placeholder='Country'
-                            className='form-field'
-                            id='form-field--country'
-                        />
-                    </div>
-                    <div id='container--form-field-spot--lat' className='container--form-field'>
-                        <input
-                            type="text"
-                            value={lat}
-                            onChange={(e) => setLat(e.target.value)}
-                            required
-                            placeholder='Latitude'
-                            className='form-field'
-                            id='form-field--lat'
-                        />
-                    </div>
-                    <div id='container--form-field-spot--lng' className='container--form-field'>
-                        <input
-                            type="text"
-                            value={lng}
-                            onChange={(e) => setLng(e.target.value)}
-                            required
-                            placeholder='Longitude'
-                            className='form-field'
-                            id='form-field--lng'
-                        />
-                    </div>
-                    <div id='container--form-field-spot--desc' className='container--form-field'>
-                        <textarea
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                            required
-                            placeholder='Description'
-                            className='form-field'
-                            id='form-field--desc'
-                            rows='8'
-                        ></textarea>
-                    </div>
-                    <div id='container--form-field-spot--price' className='container--form-field'>
-                        <input
-                            type="text"
-                            value={price}
-                            onChange={(e) => setPrice(e.target.value)}
-                            required
-                            placeholder='Price'
-                            className='form-field'
-                            id='form-field--price'
-                        />
-                    </div>
-                    <div id='container--form-field-spot--image' className='container--form-field'>
-                        <input
-                            type="text"
-                            value={url}
-                            onChange={(e) => setUrl(e.target.value)}
-                            required
-                            placeholder='Preview Image url'
-                            className='form-field'
-                            id='form-field--image'
-                        />
-                    </div>
+                <div className='container--form-fields'>
+                    <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                        placeholder='Spot Name'
+                        className='form-field'
+                        id='form-field--name'
+                    />
+
+                    <input
+                        type="text"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                        required
+                        placeholder='Address'
+                        className='form-field'
+                        id='form-field--address'
+                    />
+
+                    <input
+                        type="text"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        required
+                        placeholder='City'
+                        className='form-field'
+                        id='form-field--city'
+                    />
+
+                    <input
+                        type="text"
+                        value={state}
+                        onChange={(e) => setState(e.target.value)}
+                        required
+                        placeholder='State'
+                        className='form-field'
+                        id='form-field--state'
+                    />
+
+                    <input
+                        type="text"
+                        value={country}
+                        onChange={(e) => setCountry(e.target.value)}
+                        required
+                        placeholder='Country'
+                        className='form-field'
+                        id='form-field--country'
+                    />
+
+                    <input
+                        type="text"
+                        value={lat}
+                        onChange={(e) => setLat(e.target.value)}
+                        required
+                        placeholder='Latitude'
+                        className='form-field'
+                        id='form-field--lat'
+                    />
+
+                    <input
+                        type="text"
+                        value={lng}
+                        onChange={(e) => setLng(e.target.value)}
+                        required
+                        placeholder='Longitude'
+                        className='form-field'
+                        id='form-field--lng'
+                    />
+
+                    <textarea
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        required
+                        placeholder='Description'
+                        className='form-field'
+                        id='form-field--desc'
+                        rows='8'
+                    ></textarea>
+
+                    <input
+                        type="text"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                        required
+                        placeholder='Price'
+                        className='form-field'
+                        id='form-field--price'
+                    />
+
+                    <input
+                        type="text"
+                        value={url}
+                        onChange={(e) => setUrl(e.target.value)}
+                        required
+                        placeholder='Preview Image url'
+                        className='form-field'
+                        id='form-field--image'
+                    />
                 </div>
 
                 <button

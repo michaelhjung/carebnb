@@ -13,7 +13,7 @@
 }
 
 .user-spot-card--button {
-    background-color: #e31c5f;
+    background: linear-gradient(45deg, #FF5A5F, #e31c5f 15%);
     color: #FFF;
     font-weight: 600;
     border-radius: 7px;
@@ -22,8 +22,7 @@
 }
 
 .user-spot-card--button:hover {
-    background-color: #D31c5f;
-    opacity: 0.9;
+    background: linear-gradient(45deg, #e31c5f, #FF5A5F);
     cursor: pointer;
 }
 
