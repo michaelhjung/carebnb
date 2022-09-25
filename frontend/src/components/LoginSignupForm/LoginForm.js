@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 
@@ -7,6 +7,16 @@ function LoginForm({ setShowMenu, closeMenu }) {
     const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
     const [validationErrors, setValidationErrors] = useState([]);
+
+    useEffect(() => {
+        let loginFormDiv = document.querySelector('.container--login-form')
+
+        if (validationErrors.length === 0) loginFormDiv.setAttribute('id', 'login-error-length-0');
+        if (validationErrors.length === 1) loginFormDiv.setAttribute('id', 'login-error-length-1');
+
+        return () => loginFormDiv.setAttribute('id', 'login-error-length-0');
+
+    }, [validationErrors]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,7 +37,7 @@ function LoginForm({ setShowMenu, closeMenu }) {
     };
 
     return (
-        <div className='container--login-signup-forms' id='container--login-form'>
+        <div className='container--login-signup-forms container--login-form'>
             <div className='title-login-signup container--login-signup-top' id='title-login'>
                 Log in
             </div>
