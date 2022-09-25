@@ -42,7 +42,7 @@ export default function AddSpotImageForm() {
     if (!spot || !Object.entries(spot).length) return null;
 
     return (
-        <div className='container--form'>
+        <div id='container--img-form'>
             <h1>Add an image to your Spot!</h1>
             <h2>{spot.name}</h2>
             <NavLink to={`/spots/${spotId}`}>
@@ -57,23 +57,22 @@ export default function AddSpotImageForm() {
                 <ul className="list--errors">
                     {validationErrors.map((error) => <li key={error} className="error-li">{error}</li>)}
                 </ul>
-                <div className='container--form-fields-only'>
-                <div id='container--form-field-add-img--name' className='container--form-field'>
-                        <input
-                            type="text"
-                            value={url}
-                            onChange={(e) => setUrl(e.target.value)}
-                            required
-                            placeholder='image url'
-                            className='form-field'
-                            id='form-field--add-img-url'
-                        />
-                    </div>
+                <div className='container--form-fields'>
+                    <input
+                        type="text"
+                        value={url}
+                        onChange={(e) => setUrl(e.target.value)}
+                        required
+                        placeholder='image url'
+                        className='form-field'
+                        id='form-field--add-img-url'
+                    />
                 </div>
 
                 <button
                     type="submit"
                     className='submit-button'
+                    id='button--add-img-submit'
                 >
                     Submit
                 </button>

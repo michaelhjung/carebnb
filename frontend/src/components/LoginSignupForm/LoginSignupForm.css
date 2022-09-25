@@ -42,11 +42,6 @@
     position: relative;
 }
 
-/* #container--signup-fields {
-    width: 530px;
-    position: absolute;
-} */
-
 .container--login-signup-fields,
 .container--login-signup-field,
 .login-signup-field {
@@ -71,7 +66,7 @@
 }
 
 .login-signup-submit-button {
-    background-color: #e31c5f;
+    background: linear-gradient(45deg, #FF5A5F, #e31c5f 30%);
     color: #FFF;
     font-weight: 500;
     padding: 15px;
@@ -81,6 +76,9 @@
     position: absolute;
     width: 530px;
     bottom: 20px;
+}
+.login-signup-submit-button:hover {
+    background: linear-gradient(45deg, #e31c5f, #FF5A5F);
 }
 
 .container--signup-form {

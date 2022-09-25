@@ -154,7 +154,7 @@ export default function SpotDetails() {
                     <div id='container--spot-details-booking'>
                         <div id='spot-details--info-left'>
                             <div className='spot-details--title-host-info'>
-                                <h2 id='host-info'>Home hosted by {spot.Owner.firstName}</h2>
+                                <h2 id='host-info'>Entire home hosted by {spot.Owner.firstName}</h2>
                             </div>
 
                             <div id='air-cover'>

@@ -33,6 +33,13 @@ h1 {
 /*****************************************************************************/
 /* STYLES FOR ALL FORMS */
 
+input:focus,
+textarea:focus {
+    outline: none;
+    border: 2px solid black;
+    border-radius: 7px;
+}
+
 .list--errors {
     padding: 0;
     margin: 20px 0px;
@@ -46,66 +53,26 @@ h1 {
     margin: 3px 0px;
 }
 
-.container--form {
+/* .container--form {
     margin-top: 0px;
-}
+} */
 
-.container--form,
+/* .container--form, */
+
+/* -----> START OF CREATE A SPOT / EDIT A SPOT FORMS <----- */
 .form,
-.container--form-fields-only {
+.container--form-fields,
+#container--img-form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.container--form-fields-only {
+.container--form-fields {
     margin: 20px 0px 30px;
-    width: 700px;
-}
-
-.container--form-field,
-.form-field {
-    /* border-radius: 7px; */
-    border-right: 1.5px solid #DDD;
-    border-left: 1.5px solid #DDD;
-}
-
-#container--form-field-spot--name,
-#container--form-field-spot--address,
-#container--form-field-spot--city,
-#container--form-field-spot--state,
-#container--form-field-spot--country,
-#container--form-field-spot--lat,
-#container--form-field-spot--lng,
-#container--form-field-spot--desc,
-#container--form-field-spot--price {
-    border-bottom: 1px solid #DDD;
-}
-
-#container--form-field-spot--name,
-#form-field--name {
-    border-top: 1px solid #DDD;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
-}
-
-#container--form-field-spot--image,
-#form-field--image {
-    border-bottom: 1px solid #DDD;
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
-}
-
-#form-field--desc {
-    overflow-y: scroll;
-    resize: none;
-}
-
-#container--form-field-add-img--name,
-#form-field--add-img-url {
-    border-top: 1px solid #DDD;
-    border-bottom: 1px solid #DDD;
+    border: 1px solid #DDD;
     border-radius: 7px;
+    overflow: hidden;
 }
 
 .form-field {
@@ -114,26 +81,60 @@ h1 {
     border: none;
 }
 
+#form-field--name,
+#form-field--address,
+#form-field--city,
+#form-field--state,
+#form-field--country,
+#form-field--lat,
+#form-field--lng,
+#form-field--desc,
+#form-field--price {
+    border-bottom: 1px solid #DDD;
+}
+#form-field--name:focus,
+#form-field--address:focus,
+#form-field--city:focus,
+#form-field--state:focus,
+#form-field--country:focus,
+#form-field--lat:focus,
+#form-field--lng:focus,
+#form-field--desc:focus,
+#form-field--price:focus {
+    border: 2px solid #000;
+}
+
+#form-field--desc {
+    overflow-y: auto;
+    resize: none;
+}
+
 .submit-button {
-    background-color: #e31c5f;
+    background: linear-gradient(45deg, #FF5A5F, #e31c5f 30%);
     color: #FFF;
     font-weight: 500;
     padding: 15px;
     border: none;
     border-radius: 7px;
     cursor: pointer;
+    width: 500px;
 }
 
 .submit-button:hover {
-    background-color: #D31c5f;
-    opacity: 0.9;
+    background: linear-gradient(45deg, #e31c5f, #FF5A5F);
 }
 
-#button--create-spot-submit {
-    width: 500px;
+#button--create-spot-submit,
+#button--edit-spot-submit,
+#button--add-img-submit {
     margin-bottom: 150px;
 }
+/* ------> END OF CREATE A SPOT / EDIT A SPOT FORMS <------ */
 
+
+
+
+/* ------------> START OF ADD SPOT IMAGE FORM <------------ */
 #add-img-spot-thumbnail {
     width: 180px;
     height: 180px;
@@ -141,6 +142,8 @@ h1 {
     border-radius: 15px;
 }
 
-#form-field--desc {
-    overflow-y: auto;
+#form-field--add-img-url:focus {
+    border: 2px solid #000;
 }
+
+/* -------------> END OF ADD SPOT IMAGE FORM <------------- */

@@ -27,10 +27,24 @@
     margin-right: 2px;
 }
 
+#booking-form-stars,
+#booking-form-reviews {
+    font-size: .8rem;
+}
+
+#booking-form-stars {
+    font-weight: 500;
+}
+
+.booking-form-dot {
+    font-weight: 500;
+}
+
 #check-in-out-container {
     width: 100%;
     border: 1px solid #CCC;
-    border-radius: 15px;
+    border-radius: 7px;
+    overflow: hidden;
     display: flex;
     margin: 20px 0px 15px;
 }
@@ -38,41 +52,35 @@
 #check-in-container,
 #check-out-container {
     width: 50%;
-    padding: 10px;
     background-color: #FFF;
+    position: relative;
 }
 
-#check-in-container {
+#form-field--check-in {
     border-right: 1px solid #CCC;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-}
-#check-out-container {
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
 }
 
 #check-in-text,
 #check-out-text {
     font-size: .6rem;
     font-weight: 700;
+    position: absolute;
+    top: 10px;
+    left: 11px;
 }
 
 #form-field--check-in,
 #form-field--check-out {
     width: 100%;
+    height: 55px;
+    padding: 22px 15px 10px 10px;
+}
+#form-field--check-in:focus,
+#form-field--check-out:focus {
+    border-right: 2px solid #000;
+    border-radius: 7px;
 }
 
-#form-field--check-in {
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-}
-#form-field--check-out {
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-
-#booking-button {
+#button--booking-submit {
     width: 100%;
 }
