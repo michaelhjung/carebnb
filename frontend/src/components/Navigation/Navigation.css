@@ -99,7 +99,12 @@ footer {
 }
 #profile-icon-user {
     left: 35px;
-    color: #E61E4D
+}
+.fa-user-circle {
+    color: #777;
+}
+.logged-in-user-icon {
+    color: #E61E4D;
 }
 
 .button--profile:hover {

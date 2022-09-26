@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
@@ -11,6 +11,14 @@ function Navigation() {
     const sessionUser = useSelector(state => state.session.user);
     const checkSession = () => (sessionUser) ? welcomeBanner = `Welcome, ${sessionUser.firstName}!` : welcomeBanner = `Welcome to Carebnb!`;
     checkSession();
+
+    useEffect(() => {
+        const profilePic = document.getElementById('profile-icon-user');
+        if (sessionUser) profilePic.classList.add('logged-in-user-icon');
+        if (!sessionUser) profilePic.classList.remove('logged-in-user-icon');
+
+        return () => profilePic.classList.remove('logged-in-user-icon');
+    }, [sessionUser]);
 
     return (
         <header>
