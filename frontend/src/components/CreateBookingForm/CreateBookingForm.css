@@ -19,6 +19,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: -1;
 }
 
 #booking-form-price {
@@ -47,6 +48,7 @@
     overflow: hidden;
     display: flex;
     margin: 20px 0px 15px;
+    z-index: -1;
 }
 
 #check-in-container,
@@ -83,4 +85,5 @@
 
 #button--booking-submit {
     width: 100%;
+    z-index: -1;
 }

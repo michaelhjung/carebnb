@@ -150,6 +150,7 @@ footer {
     padding: 10px 0px;
     list-style: none;
     width: 250px;
+    z-index: 5;
 }
 
 .button--dropdown-item {
