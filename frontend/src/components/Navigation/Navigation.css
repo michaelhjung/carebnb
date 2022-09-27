@@ -32,6 +32,11 @@ nav {
     justify-content: center;
 }
 
+#welcome-banner-name {
+    color: #E61E4D;
+    font-weight: 500;
+}
+
 footer {
     border-top: 1px solid #DDD;
     background-color: #FFF;
