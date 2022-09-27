@@ -9,7 +9,7 @@ import logo from '../../logo/carebnb-logo-v5.png';
 function Navigation() {
     let welcomeBanner;
     const sessionUser = useSelector(state => state.session.user);
-    const checkSession = () => (sessionUser) ? welcomeBanner = `Welcome, ${sessionUser.firstName}!` : welcomeBanner = `Welcome to Carebnb!`;
+    const checkSession = () => (sessionUser) ? welcomeBanner = `${sessionUser.firstName}` : welcomeBanner = `Welcome to Carebnb!`;
     checkSession();
 
     useEffect(() => {
@@ -28,7 +28,10 @@ function Navigation() {
                         <img src={logo} className='logo' alt="carebnb-logo" />
                     </NavLink>
                 </div>
-                <div className='navbar--middle'>{welcomeBanner}</div>
+                {
+                    (sessionUser) ? <div className='navbar--middle'>Welcome, <span id='welcome-banner-name'>{welcomeBanner}</span>!</div>
+                     : <div className='navbar--middle'>{welcomeBanner}</div>
+                }
                 <div className='navbar--right'>
                     <NavLink to="/create-spot" className='link--create-spot'>
                         <button className='button button--create-spot'>Create a Spot</button>
