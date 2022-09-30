@@ -234,6 +234,39 @@
     width: 530px;
 }
 
+/* -----> BOOKING FORM CONTAINER <----- */
+#features {
+    border-top: 1px solid #DDD;
+    padding: 35px 35px 35px 0px;
+}
+.features-item {
+    display: flex;
+    margin-bottom: 24px;
+    /* justify-content: flex-start; */
+}
+.features-item:last-child {
+    margin-bottom: 0px;
+}
+.features-icon {
+    margin-right: 20px;
+}
+.features-text {
+    display: flex;
+    flex-direction: column;
+}
+.features-main-text {
+    font-weight: 500;
+    margin: 0px 0px 7px;
+}
+.features-main-text:last-child {
+    margin: 0px 0px 0px;
+}
+.features-sub-text {
+    font-weight: 300;
+    font-size: .85rem;
+    color: #838383
+}
+
 /* -----> AIRCOVER SECTION <----- */
 #air-cover {
     border-top: 1px solid #DDD;
