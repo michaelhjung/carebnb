@@ -157,6 +157,45 @@ export default function SpotDetails() {
                                 <h2 id='host-info'>Entire home hosted by {spot.Owner.firstName}</h2>
                             </div>
 
+                            <div id='features'>
+                                <div className='features-item'>
+                                    <div className='features-icon'>
+                                        <i class="fa-solid fa-medal fa-xl" />
+                                    </div>
+                                    <div className='features-text'>
+                                        <div className='features-main-text'>
+                                            {spot.Owner.firstName} is a Superhost
+                                        </div>
+                                        <div className='features-sub-text'>
+                                            Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='features-item'>
+                                    <div className='features-icon'>
+                                        <i class="fa-solid fa-door-open fa-xl" />
+                                    </div>
+                                    <div className='features-text'>
+                                        <div className='features-main-text'>
+                                            Self check-in
+                                        </div>
+                                        <div className='features-sub-text'>
+                                            Check yourself in with the keypad.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='features-item'>
+                                    <div className='features-icon'>
+                                        <i class="fa-regular fa-calendar fa-xl" />
+                                    </div>
+                                    <div className='features-text'>
+                                        <div className='features-main-text'>
+                                            Free cancellation for 48 hours.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div id='air-cover'>
                                 <h2>
                                     <span id='text-air'>air</span><span id='text-cover'>cover</span>
