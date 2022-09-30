@@ -85,7 +85,7 @@ module.exports = {
                 lat: 31.78,
                 lng: 35.22,
                 name: 'The Upper Room',
-                description: 'In the area? Come stay at the Upper Room for some nice time of undistracted meditation and prayer!',
+                description: 'In the area? Come stay at the Upper Room for some nice time of undistracted meditation and prayer! -visited.has(wk7',
                 price: 30
             },
             {
@@ -121,7 +121,7 @@ module.exports = {
                 lat: 40.75,
                 lng: -73.97,
                 name: 'Avenger\'s Tower',
-                description: 'Experience the life of an avenger.',
+                description: 'Experience the life of an avenger. -wk7winner🙊',
                 price: 199999
             },
             {
@@ -133,7 +133,7 @@ module.exports = {
                 lat: 37.82,
                 lng: -122.26,
                 name: 'Pokemon Center and More - Oakland',
-                description: 'Feeling sick? Heal up and rest up!',
+                description: 'Feeling sick? Heal up and rest up! -🙊7,10,11-!Logn',
                 price: 399999
             },
             {
@@ -145,7 +145,7 @@ module.exports = {
                 lat: 4.6,
                 lng: 36.1,
                 name: 'Wakandan Paradise House',
-                description: 'Come take a vacation at one of the most secret paradises in the world!',
+                description: 'Come take a vacation at one of the most secret paradises in the world! -enomooshekki🙊',
                 price: 200000
             },
             {
@@ -169,7 +169,7 @@ module.exports = {
                 lat: 40.7,
                 lng: -74.01,
                 name: 'Gotham Condo',
-                description: 'Very close to the Gotham Police Department, very safe.',
+                description: 'Very close to the Gotham Police Department, very safe. -ogjune4xwinr🙊',
                 price: 699
             },
             {
