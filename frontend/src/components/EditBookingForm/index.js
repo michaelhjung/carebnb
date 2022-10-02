@@ -6,6 +6,10 @@ import './EditBookingForm.css';
 
 // THIS COMPONENT IS NESTED IN SPOT BOOKINGS //
 
+// TODO: THERE IS STILL A BUG WHERE IT SAYS THAT
+// A SPOT IS ALREADY BOOKED WHEN TRYING TO UPDATE
+// (WHEN IT'S NOT YET BOOKED FOR THOSE NEW DATES)
+
 export default function EditBookingForm() {
     const dispatch = useDispatch();
     const history = useHistory();
