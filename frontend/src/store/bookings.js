@@ -1,4 +1,5 @@
 import { csrfFetch } from './csrf';
+// tes
 
 /* ----------------------------- ACTION TYPES: ----------------------------- */
 const LOAD_USER_BOOKINGS = '/bookings/LOAD_USER_BOOKINGS';
