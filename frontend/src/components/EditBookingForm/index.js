@@ -148,7 +148,7 @@ export default function EditBookingForm() {
                         className='submit-button'
                         disabled={validationErrors.length}
                     >
-                        Reserve
+                        Update Reservation
                     </button>
                 </form>
             </div>
