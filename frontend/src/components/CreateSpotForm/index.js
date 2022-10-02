@@ -194,6 +194,8 @@ export default function CreateSpotForm() {
                         className='form-field'
                         id='form-field--image'
                     />
+
+                    {url && <img className='create-spot-img-url-preview' src={url} alt={url} />}
                 </div>
 
                 <button
