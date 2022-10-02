@@ -52,10 +52,11 @@
 
 .booking-card--buttons-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
 }
 
-#button--delete-booking {
+#button--delete-booking,
+#button--edit-booking {
     background: linear-gradient(45deg, #FF5A5F, #e31c5f 15%);
     color: #FFF;
     font-weight: 600;
@@ -65,7 +66,8 @@
     margin-top: 15px;
 }
 
-#button--delete-booking:hover {
+#button--delete-booking:hover,
+#button--edit-booking:hover {
     background: linear-gradient(45deg, #e31c5f, #FF5A5F);
     cursor: pointer;
 }
