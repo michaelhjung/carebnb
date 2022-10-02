@@ -17,6 +17,17 @@ export default function UserBookings() {
         return () => dispatch(bookingsActions.clearData());
     }, [dispatch]);
 
+    useEffect(() => {
+        if (userBookings) {
+            console.log("USER BOOKINGS IS:", userBookings);
+            const today = new Date(Date.now());
+            Object.values(userBookings).forEach(booking => {
+                const parsedEndDate = new Date(booking.endDate + "T00:00:00");
+                if (today > parsedEndDate) dispatch(bookingsActions.deleteBooking(booking.id));
+            });
+        }
+    }, [dispatch, userBookings]);
+
     if (!sessionUser) return <Redirect to="/" />
     if (!userBookings) return null;
 

@@ -88,7 +88,7 @@ export const updateBooking = (bookingId, bookingData) => async dispatch => {
 
     if (response.ok) {
         const updatedBookingData = await response.json();
-        console.log("JSONIFIED UPDATED SPOT DATA AFTER THUNK:", updatedBookingData);
+        // console.log("JSONIFIED UPDATED SPOT DATA AFTER THUNK:", updatedBookingData);
         dispatch(editBooking(updatedBookingData));
         return updatedBookingData;
     }
@@ -140,7 +140,7 @@ const bookingsReducer = (state = initialState, action) => {
             newState = { ...state, user: { ...state.user }, spot: { ...state.spot } };
             const updatedBooking = { ...action.payload };
             newState.user[action.payload.id] = updatedBooking;
-            console.log("NEWSTATE AFTER ADD_BOOKING ACTION:", newState);
+            // console.log("NEWSTATE AFTER ADD_BOOKING ACTION:", newState);
             return newState;
         case REMOVE_BOOKING:
             newState = { ...state, user: { ...state.user }, spot: { ...state.spot } };
