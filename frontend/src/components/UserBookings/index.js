@@ -3,6 +3,7 @@ import { Redirect, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import * as bookingsActions from '../../store/bookings';
 import DeleteBookingButton from './DeleteBookingButton';
+import EditBookingButton from './EditBookingButton';
 import './UserBookings.css';
 
 export default function UserBookings() {
@@ -45,7 +46,9 @@ export default function UserBookings() {
                         </div>
 
                         <div className='booking-card--buttons-container'>
-
+                            <NavLink to={`/user/${sessionUser.id}/bookings/${booking.id}/edit`}>
+                                <EditBookingButton />
+                            </NavLink>
                             <DeleteBookingButton bookingId={booking.id} />
                         </div>
                     </div>

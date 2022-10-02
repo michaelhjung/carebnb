@@ -4,7 +4,7 @@ import { csrfFetch } from './csrf';
 const LOAD_USER_BOOKINGS = '/bookings/LOAD_USER_BOOKINGS';
 const LOAD_SPOT_BOOKINGS = '/bookings/LOAD_SPOT_BOOKINGS';
 const ADD_BOOKING = '/bookings/ADD_BOOKING';
-// const EDIT_BOOKING = '/bookings/EDIT_BOOKING';
+const EDIT_BOOKING = '/bookings/EDIT_BOOKING';
 const REMOVE_BOOKING = '/bookings/REMOVE_BOOKING';
 const CLEAR_DATA = '/spots/CLEAR_DATA';
 
@@ -25,10 +25,10 @@ const add = (bookingData) => ({
     payload: bookingData
 });
 
-// const editBooking = (bookingData) => ({
-//     type: EDIT_BOOKING,
-//     payload: bookingData
-// })
+const editBooking = (bookingData) => ({
+    type: EDIT_BOOKING,
+    payload: bookingData
+})
 
 const removeBooking = (bookingId) => ({
     type: REMOVE_BOOKING,
@@ -79,20 +79,20 @@ export const createBooking = (spotId, bookingData) => async dispatch => {
     }
 }
 
-// export const updateBooking = (bookingId, bookingData) => async dispatch => {
-//     const response = await csrfFetch(`/api/bookings/${bookingId}`, {
-//         method: 'PUT',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify(bookingData)
-//     });
+export const updateBooking = (bookingId, bookingData) => async dispatch => {
+    const response = await csrfFetch(`/api/bookings/${bookingId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(bookingData)
+    });
 
-//     if (response.ok) {
-//         const updatedBookingData = await response.json();
-//         // console.log("JSONIFIED UPDATED SPOT DATA AFTER THUNK:", updatedBookingData);
-//         dispatch(editBooking(updatedBookingData));
-//         return updatedBookingData;
-//     }
-// }
+    if (response.ok) {
+        const updatedBookingData = await response.json();
+        console.log("JSONIFIED UPDATED SPOT DATA AFTER THUNK:", updatedBookingData);
+        dispatch(editBooking(updatedBookingData));
+        return updatedBookingData;
+    }
+}
 
 export const deleteBooking = (bookingId) => async dispatch => {
     const response = await csrfFetch(`/api/bookings/${bookingId}`, {
@@ -136,12 +136,12 @@ const bookingsReducer = (state = initialState, action) => {
             newState.user[action.payload.id] = newBooking;
             // console.log("NEWSTATE AFTER ADD_BOOKING ACTION:", newState);
             return newState;
-        // case EDIT_BOOKING:
-        //     newState = { ...state };
-        //     const updatedBooking = { ...action.payload };
-        //     newState.allbookings[action.payload.id] = updatedBooking;
-        //     // console.log("NEWSTATE AFTER ADD_BOOKING ACTION:", newState);
-        //     return newState;
+        case EDIT_BOOKING:
+            newState = { ...state, user: { ...state.user }, spot: { ...state.spot } };
+            const updatedBooking = { ...action.payload };
+            newState.user[action.payload.id] = updatedBooking;
+            console.log("NEWSTATE AFTER ADD_BOOKING ACTION:", newState);
+            return newState;
         case REMOVE_BOOKING:
             newState = { ...state, user: { ...state.user }, spot: { ...state.spot } };
             delete newState.user[action.payload];

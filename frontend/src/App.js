@@ -10,6 +10,7 @@ import UserSpots from "./components/UserSpots";
 import AddSpotImageForm from "./components/AddSpotImageForm";
 import EditSpotForm from "./components/EditSpotForm";
 import UserBookings from "./components/UserBookings";
+import EditBookingForm from "./components/EditBookingForm";
 import PageNotFound from "./components/PageNotFound";
 
 function App() {
@@ -51,6 +52,10 @@ function App() {
 
                         <Route exact path="/user/:userId/bookings">
                             <UserBookings />
+                        </Route>
+
+                        <Route exact path="/user/:userId/bookings/:bookingId/edit">
+                            <EditBookingForm />
                         </Route>
 
                         <Route>
