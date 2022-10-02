@@ -78,7 +78,6 @@ export default function EditBookingForm() {
         }
 
         catch (res) {
-            console.log(res)
             const data = await res.json();
             const errors = [];
             if (data && data.message) {

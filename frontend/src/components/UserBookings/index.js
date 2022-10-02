@@ -19,7 +19,6 @@ export default function UserBookings() {
 
     useEffect(() => {
         if (userBookings) {
-            console.log("USER BOOKINGS IS:", userBookings);
             const today = new Date(Date.now());
             Object.values(userBookings).forEach(booking => {
                 const parsedEndDate = new Date(booking.endDate + "T00:00:00");
