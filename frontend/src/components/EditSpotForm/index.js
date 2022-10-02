@@ -21,8 +21,16 @@ export default function EditSpotForm() {
     const [price, setPrice] = useState("");
     const [validationErrors, setValidationErrors] = useState([]);
 
+    const [img1, setImg1] = useState("");
+    const [img2, setImg2] = useState("");
+    const [img3, setImg3] = useState("");
+    const [img4, setImg4] = useState("");
+    const [img5, setImg5] = useState("");
+
     useEffect(() => {
         dispatch(spotsActions.getSingleSpot(spotId));
+
+        return () => dispatch(spotsActions.clearData());
     }, [dispatch, spotId]);
 
     useEffect(() => {
@@ -58,6 +66,14 @@ export default function EditSpotForm() {
             setName(spot.name || '');
             setDescription(spot.description || '');
             setPrice(spot.price || '');
+
+            if (spot.spotImages) {
+                if (spot.spotImages[0]) setImg1(spot.spotImages[0].url);
+                if (spot.spotImages[1]) setImg2(spot.spotImages[1].url);
+                if (spot.spotImages[2]) setImg3(spot.spotImages[2].url);
+                if (spot.spotImages[3]) setImg4(spot.spotImages[3].url);
+                if (spot.spotImages[4]) setImg5(spot.spotImages[4].url);
+            }
         }
     }, [spot]);
 
@@ -196,6 +212,38 @@ export default function EditSpotForm() {
                         className='form-field'
                         id='form-field--price'
                     />
+
+                    {img1 && (
+                        <div className='edit-spot-img-url-preview-div'>
+                            <span className='edit-spot-img-url-preview-text'>image 1:</span>
+                            <img className='edit-spot-img-url-preview' src={img1} alt={img1} />
+                        </div>
+                    )}
+                    {img2 && (
+                        <div className='edit-spot-img-url-preview-div'>
+                            <span className='edit-spot-img-url-preview-text'>image 2:</span>
+                            <img className='edit-spot-img-url-preview' src={img2} alt={img2} />
+                        </div>
+                    )}
+                    {img3 && (
+                        <div className='edit-spot-img-url-preview-div'>
+                            <span className='edit-spot-img-url-preview-text'>image 3:</span>
+                            <img className='edit-spot-img-url-preview' src={img3} alt={img3} />
+                        </div>
+                    )}
+                    {img4 && (
+                        <div className='edit-spot-img-url-preview-div'>
+                            <span className='edit-spot-img-url-preview-text'>image 4:</span>
+                            <img className='edit-spot-img-url-preview' src={img4} alt={img4} />
+                        </div>
+                    )}
+                    {img5 && (
+                        <div className='edit-spot-img-url-preview-div'>
+                            <span className='edit-spot-img-url-preview-text'>image 5:</span>
+                            <img className='edit-spot-img-url-preview' src={img5} alt={img5} />
+                        </div>
+                    )}
+
                 </div>
 
                 <button
