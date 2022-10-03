@@ -160,7 +160,7 @@ export default function SpotDetails() {
                             <div id='features'>
                                 <div className='features-item'>
                                     <div className='features-icon'>
-                                        <i class="fa-solid fa-medal fa-xl" />
+                                        <i className="fa-solid fa-medal fa-xl" />
                                     </div>
                                     <div className='features-text'>
                                         <div className='features-main-text'>
@@ -173,7 +173,7 @@ export default function SpotDetails() {
                                 </div>
                                 <div className='features-item'>
                                     <div className='features-icon'>
-                                        <i class="fa-solid fa-door-open fa-xl" />
+                                        <i className="fa-solid fa-door-open fa-xl" />
                                     </div>
                                     <div className='features-text'>
                                         <div className='features-main-text'>
@@ -186,7 +186,7 @@ export default function SpotDetails() {
                                 </div>
                                 <div className='features-item'>
                                     <div className='features-icon'>
-                                        <i class="fa-regular fa-calendar fa-xl" />
+                                        <i className="fa-regular fa-calendar fa-xl" />
                                     </div>
                                     <div className='features-text'>
                                         <div className='features-main-text'>
