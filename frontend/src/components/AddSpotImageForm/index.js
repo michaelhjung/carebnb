@@ -47,8 +47,8 @@ export default function AddSpotImageForm() {
             <h2>{spot.name}</h2>
             <NavLink to={`/spots/${spotId}`}>
                 <img
-                    src={spot.spotImages[0].url}
-                    alt={spot.description}
+                    src={spot.spotImages[0] && spot.spotImages[0].url}
+                    alt={spot.name}
                     id='add-img-spot-thumbnail'
                 />
             </NavLink>
