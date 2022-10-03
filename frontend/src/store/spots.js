@@ -7,6 +7,7 @@ const ADD_SPOT = '/spots/ADD_SPOT';
 const ADD_IMG = '/spots/ADD_IMG';
 const EDIT_SPOT = '/spots/EDIT_SPOT';
 const REMOVE_SPOT = '/spots/REMOVE_SPOT';
+const REMOVE_IMG = '/spots/REMOVE_IMG';
 const CLEAR_DATA = '/spots/CLEAR_DATA';
 
 
@@ -42,6 +43,11 @@ const editSpot = (spotData) => ({
 const removeSpot = (spotId) => ({
     type: REMOVE_SPOT,
     payload: spotId
+});
+
+const removeImg = (imageId) => ({
+    type: REMOVE_IMG,
+    payload: imageId
 });
 
 export const clearData = () => ({
@@ -143,6 +149,19 @@ export const deleteSpot = (spotId) => async dispatch => {
     }
 }
 
+export const deleteImg = (imageId) => async dispatch => {
+    const response = await csrfFetch(`/api/spot-images/${imageId}`, {
+        method: 'DELETE'
+    });
+
+    if (response.ok) {
+        const successMessage = await response.json();
+        // console.log("THIS IS THUNK SUCCESS MSG:", successMessage, imageId);
+        dispatch(removeImg(imageId));
+        return successMessage;
+    }
+}
+
 
 /* -------------------------------- REDUCER: -------------------------------- */
 const initialState = { allSpots: null, singleSpot: null };
@@ -186,6 +205,12 @@ const spotsReducer = (state = initialState, action) => {
         case REMOVE_SPOT:
             newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot } };
             delete newState.allSpots[action.payload];
+            newState = { ...newState };
+            // console.log("NEWSTATE AFTER REMOVE_SPOT ACTION:", newState);
+            return newState;
+        case REMOVE_IMG:
+            newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot } };
+            delete newState.singleSpot.spotImages.find(img => img.id === action.payload);
             newState = { ...newState };
             // console.log("NEWSTATE AFTER REMOVE_SPOT ACTION:", newState);
             return newState;

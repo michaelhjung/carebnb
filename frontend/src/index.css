@@ -141,12 +141,16 @@ textarea:focus {
 
 .edit-spot-img-url-preview-div {
     display: flex;
-    flex-direction: column;
     align-items: center;
     margin: 15px 0px 0px;
 }
 .edit-spot-img-url-preview-div:last-child {
     margin-bottom: 15px;
+}
+.edit-spot-img-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .edit-spot-img-url-preview {
@@ -157,6 +161,12 @@ textarea:focus {
     aspect-ratio: 1.95 / 1;
     margin: 5px;
 }
+
+#button--delete-img {
+    width: 125px;
+    margin: 15px 0px 0px 25px;
+}
+
 /* ------> END OF CREATE A SPOT / EDIT A SPOT FORMS <------ */
 
 

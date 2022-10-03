@@ -98,7 +98,7 @@ export default function EditSpotForm() {
             const updatedSpot = await dispatch(spotsActions.updateSpot(spotId, spotDetails));
             if (updatedSpot) {
                 setValidationErrors([]);
-                history.replace(`/spots/${updatedSpot.id}`);
+                history.push(`/spots/${updatedSpot.id}`);
             }
         }
 
@@ -108,6 +108,24 @@ export default function EditSpotForm() {
         }
     };
 
+    const handleDeleteImg = async (imageId) => {
+        try {
+            const deleteImgMsg = await dispatch(spotsActions.deleteImg(imageId));
+            if (deleteImgMsg) {
+                alert("Successfully deleted image.");
+            }
+        }
+
+        catch (res) {
+            const data = await res.json();
+            if (data && data.errors) setValidationErrors(data.errors);
+        }
+    }
+
+    const handleDeletePreviewImg = async (imageId) => {
+        return alert("You cannot delete your preview image (yet)... functionality in progress!");
+    }
+
     if (!sessionUser) return <Redirect to="/" />;
     if (!spot || !Object.entries(spot).length) return null;
 
@@ -115,7 +133,7 @@ export default function EditSpotForm() {
         <div className='container--form'>
             <h1>Update your Spot!</h1>
 
-            <form onSubmit={handleSubmit} className="form form--create-spot">
+            <form className="form form--create-spot">
                 {validationErrors.length > 0 && (
                     <ul className="list--errors">
                         {validationErrors.map((error) => <li key={error} className="error-li">{error}</li>)}
@@ -215,32 +233,52 @@ export default function EditSpotForm() {
 
                     {img1 && (
                         <div className='edit-spot-img-url-preview-div'>
-                            <span className='edit-spot-img-url-preview-text'>image 1:</span>
-                            <img className='edit-spot-img-url-preview' src={img1} alt={img1} />
+                            <div className='edit-spot-img-text-container'>
+                                <span className='edit-spot-img-url-preview-text'>Preview Image:</span>
+                                <img className='edit-spot-img-url-preview' src={img1} alt={img1} />
+                            </div>
+
+                            <button onClick={() => handleDeletePreviewImg(spot.spotImages[0].id)} className='submit-button' id='button--delete-img'>Delete Image</button>
                         </div>
                     )}
                     {img2 && (
                         <div className='edit-spot-img-url-preview-div'>
-                            <span className='edit-spot-img-url-preview-text'>image 2:</span>
-                            <img className='edit-spot-img-url-preview' src={img2} alt={img2} />
+                            <div className='edit-spot-img-text-container'>
+                                <span className='edit-spot-img-url-preview-text'>Image 2:</span>
+                                <img className='edit-spot-img-url-preview' src={img2} alt={img2} />
+                            </div>
+
+                            <button onClick={() => handleDeleteImg(spot.spotImages[1].id)} className='submit-button' id='button--delete-img'>Delete Image</button>
                         </div>
                     )}
                     {img3 && (
                         <div className='edit-spot-img-url-preview-div'>
-                            <span className='edit-spot-img-url-preview-text'>image 3:</span>
-                            <img className='edit-spot-img-url-preview' src={img3} alt={img3} />
+                            <div className='edit-spot-img-text-container'>
+                                <span className='edit-spot-img-url-preview-text'>Image 3:</span>
+                                <img className='edit-spot-img-url-preview' src={img3} alt={img3} />
+                            </div>
+
+                            <button onClick={() => handleDeleteImg(spot.spotImages[2].id)} className='submit-button' id='button--delete-img'>Delete Image</button>
                         </div>
                     )}
                     {img4 && (
                         <div className='edit-spot-img-url-preview-div'>
-                            <span className='edit-spot-img-url-preview-text'>image 4:</span>
-                            <img className='edit-spot-img-url-preview' src={img4} alt={img4} />
+                            <div className='edit-spot-img-text-container'>
+                                <span className='edit-spot-img-url-preview-text'>Image 4:</span>
+                                <img className='edit-spot-img-url-preview' src={img4} alt={img4} />
+                            </div>
+
+                            <button onClick={() => handleDeleteImg(spot.spotImages[3].id)} className='submit-button' id='button--delete-img'>Delete Image</button>
                         </div>
                     )}
                     {img5 && (
                         <div className='edit-spot-img-url-preview-div'>
-                            <span className='edit-spot-img-url-preview-text'>image 5:</span>
-                            <img className='edit-spot-img-url-preview' src={img5} alt={img5} />
+                            <div className='edit-spot-img-text-container'>
+                                <span className='edit-spot-img-url-preview-text'>Image 5:</span>
+                                <img className='edit-spot-img-url-preview' src={img5} alt={img5} />
+                            </div>
+
+                            <button onClick={() => handleDeleteImg(spot.spotImages[4].id)} className='submit-button' id='button--delete-img'>Delete Image</button>
                         </div>
                     )}
 
@@ -248,6 +286,7 @@ export default function EditSpotForm() {
 
                 <button
                     type="submit"
+                    onClick={handleSubmit}
                     disabled={validationErrors.length}
                     className='submit-button'
                     id='button--edit-spot-submit'
