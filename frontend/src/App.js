@@ -11,6 +11,7 @@ import AddSpotImageForm from "./components/AddSpotImageForm";
 import EditSpotForm from "./components/EditSpotForm";
 import UserBookings from "./components/UserBookings";
 import EditBookingForm from "./components/EditBookingForm";
+import AddReviewForm from "./components/AddReviewForm";
 import PageNotFound from "./components/PageNotFound";
 
 function App() {
@@ -56,6 +57,10 @@ function App() {
 
                         <Route exact path="/user/:userId/bookings/:bookingId/edit">
                             <EditBookingForm />
+                        </Route>
+
+                        <Route exact path="/spots/:spotId/add-review">
+                            <AddReviewForm />
                         </Route>
 
                         <Route>

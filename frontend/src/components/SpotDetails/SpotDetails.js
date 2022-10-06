@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as spotsActions from '../../store/spots';
 import * as bookingsActions from '../../store/bookings';
+import * as reviewsActions from '../../store/reviews';
 import CreateBookingForm from '../CreateBookingForm';
 import ShowBookingsButton from './ShowBookingsButton';
 import './SpotDetails.css';
@@ -13,11 +14,17 @@ export default function SpotDetails() {
     const sessionUser = useSelector(state => state.session.user);
     const spot = useSelector(state => state.spots.singleSpot);
     const spotBookings = useSelector(state => state.bookings.spot);
+    const spotReviews = useSelector(state => state.reviews.spot);
+
     useEffect(() => {
         dispatch(spotsActions.getSingleSpot(spotId));
         dispatch(bookingsActions.getSpotBookings(spotId));
+        dispatch(reviewsActions.getSpotReviews(spotId));
 
-        return () => dispatch(spotsActions.clearData());
+        return () => {
+            dispatch(spotsActions.clearData());
+            dispatch(reviewsActions.clearData());
+        }
     }, [dispatch, spotId, sessionUser]);
 
     useEffect(() => {
@@ -223,6 +230,42 @@ export default function SpotDetails() {
                                 bookings={spotBookings}
                             />
                     </div>
+                </div>
+
+                <div className='container--reviews'>
+                    <div className='container--reviews-title'>
+                        <i className="fa-solid fa-star icon--star fa-1x reviews-title-el" />
+                        <h2 id='reviews-rating' className='reviews-title-el'>{(spot.avgStarRating) ? Number(spot.avgStarRating).toFixed(1) : 'New'}</h2>
+                        <h2 className='reviews--title-dot reviews-title-el'>·</h2>
+                        <h2 id='reviews--title-numReviews' className='reviews-title-el'>{spot.numReviews} reviews</h2>
+
+                        {sessionUser && (
+                        <NavLink to={`/spots/${spot.id}/add-review`}>
+                            <button
+                                id='button--add-review'
+                                className='submit-button'
+                            >
+                                Add a Review
+                            </button>
+                        </NavLink>)}
+                    </div>
+
+                <div className='container--actual-reviews'>
+                    {spotReviews && Object.values(spotReviews).map(review => (
+                        <div className='container-single-review'>
+                            <div className='review-title'>
+                                <i id='profile-icon-reviewer' className="fas fa-user-circle icon--profile fa-2x" />
+                                <div className='review-name-date'>
+                                    <div className='reviewer-name'>{review.User.firstName}</div>
+                                    <div className='review-created-date'>{new Date(review.createdAt).toLocaleString('default', { month: 'long' })} {new Date(review.createdAt).getFullYear()}</div>
+                                </div>
+                            </div>
+                            <div className='review-description'>{review.review}</div>
+                        </div>
+                    ))}
+                </div>
+
+
                 </div>
             </div>
         </main>

@@ -89,7 +89,9 @@ textarea:focus {
 #form-field--lat,
 #form-field--lng,
 #form-field--desc,
-#form-field--price {
+#form-field--price,
+#form-field--review,
+#form-field--stars {
     border-bottom: 1px solid #DDD;
 }
 #form-field--name:focus,
@@ -100,7 +102,9 @@ textarea:focus {
 #form-field--lat:focus,
 #form-field--lng:focus,
 #form-field--desc:focus,
-#form-field--price:focus {
+#form-field--price:focus,
+#form-field--review:focus,
+#form-field--stars:focus {
     border: 2px solid #000;
 }
 
