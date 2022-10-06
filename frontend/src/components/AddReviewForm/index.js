@@ -45,26 +45,21 @@ export default function AddReviewForm() {
         try {
             const createdReview = await dispatch(reviewsActions.createReview(spotId, newReview, sessionUser, spotData));
             if (createdReview) {
-                if (url.length) {
-                    const newImg = { url }
-                    try {
-                        const createdImg = await dispatch(reviewsActions.createReviewImg(createdReview.id, newImg));
-                        if (createdImg) setValidationErrors([]);
-                    }
-                    catch (res) {
-                        const data = await res.json();
-                        if (data && data.errors) return setValidationErrors(data.errors);
-                    }
-                }
+                // if (url.length) {
+                //     const newImg = { url }
+                //     const createdImg = await dispatch(reviewsActions.createReviewImg(createdReview.id, newImg));
+                // }
 
                 setValidationErrors([]);
-                history.replace(`/spots/${createdReview.spotId}`);
+                history.push(`/spots/${createdReview.spotId}`);
             }
         }
 
         catch (res) {
             const data = await res.json();
-            if (data && data.errors) return setValidationErrors(data.errors);
+            console.log("RES?", res)
+            console.log("ERRORS?", data);
+            if (data) return setValidationErrors([data.message]);
         }
     };
 

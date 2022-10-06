@@ -264,7 +264,7 @@
 .features-sub-text {
     font-weight: 300;
     font-size: .85rem;
-    color: #838383
+    color: #838383;
 }
 
 /* -----> AIRCOVER SECTION <----- */
@@ -332,4 +332,62 @@
     border-bottom: 1px solid #DDD;
     margin-bottom: 250px;
     padding: 55px 0px 50px;
+}
+
+.container--reviews-title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.reviews-title-el {
+    margin: 0px 4px;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+#button--add-review {
+    width: 150px;
+    margin-left: 25px;
+}
+
+.container--actual-reviews {
+    display: flex;
+    margin-top: 45px;
+    flex-wrap: wrap;
+}
+
+.container-single-review {
+    margin: 0px 110px 30px 0px;
+    width: 440px;
+}
+
+.review-title {
+    display: flex;
+}
+
+#profile-icon-reviewer {
+    margin-left: 0px;
+}
+
+.review-name-date {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: 20px;
+}
+
+.reviewer-name {
+    font-weight: 500;
+}
+
+.review-created-date {
+    color: #838383;
+    font-size: .85rem;
+    margin-top: 4px;
+}
+
+.review-description {
+    margin-top: 15px;
 }

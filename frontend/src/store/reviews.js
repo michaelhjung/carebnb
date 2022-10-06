@@ -144,7 +144,7 @@ const reviewsReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case LOAD_USER_REVIEWS:
-            newState = { ...state, user: { ...state.user, User: { ...state.user.User }, Spot: { ...state.user.Spot }, ReviewImages: [...state.user.ReviewImages] }, spot: { ...state.spot, User: { ...state.spot.User }, ReviewImages: [...state.user.ReviewImages] } };
+            newState = { ...state, user: { ...state.user } };
             // console.log("LOAD_USER_REVIEWS ACTION.PAYLOAD IS:", action.payload);
             const newUserReviews = {};
             action.payload.Reviews.forEach(review => newUserReviews[review.id] = review);
@@ -152,7 +152,7 @@ const reviewsReducer = (state = initialState, action) => {
             // console.log("NEWSTATE AFTER LOAD_USER_REVIEWS ACTION:", newState);
             return newState;
         case LOAD_SPOT_REVIEWS:
-            newState = { ...state, user: { ...state.user, User: { ...state.user.User }, Spot: { ...state.user.Spot }, ReviewImages: [...state.user.ReviewImages] }, spot: { ...state.spot, User: { ...state.spot.User }, ReviewImages: [...state.user.ReviewImages] } };
+            newState = { ...state, spot: { ...state.spot } };
             // console.log("LOAD_SPOT_REVIEWS ACTION.PAYLOAD IS:", action.payload);
             const newSpotReviews = {};
             action.payload.Reviews.forEach(review => newSpotReviews[review.id] = review);
@@ -160,7 +160,7 @@ const reviewsReducer = (state = initialState, action) => {
             // console.log("NEWSTATE AFTER LOAD_SPOT_REVIEWS ACTION:", newState);
             return newState;
         case ADD_REVIEW:
-            newState = { ...state, user: { ...state.user, User: { ...state.user.User }, Spot: { ...state.user.Spot }, ReviewImages: [...state.user.ReviewImages] }, spot: { ...state.spot, User: { ...state.spot.User }, ReviewImages: [...state.user.ReviewImages] } };
+            newState = { ...state, user: { ...state.user }, spot: { ...state.spot } };
             const newUserReview = { ...action.payload.reviewData, User: { ...action.payload.userData }, Spot: { ...action.payload.spotData } };
             const newSpotReview = { ...action.payload.reviewData, User: { ...action.payload.userData } };
             newState.user[action.payload.reviewData.id] = newUserReview;
