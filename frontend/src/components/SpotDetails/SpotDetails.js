@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as spotsActions from '../../store/spots';
 import * as bookingsActions from '../../store/bookings';
@@ -223,6 +223,17 @@ export default function SpotDetails() {
                                 bookings={spotBookings}
                             />
                     </div>
+                </div>
+
+                <div className='container--reviews'>
+                    <NavLink to={`/spots/${spot.id}/add-review`}>
+                        <button
+                            id='button--add-review'
+                            className='submit-button'
+                        >
+                            Add a Review
+                        </button>
+                    </NavLink>
                 </div>
             </div>
         </main>
