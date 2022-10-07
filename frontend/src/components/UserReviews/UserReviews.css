@@ -29,6 +29,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-right: 8px;
 }
 
 .review-card--rating-container {
