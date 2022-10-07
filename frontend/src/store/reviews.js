@@ -175,7 +175,7 @@ const reviewsReducer = (state = initialState, action) => {
             // console.log("NEWSTATE AFTER ADD_REVIEW_IMG ACTION:", newState);
             return newState;
         case EDIT_REVIEW:
-            newState = { ...state, user: { ...state.user, User: { ...state.user.User }, Spot: { ...state.user.Spot }, ReviewImages: [...state.user.ReviewImages] }, spot: { ...state.spot, User: { ...state.spot.User }, ReviewImages: [...state.user.ReviewImages] } };
+            newState = { ...state, user: { ...state.user }, spot: { ...state.spot } };
             const updatedUserReview = { ...action.payload.reviewData, User: { ...action.payload.userData }, Spot: { ...action.payload.spotData } };
             const updatedSpotReview = { ...action.payload.reviewData, User: { ...action.payload.userData } };
             newState.user[action.payload.reviewData.id] = updatedUserReview;
@@ -183,7 +183,7 @@ const reviewsReducer = (state = initialState, action) => {
             // console.log("NEWSTATE AFTER EDIT_REVIEW ACTION:", newState);
             return newState;
         case REMOVE_REVIEW:
-            newState = { ...state, user: { ...state.user, User: { ...state.user.User }, Spot: { ...state.user.Spot }, ReviewImages: [...state.user.ReviewImages] }, spot: { ...state.spot, User: { ...state.spot.User }, ReviewImages: [...state.user.ReviewImages] } };
+            newState = { ...state, user: { ...state.user }, spot: { ...state.spot } };
             delete newState.user[action.payload];
             delete newState.spot[action.payload];
             newState = { ...newState };

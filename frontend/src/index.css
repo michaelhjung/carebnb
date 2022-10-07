@@ -34,7 +34,8 @@ h1 {
 /* STYLES FOR ALL FORMS */
 
 input:focus,
-textarea:focus {
+textarea:focus,
+select:focus {
     outline: none;
     border: 2px solid black;
     border-radius: 7px;
