@@ -66,6 +66,16 @@ function ProfileButton() {
                         </NavLink>
                     </li>
                     <li>
+                        <NavLink to={`/user/${sessionUser.id}/reviews`}>
+                            <button
+                                id="button--user-reviews"
+                                className="button--dropdown-item button--dropdown-item-link"
+                            >
+                                My Reviews
+                            </button>
+                        </NavLink>
+                    </li>
+                    <li>
                         <button
                             onClick={logout}
                             className="button--dropdown-item button--dropdown-item-link"

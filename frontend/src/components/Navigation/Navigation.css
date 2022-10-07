@@ -194,7 +194,8 @@ footer {
 }
 
 #button--user-spots,
-#button--user-bookings {
+#button--user-bookings,
+#button--user-reviews {
     font-weight: 600;
 }
 

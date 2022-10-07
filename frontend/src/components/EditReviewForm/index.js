@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import * as spotsActions from "../../store/spots";
 import * as reviewsActions from "../../store/reviews";
 
-export default function AddReviewForm() {
+export default function EditReviewForm() {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
-    const { spotId } = useParams()
-    const spotData = useSelector((state) => state.spots.singleSpot);
+    const { reviewId } = useParams()
+    const userReviews = useSelector(state => state.reviews.user);
+    let currReview;
+    if (userReviews) currReview = userReviews[reviewId];
     const [review, setReview] = useState("");
     const [stars, setStars] = useState(1);
     // const [url, setUrl] = useState("");
@@ -22,10 +23,10 @@ export default function AddReviewForm() {
     }
 
     useEffect(() => {
-        dispatch(spotsActions.getSingleSpot(spotId));
+        dispatch(reviewsActions.getUserReviews());
 
-        return () => dispatch(spotsActions.clearData());
-    }, [dispatch, spotId]);
+        return () => dispatch(reviewsActions.clearData());
+    }, [dispatch, reviewId]);
 
     useEffect(() => {
         const errors = [];
@@ -35,23 +36,30 @@ export default function AddReviewForm() {
         setValidationErrors(errors);
     }, [review, stars]);
 
+    useEffect(() => {
+        if (currReview) {
+            setReview(currReview.review || '');
+            setStars(currReview.stars || 1);
+        }
+    }, [currReview]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const newReview = {
+        const updatedReviewData = {
             review,
             stars
         }
         try {
-            const createdReview = await dispatch(reviewsActions.createReview(spotId, newReview, sessionUser, spotData));
-            if (createdReview) {
+            const updatedReview = await dispatch(reviewsActions.updateReview(reviewId, updatedReviewData, sessionUser, currReview.Spot));
+            if (updatedReview) {
                 // if (url.length) {
                 //     const newImg = { url }
-                //     const createdImg = await dispatch(reviewsActions.createReviewImg(createdReview.id, newImg));
+                //     const updatedImg = await dispatch(reviewsActions.createReviewImg(updatedReview.id, newImg));
                 // }
 
                 setValidationErrors([]);
-                history.push(`/spots/${createdReview.spotId}`);
+                history.push(`/spots/${updatedReview.spotId}`);
             }
         }
 
@@ -61,11 +69,12 @@ export default function AddReviewForm() {
         }
     };
 
+    if (!currReview || !Object.values(currReview)) return null;
     return (
         <div className='container--form'>
-            <h1>Create a Review!</h1>
+            <h1>Edit your Review!</h1>
 
-            <form onSubmit={handleSubmit} className="form" id="form--create-review">
+            <form onSubmit={handleSubmit} className="form" id="form--edit-review">
                 {validationErrors.length > 0 && (
                     <ul className="list--errors">
                         {validationErrors.map((error) => <li key={error} className="error-li">{error}</li>)}
@@ -112,9 +121,9 @@ export default function AddReviewForm() {
                     type="submit"
                     disabled={validationErrors.length}
                     className='submit-button'
-                    id='button--create-review-submit'
+                    id='button--edit-review-submit'
                 >
-                    Submit
+                    Update Review
                 </button>
             </form>
         </div>
