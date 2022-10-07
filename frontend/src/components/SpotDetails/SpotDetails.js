@@ -262,7 +262,7 @@ export default function SpotDetails() {
                                 </div>
                             </div>
                             <div className='review-description'>{review.review}</div>
-                            {review.User.id === sessionUser.id && (
+                            {sessionUser && review.User.id === sessionUser.id && (
                                 <DeleteReviewButton reviewId={review.id} />
                             )}
                         </div>
