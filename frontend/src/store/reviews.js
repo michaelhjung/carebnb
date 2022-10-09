@@ -195,12 +195,10 @@ const reviewsReducer = (state = initialState, action) => {
         case ADD_REVIEW_IMG:
             newState = { ...state, user: { ...state.user }, spot: { ...state.spot } };
             newState.user[action.payload.reviewId].ReviewImages ? newState.user[action.payload.reviewId].ReviewImages = [ ...state.user[action.payload.reviewId].ReviewImages ] : newState.user[action.payload.reviewId].ReviewImages = []
-            newState.spot[action.payload.reviewId].ReviewImages ? newState.spot[action.payload.reviewId].ReviewImages = [ ...state.spot[action.payload.reviewId].ReviewImages ] : newState.spot[action.payload.reviewId].ReviewImages = []
 
             const newReviewImg = { ...action.payload.reviewImgData };
 
             newState.user[action.payload.reviewId].ReviewImages.push(newReviewImg);
-            newState.spot[action.payload.reviewId].ReviewImages.push(newReviewImg);
             // console.log("NEWSTATE AFTER ADD_REVIEW_IMG ACTION:", newState);
             return newState;
         case EDIT_REVIEW:

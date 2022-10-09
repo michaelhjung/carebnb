@@ -92,7 +92,8 @@ select:focus {
 #form-field--desc,
 #form-field--price,
 #form-field--review,
-#form-field--stars {
+#form-field--stars,
+#form-field--image {
     border-bottom: 1px solid #DDD;
 }
 #form-field--name:focus,
@@ -105,7 +106,8 @@ select:focus {
 #form-field--desc:focus,
 #form-field--price:focus,
 #form-field--review:focus,
-#form-field--stars:focus {
+#form-field--stars:focus,
+#form-field--image:focus {
     border: 2px solid #000;
 }
 
@@ -194,13 +196,46 @@ select:focus {
 
 
 
-/* --------------> START OF ADD REVIEW FORM <-------------- */
-.create-review-img-url-preview {
-    width: 400px;
-    height: 400px;
+/* -----------> START OF ADD & EDIT REVIEW FORM <----------- */
+.create-review-img-url-preview,
+.edit-review-img-url-preview {
+    width: 300px;
+    height: 300px;
     border-radius: 15px;
     object-fit: cover;
     margin: 15px;
 }
 
-/* --------------> START OF ADD REVIEW FORM <-------------- */
+.container--edit-review-current-imgs {
+    margin-top: 10px;
+}
+
+.title--edit-review-current-imgs {
+    display: flex;
+    justify-content: center;
+}
+
+.edit-review-images {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-review-images-delete {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#edit-review-img {
+    width: 300px;
+    height: 300px;
+}
+
+.edit-review-images-delete #button--delete-review-img {
+    height: 55px;
+}
+
+#button--edit-review-submit {
+    margin-bottom: 200px;
+}
+/* -----------> START OF ADD & EDIT REVIEW FORM <----------- */
