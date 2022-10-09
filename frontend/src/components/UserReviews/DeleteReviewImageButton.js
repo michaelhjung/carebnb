@@ -1,20 +1,20 @@
 import { useDispatch } from 'react-redux'
 import * as reviewsActions from '../../store/reviews';
 
-export default function DeleteReviewButton({ reviewId }) {
+export default function DeleteReviewImageButton({ reviewId, reviewImgId }) {
     const dispatch = useDispatch();
     const handleDeleteClick = async () => {
         try {
-            await dispatch(reviewsActions.deleteReview(reviewId))
+            await dispatch(reviewsActions.deleteReviewImg(reviewId, reviewImgId))
         }
 
         catch (res) {
             const data = await res.json();
-            if (data.message) return alert(data.message);
+            if (data) return alert(data.message);
         }
     }
 
     return (
-        <button onClick={handleDeleteClick} id="button--delete-review">Delete Review</button>
+        <button onClick={handleDeleteClick} id="button--delete-review-img">Delete Image</button>
     )
 }

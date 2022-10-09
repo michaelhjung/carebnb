@@ -4,8 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as reviewsActions from '../../store/reviews';
 import DeleteReviewButton from './DeleteReviewButton';
 import EditReviewButton from './EditReviewButton';
-import './UserReviews.css';
 import AddReviewImageButton from './AddReviewImageButton';
+import DeleteReviewImageButton from './DeleteReviewImageButton';
+import './UserReviews.css';
 
 export default function UserReviews() {
     const dispatch = useDispatch();
@@ -46,7 +47,10 @@ export default function UserReviews() {
                                 <h2 id='review-card--review-img-header'>Review Images:</h2>
                             )}
                             <div className='user-review-images'>{review.ReviewImages && review.ReviewImages.map(img => (
-                                    <img className='user-review-img' src={img.url} alt={img.id} />
+                                    <div className='container--user-review-img-delete'>
+                                        <img className='user-review-img' src={img.url} alt={img.id} />
+                                        <DeleteReviewImageButton reviewId={review.id} reviewImgId={img.id} />
+                                    </div>
                             ))}</div>
 
                         </div>

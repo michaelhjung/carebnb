@@ -7,6 +7,7 @@ const ADD_REVIEW = '/REVIEWS/ADD_REVIEW';
 const ADD_REVIEW_IMG = '/REVIEWS/ADD_REVIEW_IMG';
 const EDIT_REVIEW = '/REVIEWS/EDIT_REVIEW';
 const REMOVE_REVIEW = '/REVIEWS/REMOVE_REVIEW';
+const REMOVE_REVIEW_IMG = '/REVIEWS/REMOVE_REVIEW_IMG';
 const CLEAR_DATA = '/spots/CLEAR_DATA';
 
 
@@ -50,6 +51,14 @@ const editReview = (reviewData, userData, spotData) => ({
 const removeReview = (reviewId) => ({
     type: REMOVE_REVIEW,
     payload: reviewId
+});
+
+const removeReviewImg = (reviewId, reviewImgId) => ({
+    type: REMOVE_REVIEW_IMG,
+    payload: {
+        reviewId,
+        reviewImgId
+    }
 });
 
 export const clearData = () => ({
@@ -139,6 +148,19 @@ export const deleteReview = (reviewId) => async dispatch => {
     }
 }
 
+export const deleteReviewImg = (reviewId, reviewImgId) => async dispatch => {
+    const response = await csrfFetch(`/api/review-images/${reviewImgId}`, {
+        method: 'DELETE'
+    });
+
+    if (response.ok) {
+        const successMessage = await response.json();
+        // console.log("THIS IS THUNK SUCCESS MSG:", successMessage, ReviewId);
+        dispatch(removeReviewImg(reviewId, reviewImgId));
+        return successMessage;
+    }
+}
+
 
 /* -------------------------------- REDUCER: -------------------------------- */
 const initialState = { user: null, spot: null };
@@ -195,6 +217,19 @@ const reviewsReducer = (state = initialState, action) => {
             delete newState.spot[action.payload];
             newState = { ...newState };
             // console.log("NEWSTATE AFTER REMOVE_REVIEW ACTION:", newState);
+            return newState;
+        case REMOVE_REVIEW_IMG:
+            newState = { ...state, user: { ...state.user }, spot: { ...state.spot } };
+            newState.user[action.payload.reviewId].ReviewImages = [ ...state.user[action.payload.reviewId].ReviewImages ]
+
+            const userReviewImages = newState.user[action.payload.reviewId].ReviewImages;
+            for (let i = 0; i < userReviewImages.length; i++) {
+                const img = userReviewImages[i];
+                if (img.id === action.payload.reviewImgId) userReviewImages.splice(i, 1);
+            }
+
+            newState = { ...newState };
+            // console.log("NEWSTATE AFTER REMOVE_REVIEW_IMG ACTION:", newState);
             return newState;
         case CLEAR_DATA:
                 return initialState;

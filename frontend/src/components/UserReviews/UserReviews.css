@@ -71,6 +71,15 @@
     width: 200px;
     height: 200px;
     object-fit: cover;
+    margin-bottom: 5px;
+}
+.user-review-img:last-child {
+    margin-bottom: 0px;
+}
+
+.container--user-review-img-delete {
+    display: flex;
+    align-items: center;
 }
 
 .review-card--buttons-container {
@@ -80,19 +89,26 @@
 
 #button--delete-review,
 #button--edit-review,
-#button--add-review-image {
+#button--add-review-image,
+#button--delete-review-img {
     background: linear-gradient(45deg, #FF5A5F, #e31c5f 15%);
     color: #FFF;
     font-weight: 600;
     border-radius: 7px;
     border: 1px solid #DDD;
     padding: 10px;
-    margin-top: 15px;
+    margin: 15px 0px 0px;
 }
 
 #button--delete-review:hover,
 #button--edit-review:hover,
-#button--add-review-image:hover {
+#button--add-review-image:hover,
+#button--delete-review-img:hover {
     background: linear-gradient(45deg, #e31c5f, #FF5A5F);
     cursor: pointer;
+}
+
+#button--delete-review-img {
+    margin-left: 30px;
+    width: 70px;
 }
