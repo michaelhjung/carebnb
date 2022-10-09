@@ -1,4 +1,3 @@
-import React from 'react'
 import { useDispatch } from 'react-redux'
 import * as reviewsActions from '../../store/reviews';
 
@@ -17,6 +16,6 @@ export default function DeleteReviewButton({ reviewId }) {
     }
 
     return (
-        <button onClick={handleDeleteClick} id="button--delete-review">DELETE Review</button>
+        <button onClick={handleDeleteClick} id="button--delete-review">Delete Review</button>
     )
 }

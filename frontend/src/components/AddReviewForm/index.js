@@ -12,7 +12,7 @@ export default function AddReviewForm() {
     const spotData = useSelector((state) => state.spots.singleSpot);
     const [review, setReview] = useState("");
     const [stars, setStars] = useState(1);
-    // const [url, setUrl] = useState("");
+    const [url, setUrl] = useState("");
     const [validationErrors, setValidationErrors] = useState([]);
 
 
@@ -37,6 +37,7 @@ export default function AddReviewForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const errors = [];
 
         const newReview = {
             review,
@@ -44,11 +45,19 @@ export default function AddReviewForm() {
         }
         try {
             const createdReview = await dispatch(reviewsActions.createReview(spotId, newReview, sessionUser, spotData));
+
             if (createdReview) {
-                // if (url.length) {
-                //     const newImg = { url }
-                //     const createdImg = await dispatch(reviewsActions.createReviewImg(createdReview.id, newImg));
-                // }
+                if (url.length) {
+                    const newImg = { url }
+                    try {
+                        await dispatch(reviewsActions.createReviewImg(createdReview.id, newImg));
+                    }
+
+                    catch (res) {
+                        const data = await res.json();
+                        if (data) errors.push(data.message);
+                    }
+                }
 
                 setValidationErrors([]);
                 history.push(`/spots/${createdReview.spotId}`);
@@ -57,7 +66,10 @@ export default function AddReviewForm() {
 
         catch (res) {
             const data = await res.json();
-            if (data) return setValidationErrors([data.message]);
+            if (data) {
+                errors.push(data.message);
+                return setValidationErrors(errors);
+            }
         }
     };
 
@@ -96,7 +108,7 @@ export default function AddReviewForm() {
                         <option>5</option>
                     </select>
 
-                    {/* <input
+                    <input
                         type="text"
                         value={url}
                         onChange={(e) => setUrl(e.target.value)}
@@ -105,7 +117,7 @@ export default function AddReviewForm() {
                         id='form-field--image'
                     />
 
-                    {url && <img className='create-review-img-url-preview' src={url} alt={url} />} */}
+                    {url && <img className='create-review-img-url-preview' src={url} alt={url} />}
                 </div>
 
                 <button

@@ -5,6 +5,7 @@ import * as reviewsActions from '../../store/reviews';
 import DeleteReviewButton from './DeleteReviewButton';
 import EditReviewButton from './EditReviewButton';
 import './UserReviews.css';
+import AddReviewImageButton from './AddReviewImageButton';
 
 export default function UserReviews() {
     const dispatch = useDispatch();
@@ -40,12 +41,25 @@ export default function UserReviews() {
 
                             <h2 id='review-card--review-header'>Review:</h2>
                             <p className='review-card--actual-review'>{review.review}</p>
+
+                            {review.ReviewImages.length > 0 && (
+                                <h2 id='review-card--review-img-header'>Review Images:</h2>
+                            )}
+                            <div className='user-review-images'>{review.ReviewImages && review.ReviewImages.map(img => (
+                                    <img className='user-review-img' src={img.url} alt={img.id} />
+                            ))}</div>
+
                         </div>
 
                         <div className='review-card--buttons-container'>
+                            <NavLink to={`/user/${sessionUser.id}/reviews/${review.id}/add-review-image`}>
+                                <AddReviewImageButton />
+                            </NavLink>
+
                             <NavLink to={`/user/${sessionUser.id}/reviews/${review.id}/edit`}>
                                 <EditReviewButton />
                             </NavLink>
+
                             <DeleteReviewButton reviewId={review.id} />
                         </div>
                     </div>

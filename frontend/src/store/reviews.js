@@ -30,9 +30,12 @@ const add = (reviewData, userData, spotData) => ({
     }
 });
 
-const addReviewImg = (reviewImgData) => ({
+const addReviewImg = (reviewId, reviewImgData) => ({
     type: ADD_REVIEW_IMG,
-    payload: reviewImgData
+    payload: {
+        reviewId,
+        reviewImgData
+    }
 });
 
 const editReview = (reviewData, userData, spotData) => ({
@@ -102,8 +105,8 @@ export const createReviewImg = (reviewId, reviewImgData) => async dispatch => {
 
     if (response.ok) {
         const newReviewImg = await response.json();
-        // console.log("JSONIFIED NEW-SPOT DATA AFTER THUNK:", newReviewImg);
-        dispatch(addReviewImg(newReviewImg));
+        console.log("JSONIFIED NEW-SPOT DATA AFTER THUNK:", newReviewImg);
+        dispatch(addReviewImg(reviewId, newReviewImg));
         return newReviewImg;
     }
 }
@@ -168,10 +171,14 @@ const reviewsReducer = (state = initialState, action) => {
             // console.log("NEWSTATE AFTER ADD_REVIEW ACTION:", newState);
             return newState;
         case ADD_REVIEW_IMG:
-            newState = { ...state, user: { ...state.user, User: { ...state.user.User }, Spot: { ...state.user.Spot }, ReviewImages: [...state.user.ReviewImages] }, spot: { ...state.spot, User: { ...state.spot.User }, ReviewImages: [...state.user.ReviewImages] } };
-            const newReviewImg = { ...action.payload };
-            newState.user[action.payload.id].ReviewImages.push(newReviewImg);
-            newState.spot[action.payload.id].ReviewImages.push(newReviewImg);
+            newState = { ...state, user: { ...state.user }, spot: { ...state.spot } };
+            newState.user[action.payload.reviewId].ReviewImages ? newState.user[action.payload.reviewId].ReviewImages = [ ...state.user[action.payload.reviewId].ReviewImages ] : newState.user[action.payload.reviewId].ReviewImages = []
+            newState.spot[action.payload.reviewId].ReviewImages ? newState.spot[action.payload.reviewId].ReviewImages = [ ...state.spot[action.payload.reviewId].ReviewImages ] : newState.spot[action.payload.reviewId].ReviewImages = []
+
+            const newReviewImg = { ...action.payload.reviewImgData };
+
+            newState.user[action.payload.reviewId].ReviewImages.push(newReviewImg);
+            newState.spot[action.payload.reviewId].ReviewImages.push(newReviewImg);
             // console.log("NEWSTATE AFTER ADD_REVIEW_IMG ACTION:", newState);
             return newState;
         case EDIT_REVIEW:
