@@ -390,11 +390,16 @@
 
 .review-description {
     margin-top: 15px;
+    text-align: justify;
 }
 
 .review-images {
     width: 100%;
     margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .review-img {
@@ -402,8 +407,11 @@
     width: 300px;
     height: 300px;
     object-fit: cover;
+    margin: 5px 0px;
 }
 
-#spot-details-review-buttons a {
-    margin-right: 15px;
+#spot-details-review-buttons {
+    display: flex;
+    justify-content: space-around;
+
 }
