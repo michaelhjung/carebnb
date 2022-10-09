@@ -6,6 +6,7 @@ import * as bookingsActions from '../../store/bookings';
 import * as reviewsActions from '../../store/reviews';
 import CreateBookingForm from '../CreateBookingForm';
 import ShowBookingsButton from './ShowBookingsButton';
+import AddReviewImageButton from '../UserReviews/AddReviewImageButton';
 import EditReviewButton from '../UserReviews/EditReviewButton';
 import DeleteReviewButton from '../UserReviews/DeleteReviewButton';
 import './SpotDetails.css';
@@ -269,7 +270,12 @@ export default function SpotDetails() {
                                 ))}</div>
                             </div>
                             {sessionUser && review.User && review.User.id === sessionUser.id && (
+
                                 <div id='spot-details-review-buttons'>
+                                    <NavLink to={`/user/${sessionUser.id}/reviews/${review.id}/add-review-image`}>
+                                        <AddReviewImageButton />
+                                    </NavLink>
+
                                     <NavLink to={`/user/${sessionUser.id}/reviews/${review.id}/edit`}>
                                         <EditReviewButton />
                                     </NavLink>

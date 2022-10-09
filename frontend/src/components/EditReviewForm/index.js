@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import * as reviewsActions from "../../store/reviews";
+import DeleteReviewImageButton from '../UserReviews/DeleteReviewImageButton';
 
 export default function EditReviewForm() {
     const dispatch = useDispatch();
@@ -13,7 +14,7 @@ export default function EditReviewForm() {
     if (userReviews) currReview = userReviews[reviewId];
     const [review, setReview] = useState("");
     const [stars, setStars] = useState(1);
-    // const [url, setUrl] = useState("");
+    const [url, setUrl] = useState("");
     const [validationErrors, setValidationErrors] = useState([]);
 
 
@@ -45,6 +46,7 @@ export default function EditReviewForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const errors = []
 
         const updatedReviewData = {
             review,
@@ -52,11 +54,19 @@ export default function EditReviewForm() {
         }
         try {
             const updatedReview = await dispatch(reviewsActions.updateReview(reviewId, updatedReviewData, sessionUser, currReview.Spot));
+
             if (updatedReview) {
-                // if (url.length) {
-                //     const newImg = { url }
-                //     const updatedImg = await dispatch(reviewsActions.createReviewImg(updatedReview.id, newImg));
-                // }
+                if (url.length) {
+                    const newImg = { url }
+                    try {
+                        await dispatch(reviewsActions.createReviewImg(updatedReview.id, newImg));
+                    }
+
+                    catch (res) {
+                        const data = await res.json();
+                        if (data) errors.push(data.message);
+                    }
+                }
 
                 setValidationErrors([]);
                 history.push(`/spots/${updatedReview.spotId}`);
@@ -65,7 +75,10 @@ export default function EditReviewForm() {
 
         catch (res) {
             const data = await res.json();
-            if (data) return setValidationErrors([data.message]);
+            if (data) {
+                errors.push(data.message);
+                return setValidationErrors(errors);
+            }
         }
     };
 
@@ -105,16 +118,34 @@ export default function EditReviewForm() {
                         <option>5</option>
                     </select>
 
-                    {/* <input
+                    <input
                         type="text"
                         value={url}
                         onChange={(e) => setUrl(e.target.value)}
-                        placeholder='Review Image url'
+                        placeholder='Add a Review Image url'
                         className='form-field'
                         id='form-field--image'
                     />
 
-                    {url && <img className='create-review-img-url-preview' src={url} alt={url} />} */}
+                    {url && (
+                        <>
+                            <h2 className='title--edit-review-preview-img'>Preview of Review Image to Add:</h2>
+                            <img className='edit-review-img-url-preview' src={url} alt={url} />
+                        </>
+                    )}
+
+                    {currReview.ReviewImages && (
+                        <div className='container--edit-review-current-imgs'>
+                            <h2 className='title--edit-review-current-imgs'>Current Review Images:</h2>
+                            <div className='edit-review-images'>{currReview.ReviewImages && currReview.ReviewImages.map(img => (
+                                <div className='edit-review-images-delete'>
+                                    <img className='review-img' id='edit-review-img' src={img.url} alt={img.id} />
+                                    <DeleteReviewImageButton reviewId={currReview.id} reviewImgId={img.id} />
+                                </div>
+                            ))}</div>
+
+                        </div>
+                    )}
                 </div>
 
                 <button
