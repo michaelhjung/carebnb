@@ -190,3 +190,17 @@ select:focus {
 }
 
 /* -------------> END OF ADD SPOT IMAGE FORM <------------- */
+
+
+
+
+/* --------------> START OF ADD REVIEW FORM <-------------- */
+.create-review-img-url-preview {
+    width: 400px;
+    height: 400px;
+    border-radius: 15px;
+    object-fit: cover;
+    margin: 15px;
+}
+
+/* --------------> START OF ADD REVIEW FORM <-------------- */

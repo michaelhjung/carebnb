@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as reviewsActions from '../../store/reviews';
 import DeleteReviewButton from './DeleteReviewButton';
 import EditReviewButton from './EditReviewButton';
+import AddReviewImageButton from './AddReviewImageButton';
+import DeleteReviewImageButton from './DeleteReviewImageButton';
 import './UserReviews.css';
 
 export default function UserReviews() {
@@ -40,12 +42,28 @@ export default function UserReviews() {
 
                             <h2 id='review-card--review-header'>Review:</h2>
                             <p className='review-card--actual-review'>{review.review}</p>
+
+                            {review.ReviewImages.length > 0 && (
+                                <h2 id='review-card--review-img-header'>Review Images:</h2>
+                            )}
+                            <div className='user-review-images'>{review.ReviewImages && review.ReviewImages.map(img => (
+                                    <div className='container--user-review-img-delete'>
+                                        <img className='user-review-img' src={img.url} alt={img.id} />
+                                        <DeleteReviewImageButton reviewId={review.id} reviewImgId={img.id} />
+                                    </div>
+                            ))}</div>
+
                         </div>
 
                         <div className='review-card--buttons-container'>
+                            <NavLink to={`/user/${sessionUser.id}/reviews/${review.id}/add-review-image`}>
+                                <AddReviewImageButton />
+                            </NavLink>
+
                             <NavLink to={`/user/${sessionUser.id}/reviews/${review.id}/edit`}>
                                 <EditReviewButton />
                             </NavLink>
+
                             <DeleteReviewButton reviewId={review.id} />
                         </div>
                     </div>

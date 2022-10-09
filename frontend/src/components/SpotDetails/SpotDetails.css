@@ -391,3 +391,15 @@
 .review-description {
     margin-top: 15px;
 }
+
+.review-images {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.review-img {
+    border-radius: 15px;
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+}

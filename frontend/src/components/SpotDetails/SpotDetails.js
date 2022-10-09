@@ -257,12 +257,17 @@ export default function SpotDetails() {
                             <div className='review-title'>
                                 <i id='profile-icon-reviewer' className="fas fa-user-circle icon--profile fa-2x" />
                                 <div className='review-name-date'>
-                                    <div className='reviewer-name'>{review.User.firstName}</div>
+                                    <div className='reviewer-name'>{review.User && review.User.firstName}</div>
                                     <div className='review-created-date'>{new Date(review.createdAt).toLocaleString('default', { month: 'long' })} {new Date(review.createdAt).getFullYear()}</div>
                                 </div>
                             </div>
-                            <div className='review-description'>{review.review}</div>
-                            {sessionUser && review.User.id === sessionUser.id && (
+                            <div className='review-description'>
+                                <div className='review-text'>{review.review}</div>
+                                <div className='review-images'>{review.ReviewImages && review.ReviewImages.map(img => (
+                                    <img className='review-img' src={img.url} alt={img.id} />
+                                ))}</div>
+                            </div>
+                            {sessionUser && review.User && review.User.id === sessionUser.id && (
                                 <DeleteReviewButton reviewId={review.id} />
                             )}
                         </div>
