@@ -403,3 +403,7 @@
     height: 400px;
     object-fit: cover;
 }
+
+#spot-details-review-buttons a {
+    margin-right: 15px;
+}
