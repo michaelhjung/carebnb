@@ -159,6 +159,7 @@ To get a local copy up and running follow these simple example steps.
     - [ ] maximum price
 - [ ] Other Improvements:
     - [x] Dynamic spot images CSS grid layout
+    - [x] Auto delete past user bookings
     - [ ] Dynamic load more spots on scroll
     - [ ] Select new preview image
     - [ ] Reorder spot images
