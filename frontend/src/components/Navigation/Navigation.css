@@ -8,6 +8,7 @@ header {
     position: sticky;
     top: 0;
     background-color: #FFF;
+    z-index: 10;
 }
 
 nav {
@@ -150,7 +151,7 @@ footer {
     background-color: #FFF;
     top: 38px;
     right: 0px;
-    box-shadow: 2px -2px 2px 0.5px #DDD;
+    box-shadow: 0px 0px 14px 0.5px rgba(221, 221, 221, 0.7);
     border-radius: 15px;
     padding: 10px 0px;
     list-style: none;
