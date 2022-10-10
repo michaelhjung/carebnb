@@ -148,16 +148,22 @@ To get a local copy up and running follow these simple example steps.
     - [x] Delete a spot image
     - [x] Add an image to a review
     - [x] Delete a review image
-- [ ] Search
-    - [ ] Filter spot search by:
-        - [ ] page
-        - [ ] size
-        - [ ] minimum latitude
-        - [ ] maximum latitude
-        - [ ] minimum longitude
-        - [ ] maximum longitude
-        - [ ] minimum price
-        - [ ] maximum price
+- [ ] Spot Search Filter
+    - [ ] page
+    - [ ] size
+    - [ ] minimum latitude
+    - [ ] maximum latitude
+    - [ ] minimum longitude
+    - [ ] maximum longitude
+    - [ ] minimum price
+    - [ ] maximum price
+- [ ] Other Improvements:
+    - [x] Dynamic spot images CSS grid layout
+    - [ ] Dynamic load more spots on scroll
+    - [ ] Select new preview image
+    - [ ] Reorder spot images
+    - [ ] Page for spot images beyond 5
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
