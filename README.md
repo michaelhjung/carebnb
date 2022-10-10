@@ -131,23 +131,23 @@ To get a local copy up and running follow these simple example steps.
     - [x] See list of current user's spots
     - [x] Update a current user's spot
     - [x] Delete a current user's spot
-- [ ] Bookings
+- [x] Bookings
     - [x] Create a booking
     - [x] See list of current user's bookings
     - [x] See list of bookings by spot
-    - [ ] Update a current user's booking
+    - [x] Update a current user's booking
     - [x] Delete a current user's booking
-- [ ] Reviews
-    - [ ] Create a review
-    - [ ] See all reviews of a spot
-    - [ ] See all reviews of current user
-    - [ ] Update a review
-    - [ ] Delete a review
-- [ ] Images
+- [x] Reviews
+    - [x] Create a review
+    - [x] See all reviews of a spot
+    - [x] See all reviews of current user
+    - [x] Update a review
+    - [x] Delete a review
+- [x] Images
     - [x] Add an image to a spot
-    - [ ] Delete a spot image
-    - [ ] Add an image to a review
-    - [ ] Delete a review image
+    - [x] Delete a spot image
+    - [x] Add an image to a review
+    - [x] Delete a review image
 - [ ] Search
     - [ ] Filter spot search by:
         - [ ] page
