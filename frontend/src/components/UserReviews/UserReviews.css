@@ -1,48 +1,69 @@
 .container--user-reviews {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 20px;
     font-size: .9rem;
     margin-bottom: 150px;
+    width: 100%;
+    height: 100%;
 }
 
 .review-card {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
     height: auto;
+    width: 100%;
+    align-items: center;
+}
+
+.review-left {
+    position: relative;
+    width: 30%;
+    height: 100%;
+    padding-right: 20px;
+}
+
+#review-card--info-name {
+    font-weight: 700;
+    font-size: 1.9rem;
+    position: absolute;
+    top: 3%;
+    left: 4%;
+    color: #FFF;
+    text-shadow: 2px 2px 4px #333;
 }
 
 .review-card--spot-card-img {
-    width: 300px;
-    height: 300px;
+    width: 100%;
+    height: 450px;
     border-radius: 15px;
     object-fit: cover;
 }
 
-#review-card--info-container {
-    width: 300px;
+.review-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 70%;
+    height: 100%;
+    padding: 15px 0px;
+    overflow-y: auto;
 }
 
-.review-card--name-rating {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-right: 8px;
+#review-card--info-container {
+    width: 100%;
 }
 
 .review-card--rating-container {
     display: flex;
     align-items: center;
+    margin: 3px 0px 0px 5px;
 }
 
 .review-card--info {
     margin: 8px;
-}
-
-#review-card--info-name {
-    font-weight: 600;
 }
 
 .review-card--rating {
@@ -59,32 +80,39 @@
 .review-card--actual-review {
     margin: 5px 8px 0px 8px;
     text-align: justify;
+    width: 80%;
 }
 
 .user-review-images {
-    width: 100%;
+    width: 80%;
+    height: 225px;
     margin-top: 10px;
+    overflow-y: auto;
+    display: flex;
+    gap: 20px;
+    padding: 10px 10px;
+    border: 1px dotted #CCC;
+    border-radius: 4px;
 }
 
 .user-review-img {
     border-radius: 15px;
-    width: 200px;
-    height: 200px;
+    width: 140px;
+    height: 140px;
     object-fit: cover;
-    margin-bottom: 5px;
-}
-.user-review-img:last-child {
-    margin-bottom: 0px;
 }
 
 .container--user-review-img-delete {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    height: 220px;
 }
 
 .review-card--buttons-container {
     display: flex;
     justify-content: space-around;
+    width: 80%;
 }
 
 #button--delete-review,
@@ -98,6 +126,8 @@
     border: 1px solid #DDD;
     padding: 10px;
     margin: 15px 0px 0px;
+    width: 220px;
+    height: 55px;
 }
 
 #button--delete-review:hover,
@@ -109,6 +139,5 @@
 }
 
 #button--delete-review-img {
-    margin: 0px 8px 0px 30px;
-    width: 70px;
+    width: 130px;
 }

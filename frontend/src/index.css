@@ -218,6 +218,9 @@ select:focus {
 .edit-review-images {
     display: flex;
     flex-direction: column;
+    height: 100%;
+    max-height: 500px;
+    overflow-y: auto;
 }
 
 .edit-review-images-delete {
@@ -238,4 +241,22 @@ select:focus {
 #button--edit-review-submit {
     margin-bottom: 200px;
 }
-/* -----------> START OF ADD & EDIT REVIEW FORM <----------- */
+
+#edit-rev-delete-rev-img {
+    background: linear-gradient(45deg, #FF5A5F, #e31c5f 15%);
+    color: #FFF;
+    font-weight: 600;
+    border-radius: 7px;
+    border: 1px solid #DDD;
+    padding: 10px;
+    margin: 15px 0px 0px;
+    width: 140px;
+    height: 55px;
+    margin-left: 20px;
+}
+
+#edit-rev-delete-rev-img:hover {
+    background: linear-gradient(45deg, #e31c5f, #FF5A5F);
+    cursor: pointer;
+}
+/* -----------> END OF ADD & EDIT REVIEW FORM <----------- */

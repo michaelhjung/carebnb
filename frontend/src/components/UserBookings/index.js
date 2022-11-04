@@ -36,23 +36,28 @@ export default function UserBookings() {
             <main className='container--bookings'>
                 {Object.values(userBookings).map(booking => booking.Spot && (
                     <div key={booking.id} className='booking-card'>
-                        <NavLink to={`/spots/${booking.spotId}`}>
+                        <NavLink className="booking-img-container" to={`/spots/${booking.spotId}`}>
                             <img src={booking.Spot.previewImage} alt={booking.Spot.name} className='booking-card--spot-card-img' />
+                            <span id='booking-card--info-name' className='booking-card--info'>{booking.Spot.name}</span>
                         </NavLink>
                         <div id='booking-card--info-container'>
-                            <div id='booking-card--info-name' className='booking-card--info'>{booking.Spot.name}</div>
-                            <div id='booking-card--info-address' className='booking-card--info'>{booking.Spot.address}, {booking.Spot.city}, {booking.Spot.country}</div>
-                            <div id='booking-card--info-price-container' className='booking-card--info'>
-                                <span id='booking-card--info-price'>
-                                ${booking.Spot.price}
-                                </span>
-                                {" "}
-                                night
-                            </div>
                             <div className='booking-card--booking-info'>
-                                <div>Check In: <span className='booking-dates'>{booking.startDate}</span></div>
-                                <div>Check Out: <span className='booking-dates'>{booking.endDate}</span></div>
+                                <div className='booking-card--check-in-out-container'>
+                                    <span className='booking-card--check-in-out-text'>Check In</span>
+                                    <span className='booking-dates'>{new Date(booking.startDate).toUTCString().split(' ').slice(0, 1).join(' ')} {new Date(booking.startDate).toUTCString().split(' ').slice(2, 3).join(' ')} {new Date(booking.startDate).toUTCString().split(' ').slice(1, 2).join(' ')}, {new Date(booking.startDate).toUTCString().split(' ').slice(3, 4).join(' ')}</span>
+                                </div>
+                                <div className='booking-card--check-in-out-container'>
+                                    <span className='booking-card--check-in-out-text'>Check Out</span>
+                                    <span className='booking-dates'>{new Date(booking.endDate).toUTCString().split(' ').slice(0, 1).join(' ')} {new Date(booking.endDate).toUTCString().split(' ').slice(2, 3).join(' ')} {new Date(booking.endDate).toUTCString().split(' ').slice(1, 2).join(' ')}, {new Date(booking.endDate).toUTCString().split(' ').slice(3, 4).join(' ')}</span>
+                                </div>
                             </div>
+                        </div>
+                        <div id='booking-card--info-price-container' className='booking-card--info'>
+                            <span id='booking-card--info-price'>
+                            ${booking.Spot.price}
+                            </span>
+                            {" "}
+                            per night
                         </div>
 
                         <div className='booking-card--buttons-container'>
