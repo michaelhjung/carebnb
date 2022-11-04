@@ -31,8 +31,8 @@ h1 {
 }
 
 
-*::-webkit-scrollbar {
-    width: 9px;
+/* *::-webkit-scrollbar {
+    width: 10px;
 }
 
 *::-webkit-scrollbar-track {
@@ -42,7 +42,7 @@ h1 {
 *::-webkit-scrollbar-thumb {
     background-color: rgba(238, 238, 238, 0.732);
     border-radius: 25px;
-}
+} */
 
 /*****************************************************************************/
 /* STYLES FOR ALL FORMS */
