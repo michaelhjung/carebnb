@@ -17,6 +17,17 @@ export default function EditReviewForm() {
     const [url, setUrl] = useState("");
     const [validationErrors, setValidationErrors] = useState([]);
 
+    const handleDeleteClick = async (e, reviewId, reviewImgId) => {
+        e.preventDefault();
+        try {
+            await dispatch(reviewsActions.deleteReviewImg(reviewId, reviewImgId))
+        }
+
+        catch (res) {
+            const data = await res.json();
+            if (data) return alert(data.message);
+        }
+    }
 
     if (!sessionUser) {
         alert("You must be logged in to add a review!");
@@ -136,13 +147,18 @@ export default function EditReviewForm() {
 
                     {currReview.ReviewImages && (
                         <div className='container--edit-review-current-imgs'>
-                            <h2 className='title--edit-review-current-imgs'>Current Review Images:</h2>
-                            <div className='edit-review-images'>{currReview.ReviewImages && currReview.ReviewImages.map(img => (
-                                <div className='edit-review-images-delete'>
-                                    <img className='review-img' id='edit-review-img' src={img.url} alt={img.id} />
-                                    <DeleteReviewImageButton reviewId={currReview.id} reviewImgId={img.id} />
-                                </div>
-                            ))}</div>
+                            {currReview.ReviewImages.length > 0 && (
+                                <>
+                                    <h2 className='title--edit-review-current-imgs'>Current Review Images:</h2>
+                                    <div className='edit-review-images'>{currReview.ReviewImages && currReview.ReviewImages.map(img => (
+                                        <div className='edit-review-images-delete'>
+                                            <img className='review-img' id='edit-review-img' src={img.url} alt={img.id} />
+                                            <button onClick={(e) => handleDeleteClick(e, currReview.id, img.id)} id="edit-rev-delete-rev-img">Delete Image</button>
+                                            {/* <DeleteReviewImageButton reviewId={currReview.id} reviewImgId={img.id} /> */}
+                                        </div>
+                                    ))}</div>
+                                </>
+                            )}
 
                         </div>
                     )}

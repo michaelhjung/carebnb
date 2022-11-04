@@ -395,11 +395,12 @@
 
 .review-images {
     width: 100%;
+    height: 350px;
+    overflow-y: auto;
     margin-top: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .review-img {
@@ -412,6 +413,26 @@
 
 #spot-details-review-buttons {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+}
 
+#spot-details-add-rev-img,
+#spot-details-edit-rev,
+#spot-details-delete-rev {
+    background: linear-gradient(45deg, #FF5A5F, #e31c5f 15%);
+    color: #FFF;
+    font-weight: 600;
+    border-radius: 7px;
+    border: 1px solid #DDD;
+    padding: 10px;
+    margin: 15px 0px 0px;
+    width: 140px;
+    height: 55px;
+}
+
+#spot-details-add-rev-img:hover,
+#spot-details-edit-rev:hover,
+#spot-details-delete-rev:hover {
+    background: linear-gradient(45deg, #e31c5f, #FF5A5F);
+    cursor: pointer;
 }

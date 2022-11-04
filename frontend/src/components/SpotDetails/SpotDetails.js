@@ -19,6 +19,17 @@ export default function SpotDetails() {
     const spotBookings = useSelector(state => state.bookings.spot);
     const spotReviews = useSelector(state => state.reviews.spot);
 
+    const handleDeleteClick = async (reviewId) => {
+        try {
+            await dispatch(reviewsActions.deleteReview(reviewId))
+        }
+
+        catch (res) {
+            const data = await res.json();
+            if (data.message) return alert(data.message);
+        }
+    }
+
     useEffect(() => {
         dispatch(spotsActions.getSingleSpot(spotId));
         dispatch(bookingsActions.getSpotBookings(spotId));
@@ -265,22 +276,24 @@ export default function SpotDetails() {
                             </div>
                             <div className='review-description'>
                                 <div className='review-text'>{review.review}</div>
-                                <div className='review-images'>{review.ReviewImages && review.ReviewImages.map(img => (
-                                    <img className='review-img' src={img.url} alt={img.id} />
-                                ))}</div>
+                                {review.ReviewImages.length > 0 && (
+                                    <div className='review-images'>{review.ReviewImages && review.ReviewImages.map(img => (
+                                        <img className='review-img' src={img.url} alt={img.id} />
+                                    ))}</div>
+                                )}
                             </div>
                             {sessionUser && review.User && review.User.id === sessionUser.id && (
 
                                 <div id='spot-details-review-buttons'>
                                     <NavLink to={`/user/${sessionUser.id}/reviews/${review.id}/add-review-image`}>
-                                        <AddReviewImageButton />
+                                        <button id="spot-details-add-rev-img">Add Image</button>
                                     </NavLink>
 
                                     <NavLink to={`/user/${sessionUser.id}/reviews/${review.id}/edit`}>
-                                        <EditReviewButton />
+                                        <button id="spot-details-edit-rev">Edit Review</button>
                                     </NavLink>
 
-                                    <DeleteReviewButton reviewId={review.id} />
+                                    <button onClick={() => handleDeleteClick(review.id)} id="spot-details-delete-rev">Delete Review</button>
                                 </div>
                             )}
                         </div>
