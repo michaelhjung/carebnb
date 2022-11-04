@@ -42,7 +42,7 @@ export default function UserReviews() {
                                 </div>
                                 <p className='review-card--actual-review'>{review.review}</p>
 
-                                {review.ReviewImages.length > 0 && (
+                                {review.ReviewImages && review.ReviewImages.length > 0 && (
                                     <>
                                         <h2 id='review-card--review-img-header'>Review Images:</h2>
                                         <div className='user-review-images'>{review.ReviewImages && review.ReviewImages.map(img => (
