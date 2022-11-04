@@ -141,7 +141,7 @@ export default function EditReviewForm() {
                     {url && (
                         <>
                             <h2 className='title--edit-review-preview-img'>Preview of Review Image to Add:</h2>
-                            <img className='edit-review-img-url-preview' src={url} alt={url} />
+                            <img className='edit-review-img-url-preview' src={url} alt={url} onError={(e) => e.target.src="https://i.imgur.com/udFhU6r.png"} />
                         </>
                     )}
 
@@ -152,7 +152,7 @@ export default function EditReviewForm() {
                                     <h2 className='title--edit-review-current-imgs'>Current Review Images:</h2>
                                     <div className='edit-review-images'>{currReview.ReviewImages && currReview.ReviewImages.map(img => (
                                         <div className='edit-review-images-delete'>
-                                            <img className='review-img' id='edit-review-img' src={img.url} alt={img.id} />
+                                            <img className='review-img' id='edit-review-img' src={img.url} alt={img.id} onError={(e) => e.target.src="https://i.imgur.com/udFhU6r.png"} />
                                             <button onClick={(e) => handleDeleteClick(e, currReview.id, img.id)} id="edit-rev-delete-rev-img">Delete Image</button>
                                             {/* <DeleteReviewImageButton reviewId={currReview.id} reviewImgId={img.id} /> */}
                                         </div>

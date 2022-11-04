@@ -166,7 +166,7 @@ export default function SpotDetails() {
 
                 <div className='spot-details--imgs-container'>
                     {spot.spotImages.map(img => (
-                        <img key={img.url} src={img.url} alt={img.url} className='spot-details--img' />
+                        <img key={img.url} src={img.url} alt={img.url} className='spot-details--img' onError={(e) => e.target.src="https://i.imgur.com/udFhU6r.png"} />
                     ))}
                 </div>
 
@@ -278,7 +278,7 @@ export default function SpotDetails() {
                                 <div className='review-text'>{review.review}</div>
                                 {review.ReviewImages.length > 0 && (
                                     <div className='review-images'>{review.ReviewImages && review.ReviewImages.map(img => (
-                                        <img className='review-img' src={img.url} alt={img.id} />
+                                        <img className='review-img' src={img.url} alt={img.id} onError={(e) => e.target.src="https://i.imgur.com/udFhU6r.png"} />
                                     ))}</div>
                                 )}
                             </div>

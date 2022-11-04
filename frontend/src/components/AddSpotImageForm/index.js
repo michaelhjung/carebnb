@@ -50,6 +50,7 @@ export default function AddSpotImageForm() {
                     src={spot.spotImages[0] && spot.spotImages[0].url}
                     alt={spot.name}
                     id='add-img-spot-thumbnail'
+                    onError={(e) => e.target.src="https://i.imgur.com/udFhU6r.png"}
                 />
             </NavLink>
 

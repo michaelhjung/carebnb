@@ -37,7 +37,7 @@ export default function UserBookings() {
                 {Object.values(userBookings).map(booking => booking.Spot && (
                     <div key={booking.id} className='booking-card'>
                         <NavLink className="booking-img-container" to={`/spots/${booking.spotId}`}>
-                            <img src={booking.Spot.previewImage} alt={booking.Spot.name} className='booking-card--spot-card-img' />
+                            <img src={booking.Spot.previewImage} alt={booking.Spot.name} className='booking-card--spot-card-img' onError={(e) => e.target.src="https://i.imgur.com/udFhU6r.png"} />
                             <span id='booking-card--info-name' className='booking-card--info'>{booking.Spot.name}</span>
                         </NavLink>
                         <div id='booking-card--info-container'>
