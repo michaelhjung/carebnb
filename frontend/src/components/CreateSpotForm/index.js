@@ -195,7 +195,7 @@ export default function CreateSpotForm() {
                         id='form-field--image'
                     />
 
-                    {url && <img className='create-spot-img-url-preview' src={url} alt={url} />}
+                    {url && <img className='create-spot-img-url-preview' src={url} alt={url} onError={(e) => e.target.src="https://i.imgur.com/udFhU6r.png"} />}
                 </div>
 
                 <button

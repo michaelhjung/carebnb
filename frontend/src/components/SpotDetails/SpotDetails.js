@@ -22,6 +22,7 @@ export default function SpotDetails() {
     const handleDeleteClick = async (reviewId) => {
         try {
             await dispatch(reviewsActions.deleteReview(reviewId))
+            await dispatch(spotsActions.getSingleSpot(spotId));
         }
 
         catch (res) {
@@ -166,7 +167,7 @@ export default function SpotDetails() {
 
                 <div className='spot-details--imgs-container'>
                     {spot.spotImages.map(img => (
-                        <img key={img.url} src={img.url} alt={img.url} className='spot-details--img' />
+                        <img key={img.url} src={img.url} alt={img.url} className='spot-details--img' onError={(e) => e.target.src="https://i.imgur.com/udFhU6r.png"} />
                     ))}
                 </div>
 
@@ -266,7 +267,7 @@ export default function SpotDetails() {
 
                 <div className='container--actual-reviews'>
                     {spotReviews && Object.values(spotReviews).map(review => (
-                        <div className='container-single-review'>
+                        <div key={review.id} className='container-single-review'>
                             <div className='review-title'>
                                 <i id='profile-icon-reviewer' className="fas fa-user-circle icon--profile fa-2x" />
                                 <div className='review-name-date'>
@@ -276,15 +277,15 @@ export default function SpotDetails() {
                             </div>
                             <div className='review-description'>
                                 <div className='review-text'>{review.review}</div>
-                                {review.ReviewImages.length > 0 && (
-                                    <div className='review-images'>{review.ReviewImages && review.ReviewImages.map(img => (
-                                        <img className='review-img' src={img.url} alt={img.id} />
+                                {review.ReviewImages && review.ReviewImages.length > 0 && (
+                                    <div key={review.id} className='review-images'>{review.ReviewImages && review.ReviewImages.map(img => (
+                                        <img key={img.id} className='review-img' src={img.url} alt={img.id} onError={(e) => e.target.src="https://i.imgur.com/udFhU6r.png"} />
                                     ))}</div>
                                 )}
                             </div>
                             {sessionUser && review.User && review.User.id === sessionUser.id && (
 
-                                <div id='spot-details-review-buttons'>
+                                <div id='spot-details-review-buttons' key={review.id}>
                                     <NavLink to={`/user/${sessionUser.id}/reviews/${review.id}/add-review-image`}>
                                         <button id="spot-details-add-rev-img">Add Image</button>
                                     </NavLink>

@@ -25,7 +25,7 @@ function Navigation() {
             <nav>
                 <div className='navbar--left'>
                     <NavLink exact to="/" className='link--home'>
-                        <img src={logo} className='logo' alt="carebnb-logo" />
+                        <img src={logo} className='logo' alt="carebnb-logo" onError={(e) => e.target.src="https://i.imgur.com/udFhU6r.png"} />
                     </NavLink>
                 </div>
                 {

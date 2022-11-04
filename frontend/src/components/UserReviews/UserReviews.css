@@ -1,7 +1,9 @@
 .container--user-reviews {
     display: flex;
+    flex-direction: column-reverse;
     flex-wrap: wrap;
-    justify-content: center;
+    /* align-items: center; */
+    /* justify-content: center; */
     gap: 20px;
     font-size: .9rem;
     margin-bottom: 150px;
@@ -15,8 +17,6 @@
     flex-wrap: wrap;
     height: auto;
     width: 100%;
-    max-height: 455px;
-    overflow-y: auto;
     align-items: center;
 }
 
@@ -39,7 +39,7 @@
 
 .review-card--spot-card-img {
     width: 100%;
-    height: 450px;
+    height: 420px;
     border-radius: 15px;
     object-fit: cover;
 }
@@ -50,7 +50,8 @@
     justify-content: space-between;
     width: 70%;
     height: 100%;
-    padding: 15px 0px;
+    max-height: 410px;
+    overflow-y: auto;
     overflow-y: auto;
 }
 

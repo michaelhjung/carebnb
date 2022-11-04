@@ -29,7 +29,7 @@ export default function UserReviews() {
                 {Object.values(userReviews).map(review => review.Spot && (
                     <div key={review.id} className='review-card'>
                         <NavLink className="review-left" to={`/spots/${review.spotId}`}>
-                            <img src={review.Spot.previewImage} alt={review.Spot.name} className='review-card--spot-card-img' />
+                            <img src={review.Spot.previewImage} alt={review.Spot.name} className='review-card--spot-card-img' onError={(e) => e.target.src="https://i.imgur.com/udFhU6r.png"} />
                             <span id='review-card--info-name' className='review-card--info'>{review.Spot.name}</span>
                         </NavLink>
                         <div className='review-right'>
@@ -42,12 +42,12 @@ export default function UserReviews() {
                                 </div>
                                 <p className='review-card--actual-review'>{review.review}</p>
 
-                                {review.ReviewImages.length > 0 && (
+                                {review.ReviewImages && review.ReviewImages.length > 0 && (
                                     <>
                                         <h2 id='review-card--review-img-header'>Review Images:</h2>
                                         <div className='user-review-images'>{review.ReviewImages && review.ReviewImages.map(img => (
                                             <div className='container--user-review-img-delete'>
-                                                <img className='user-review-img' src={img.url} alt={img.id} />
+                                                <img className='user-review-img' src={img.url} alt={img.id} onError={(e) => e.target.src="https://i.imgur.com/udFhU6r.png"} />
                                                 <DeleteReviewImageButton reviewId={review.id} reviewImgId={img.id} />
                                             </div>
                                         ))}

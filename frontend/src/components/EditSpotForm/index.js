@@ -235,7 +235,7 @@ export default function EditSpotForm() {
                         <div className='edit-spot-img-url-preview-div'>
                             <div className='edit-spot-img-text-container'>
                                 <span className='edit-spot-img-url-preview-text'>Preview Image:</span>
-                                <img className='edit-spot-img-url-preview' src={img1} alt={img1} />
+                                <img className='edit-spot-img-url-preview' src={img1} alt={img1} onError={(e) => e.target.src="https://i.imgur.com/udFhU6r.png"} />
                             </div>
 
                             <button onClick={() => handleDeletePreviewImg(spot.spotImages[0].id)} className='submit-button' id='button--delete-img'>Delete Image</button>
@@ -245,7 +245,7 @@ export default function EditSpotForm() {
                         <div className='edit-spot-img-url-preview-div'>
                             <div className='edit-spot-img-text-container'>
                                 <span className='edit-spot-img-url-preview-text'>Image 2:</span>
-                                <img className='edit-spot-img-url-preview' src={img2} alt={img2} />
+                                <img className='edit-spot-img-url-preview' src={img2} alt={img2} onError={(e) => e.target.src="https://i.imgur.com/udFhU6r.png"} />
                             </div>
 
                             <button onClick={() => handleDeleteImg(spot.spotImages[1].id)} className='submit-button' id='button--delete-img'>Delete Image</button>
@@ -255,7 +255,7 @@ export default function EditSpotForm() {
                         <div className='edit-spot-img-url-preview-div'>
                             <div className='edit-spot-img-text-container'>
                                 <span className='edit-spot-img-url-preview-text'>Image 3:</span>
-                                <img className='edit-spot-img-url-preview' src={img3} alt={img3} />
+                                <img className='edit-spot-img-url-preview' src={img3} alt={img3} onError={(e) => e.target.src="https://i.imgur.com/udFhU6r.png"} />
                             </div>
 
                             <button onClick={() => handleDeleteImg(spot.spotImages[2].id)} className='submit-button' id='button--delete-img'>Delete Image</button>
@@ -265,7 +265,7 @@ export default function EditSpotForm() {
                         <div className='edit-spot-img-url-preview-div'>
                             <div className='edit-spot-img-text-container'>
                                 <span className='edit-spot-img-url-preview-text'>Image 4:</span>
-                                <img className='edit-spot-img-url-preview' src={img4} alt={img4} />
+                                <img className='edit-spot-img-url-preview' src={img4} alt={img4} onError={(e) => e.target.src="https://i.imgur.com/udFhU6r.png"} />
                             </div>
 
                             <button onClick={() => handleDeleteImg(spot.spotImages[3].id)} className='submit-button' id='button--delete-img'>Delete Image</button>
@@ -275,7 +275,7 @@ export default function EditSpotForm() {
                         <div className='edit-spot-img-url-preview-div'>
                             <div className='edit-spot-img-text-container'>
                                 <span className='edit-spot-img-url-preview-text'>Image 5:</span>
-                                <img className='edit-spot-img-url-preview' src={img5} alt={img5} />
+                                <img className='edit-spot-img-url-preview' src={img5} alt={img5} onError={(e) => e.target.src="https://i.imgur.com/udFhU6r.png"} />
                             </div>
 
                             <button onClick={() => handleDeleteImg(spot.spotImages[4].id)} className='submit-button' id='button--delete-img'>Delete Image</button>

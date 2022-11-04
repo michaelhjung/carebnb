@@ -34,10 +34,10 @@ export default function UserBookings() {
         <>
             <h1>Hello, {sessionUser.firstName}. Here are your bookings:</h1>
             <main className='container--bookings'>
-                {Object.values(userBookings).map(booking => booking.Spot && (
+                {Object.values(userBookings).sort((a, b) => new Date(a.startDate) - new Date(b.startDate)).map(booking => booking.Spot && (
                     <div key={booking.id} className='booking-card'>
                         <NavLink className="booking-img-container" to={`/spots/${booking.spotId}`}>
-                            <img src={booking.Spot.previewImage} alt={booking.Spot.name} className='booking-card--spot-card-img' />
+                            <img src={booking.Spot.previewImage} alt={booking.Spot.name} className='booking-card--spot-card-img' onError={(e) => e.target.src="https://i.imgur.com/udFhU6r.png"} />
                             <span id='booking-card--info-name' className='booking-card--info'>{booking.Spot.name}</span>
                         </NavLink>
                         <div id='booking-card--info-container'>

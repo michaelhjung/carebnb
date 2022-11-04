@@ -8,7 +8,7 @@ export default function SpotCard({ spot }) {
         <>
             <NavLink to={`/spots/${spot.id}`} className="link--spot">
                 <div className='container--spot-card--img'>
-                    <img src={spot.previewImage} alt={spot.name} className="spot-card--img" />
+                    <img src={spot.previewImage} alt={spot.name} className="spot-card--img" onError={(e) => e.target.src="https://i.imgur.com/udFhU6r.png"} />
                 </div>
             </NavLink>
             <div className='user-spot-card--info'>
