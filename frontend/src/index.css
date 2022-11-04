@@ -30,6 +30,20 @@ h1 {
     text-align: center;
 }
 
+
+*::-webkit-scrollbar {
+    width: 9px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #ff5a6087;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgba(238, 238, 238, 0.732);
+    border-radius: 25px;
+}
+
 /*****************************************************************************/
 /* STYLES FOR ALL FORMS */
 
