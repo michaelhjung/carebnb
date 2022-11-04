@@ -50,6 +50,7 @@ export default function EditSpotForm() {
 
             if (Number.isNaN(Number(price)) && Number(price) !== 0 && price) errors.push("Please enter a valid price");
             if ((Number(price)) < 0 && price.length !== 0) errors.push("The price cannot be negative... but if you're feeling generous, you can make it free :)");
+            if ((Number(price)) >= 400000 && price.length !== 0) errors.push("You're not allowed to be THAT greedy. Please keep the cost below $400,000 per night");
 
             setValidationErrors(errors);
         }
