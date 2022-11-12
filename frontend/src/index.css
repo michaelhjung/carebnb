@@ -274,3 +274,18 @@ select:focus {
     cursor: pointer;
 }
 /* -----------> END OF ADD & EDIT REVIEW FORM <----------- */
+
+#footer-imgs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-links:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.portfolio-icon {
+    width: 20px;
+}

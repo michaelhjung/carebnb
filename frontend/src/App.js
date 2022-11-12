@@ -16,6 +16,7 @@ import EditReviewForm from "./components/EditReviewForm";
 import AddReviewForm from "./components/AddReviewForm";
 import AddReviewImageForm from "./components/AddReviewImageForm";
 import PageNotFound from "./components/PageNotFound";
+import briefcase from "./icons/portfolio.svg";
 
 function App() {
     const dispatch = useDispatch();
@@ -93,6 +94,9 @@ function App() {
                         </a>
                         <a id='github' className='footer-links' href='https://github.com/michaelhjung' target='_blank' rel='noreferrer'>
                             <i className="fa-brands fa-github fa-xl" />
+                        </a>
+                        <a id='portfolio' className='footer-links' href='https://www.michaelhjung.com/' target='_blank' rel='noreferrer'>
+                            <img className="portfolio-icon" src={briefcase} alt="portfolio" />
                         </a>
                     </div>
                 </div>
