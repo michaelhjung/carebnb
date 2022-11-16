@@ -123,7 +123,8 @@ router.get('/', async (req, res, next) => {
 
 
     // LAZY LOADING (& N+1):
-    const spots = await Spot.findAll({ where, raw: true, ...pagination });
+    // const spots = await Spot.findAll({ where, raw: true, ...pagination });
+    const spots = await Spot.findAll({ where, raw: true });
 
     for (let i = 0; i < spots.length; i++) {
         const spot = spots[i];
