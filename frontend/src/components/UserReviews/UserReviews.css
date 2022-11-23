@@ -93,7 +93,7 @@
     width: 80%;
     max-height: 275px;
     overflow-y: auto;
-    word-break: break-all;
+    word-break: break-word;
 }
 
 .user-review-images {
