@@ -33,42 +33,78 @@ export default function UserReviews() {
                             <span id='review-card--info-name' className='review-card--info'>{review.Spot.name}</span>
                         </NavLink>
                         <div className='review-right'>
-                            <div id='review-card--info-container'>
+                            <div className='review-right-top'>
+                                <div id='review-card--info-container'>
 
-                                <h2 id='review-card--review-header'>Review:</h2>
-                                <div className='review-card--rating-container'>
-                                    <i className="fa-solid fa-star icon--star fa-1x user-reviews--star-icon" />
-                                    <div className='review-card--rating'>{review.stars}</div>
-                                </div>
-                                <p className='review-card--actual-review'>{review.review}</p>
+                                    <h2 id='review-card--review-header'>Review:</h2>
+                                    <div className='review-card--rating-container'>
+                                        <div className='rating-text'>Rating: </div>
+                                        {review.stars === 5 ?
+                                            (<>
+                                                <i className="fa-solid fa-star icon--star fa-1x user-reviews--star-icon" />
+                                                <i className="fa-solid fa-star icon--star fa-1x user-reviews--star-icon" />
+                                                <i className="fa-solid fa-star icon--star fa-1x user-reviews--star-icon" />
+                                                <i className="fa-solid fa-star icon--star fa-1x user-reviews--star-icon" />
+                                                <i className="fa-solid fa-star icon--star fa-1x user-reviews--star-icon" />
+                                            </>)
 
-                                {review.ReviewImages && review.ReviewImages.length > 0 && (
-                                    <>
-                                        <h2 id='review-card--review-img-header'>Review Images:</h2>
-                                        <div className='user-review-images'>{review.ReviewImages && review.ReviewImages.map(img => (
-                                            <div className='container--user-review-img-delete'>
-                                                <img className='user-review-img' src={img.url} alt={img.id} onError={(e) => e.target.src="https://i.imgur.com/udFhU6r.png"} />
-                                                <DeleteReviewImageButton reviewId={review.id} reviewImgId={img.id} />
+                                            : review.stars === 4 ?
+                                            (<>
+                                                <i className="fa-solid fa-star icon--star fa-1x user-reviews--star-icon" />
+                                                <i className="fa-solid fa-star icon--star fa-1x user-reviews--star-icon" />
+                                                <i className="fa-solid fa-star icon--star fa-1x user-reviews--star-icon" />
+                                                <i className="fa-solid fa-star icon--star fa-1x user-reviews--star-icon" />
+                                            </>)
+
+                                            : review.stars === 3 ?
+                                            (<>
+                                                <i className="fa-solid fa-star icon--star fa-1x user-reviews--star-icon" />
+                                                <i className="fa-solid fa-star icon--star fa-1x user-reviews--star-icon" />
+                                                <i className="fa-solid fa-star icon--star fa-1x user-reviews--star-icon" />
+                                            </>)
+
+                                            : review.stars === 2 ?
+                                            (<>
+                                                <i className="fa-solid fa-star icon--star fa-1x user-reviews--star-icon" />
+                                                <i className="fa-solid fa-star icon--star fa-1x user-reviews--star-icon" />
+                                            </>)
+
+                                            :
+                                            (<i className="fa-solid fa-star icon--star fa-1x user-reviews--star-icon" />)
+                                        }
+
+                                        {/* <div className='review-card--rating'>{review.stars}</div> */}
+                                    </div>
+                                    <p className='review-card--actual-review'>{review.review}</p>
+
+                                    {review.ReviewImages && review.ReviewImages.length > 0 && (
+                                        <>
+                                            <h2 id='review-card--review-img-header'>Review Images:</h2>
+                                            <div className='user-review-images'>{review.ReviewImages && review.ReviewImages.map(img => (
+                                                <div className='container--user-review-img-delete'>
+                                                    <img className='user-review-img' src={img.url} alt={img.id} onError={(e) => e.target.src="https://i.imgur.com/udFhU6r.png"} />
+                                                    <DeleteReviewImageButton reviewId={review.id} reviewImgId={img.id} />
+                                                </div>
+                                            ))}
                                             </div>
-                                        ))}
-                                        </div>
-                                    </>
-                                )}
-
+                                        </>
+                                    )}
+                                </div>
                             </div>
 
-                            <div className='review-card--buttons-container'>
-                                <NavLink to={`/user/${sessionUser.id}/reviews/${review.id}/add-review-image`}>
-                                    <AddReviewImageButton />
-                                </NavLink>
+                            <div className='review-right-bottom'>
+                                <div className='review-card--buttons-container'>
+                                    <NavLink to={`/user/${sessionUser.id}/reviews/${review.id}/add-review-image`}>
+                                        <AddReviewImageButton />
+                                    </NavLink>
 
-                                <NavLink to={`/user/${sessionUser.id}/reviews/${review.id}/edit`}>
-                                    <EditReviewButton />
-                                </NavLink>
+                                    <NavLink to={`/user/${sessionUser.id}/reviews/${review.id}/edit`}>
+                                        <EditReviewButton />
+                                    </NavLink>
 
-                                <DeleteReviewButton reviewId={review.id} />
+                                    <DeleteReviewButton reviewId={review.id} />
+                                </div>
                             </div>
-
                         </div>
                     </div>
                 ))}
