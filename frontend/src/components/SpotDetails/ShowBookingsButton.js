@@ -34,6 +34,9 @@ export default function ShowBookingsButton({ spot, user, bookings }) {
             {user && showBookings && (
                 <div className='spot-bookings--details'>
                     <div id='booked-dates-title'>The following dates are booked for this spot:</div>
+                    {Object.values(bookings).length === 0 && (
+                        <span className='booked-date'>No upcoming bookings for this spot.</span>
+                    )}
                     {Object.values(bookings).sort((a, b) => new Date(a.startDate) - new Date(b.startDate)).map(booking => (
                         <div key={booking.id} className='container--booking-card'>
                             <span className='booked-date'>{booking.startDate}</span> to <span className='booked-date'>{booking.endDate}</span>

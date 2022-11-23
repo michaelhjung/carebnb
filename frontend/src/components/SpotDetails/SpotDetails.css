@@ -395,6 +395,7 @@
 .review-description {
     margin-top: 15px;
     text-align: justify;
+    word-break: break-all;
 }
 
 .review-images {

@@ -28,10 +28,10 @@ function Navigation() {
                         <img src={logo} className='logo' alt="carebnb-logo" onError={(e) => e.target.src="https://i.imgur.com/udFhU6r.png"} />
                     </NavLink>
                 </div>
-                {
+                {/* {
                     (sessionUser) ? <div className='navbar--middle'>Welcome, <span id='welcome-banner-name'>{welcomeBanner}</span>!</div>
                      : <div className='navbar--middle'>{welcomeBanner}</div>
-                }
+                } */}
                 <div className='navbar--right'>
                     <NavLink to="/create-spot" className='link--create-spot'>
                         <button className='button button--create-spot'>Create a Spot</button>
