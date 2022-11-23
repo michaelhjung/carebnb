@@ -125,7 +125,8 @@ select:focus {
     border: 2px solid #000;
 }
 
-#form-field--desc {
+#form-field--desc,
+#form-field--review {
     overflow-y: auto;
     resize: none;
 }
@@ -252,10 +253,6 @@ select:focus {
     height: 55px;
 }
 
-#button--edit-review-submit {
-    margin-bottom: 200px;
-}
-
 #edit-rev-delete-rev-img {
     background: linear-gradient(45deg, #FF5A5F, #e31c5f 15%);
     color: #FFF;
@@ -273,6 +270,12 @@ select:focus {
     background: linear-gradient(45deg, #e31c5f, #FF5A5F);
     cursor: pointer;
 }
+
+#button--create-review-submit,
+#button--edit-review-submit {
+    margin-bottom: 200px;
+}
+
 /* -----------> END OF ADD & EDIT REVIEW FORM <----------- */
 
 #footer-imgs {

@@ -110,8 +110,7 @@ export default function EditBookingForm() {
                                 {(spot.avgStarRating) ? Number(spot.avgStarRating).toFixed(1) : 'New'}
                             </span>
                             <span className='booking-form-dot'> · </span>
-                            <span id='booking-form-reviews'>{spot.numReviews} reviews</span>
-
+                            {!spot.numReviews ? <span id='booking-form-reviews'>0 reviews</span> : <span id='booking-form-reviews'>{spot.numReviews} reviews</span>}
                         </div>
                     </div>
                     <div id='check-in-out-container'>
