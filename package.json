@@ -1,5 +1,5 @@
 {
-  "name": "airbnb-clone",
+  "name": "carebnb",
   "version": "1.0.0",
   "description": "## Database Schema Design",
   "main": "index.js",
@@ -14,13 +14,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/michaelhjung/airBnB-clone.git"
+    "url": "git+https://github.com/michaelhjung/carebnb.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/michaelhjung/airBnB-clone/issues"
+    "url": "https://github.com/michaelhjung/carebnb/issues"
   },
-  "homepage": "https://github.com/michaelhjung/airBnB-clone#readme"
+  "homepage": "https://github.com/michaelhjung/carebnb#readme"
 }
